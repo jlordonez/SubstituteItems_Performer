@@ -1,0 +1,180 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Retalix___Purchasing_Menu___Code_N_or_F" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uit="http://schemas.uipath.com/workflow/activities/terminal" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_TerminalConnection" Type="InArgument(uit:TerminalConnection)" />
+    <x:Property Name="in_TransactionItem" Type="InArgument(ui:QueueItem)" />
+    <x:Property Name="out_BusinessException" Type="InArgument(ui:BusinessRuleException)" />
+    <x:Property Name="in_ReportPath" Type="InArgument(x:String)" />
+  </x:Members>
+  <this:Retalix___Purchasing_Menu___Code_N_or_F.out_BusinessException>
+    <InArgument x:TypeArguments="ui:BusinessRuleException" />
+  </this:Retalix___Purchasing_Menu___Code_N_or_F.out_BusinessException>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>651,2219</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>Retalix___Purchasing_Menu___Code_N_or_F_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="34">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>UiPath.Terminal</x:String>
+      <x:String>UiPath.Terminal.Service</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>UiPath.Terminal.Enums</x:String>
+      <x:String>UiPath.Terminal.Activities</x:String>
+      <x:String>UiPath.Terminal.Advanced.Activities</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.ComponentModel</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="90">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>UiPath.Terminal.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Terminal</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Runtime.InteropServices</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>UiPath.Terminal.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Forms</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Core</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>Microsoft.Win32.Primitives</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="Navigate to purchasing menu and updated the Item" DisplayName="Retalix___Purchasing_Menu___Code_N" sap:VirtualizedContainerService.HintSize="636,2154" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="SubItem" />
+      <Variable x:TypeArguments="x:String" Name="SubstitutionCodeBilling" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <uit:TerminalSession ConnectionString="{x:Null}" ContinueOnError="{x:Null}" OutputConnection="{x:Null}" SSHPassword="{x:Null}" SSHUserName="{x:Null}" CloseConnection="False" DelayMS="1000" DisplayName="Terminal Session" ExistingConnection="[in_TerminalConnection]" sap:VirtualizedContainerService.HintSize="574,2012" sap2010:WorkflowViewState.IdRef="TerminalSession_2" TimeoutMS="50000">
+      <uit:TerminalSession.Body>
+        <ActivityAction x:TypeArguments="uit:TerminalConnection">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="uit:TerminalConnection" Name="terminalSession" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="540,1912" sap2010:WorkflowViewState.IdRef="Sequence_4">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <uit:TerminalSendKeys DelayMS="300" DisplayName="&quot;Send Keys - Purchasing Menu&quot;" sap:VirtualizedContainerService.HintSize="478,60" sap2010:WorkflowViewState.IdRef="TerminalSendKeys_4" Keys="10" TimeoutMS="5000" WaitType="READY" />
+            <uit:TerminalSendControlKey DelayMS="1000" DisplayName="Send Control Key" sap:VirtualizedContainerService.HintSize="478,60" sap2010:WorkflowViewState.IdRef="TerminalSendControlKey_4" Key="Transmit" TimeoutMS="5000" WaitType="READY" />
+            <uit:TerminalSendKeys DelayMS="300" DisplayName="&quot;Send Keys - Menu Item&quot;" sap:VirtualizedContainerService.HintSize="478,60" sap2010:WorkflowViewState.IdRef="TerminalSendKeys_5" Keys="05" TimeoutMS="5000" WaitType="READY" />
+            <uit:TerminalSendKeys DelayMS="300" DisplayName="&quot;Send Keys - Item&quot;" sap:VirtualizedContainerService.HintSize="478,60" sap2010:WorkflowViewState.IdRef="TerminalSendKeys_6" Keys="[in_TransactionItem.SpecificContent(&quot;Item&quot;).ToString]" TimeoutMS="5000" WaitType="READY" />
+            <uit:TerminalMoveCursor Column="55" DelayMS="300" DisplayName="Move Cursor" sap:VirtualizedContainerService.HintSize="478,60" sap2010:WorkflowViewState.IdRef="TerminalMoveCursor_1" Row="24" TimeoutMS="5000" WaitType="READY" />
+            <uit:TerminalSendKeys DelayMS="300" DisplayName="&quot;Send Keys - Facility&quot;" sap:VirtualizedContainerService.HintSize="478,60" sap2010:WorkflowViewState.IdRef="TerminalSendKeys_7" Keys="[in_TransactionItem.SpecificContent(&quot;Facility&quot;).ToString]" TimeoutMS="5000" WaitType="READY" />
+            <uit:TerminalSendControlKey DelayMS="1000" DisplayName="Send Control Key" sap:VirtualizedContainerService.HintSize="478,60" sap2010:WorkflowViewState.IdRef="TerminalSendControlKey_6" Key="Tab" TimeoutMS="5000" WaitType="READY" />
+            <uit:TerminalSendKeys DelayMS="300" DisplayName="&quot;Send Keys - Buyer&quot;" sap:VirtualizedContainerService.HintSize="478,60" sap2010:WorkflowViewState.IdRef="TerminalSendKeys_8" Keys="[in_TransactionItem.SpecificContent(&quot;Buyer&quot;).ToString]" TimeoutMS="5000" WaitType="READY" />
+            <uit:TerminalSendControlKey DelayMS="1000" DisplayName="Send Control Key" sap:VirtualizedContainerService.HintSize="478,60" sap2010:WorkflowViewState.IdRef="TerminalSendControlKey_5" Key="Transmit" TimeoutMS="5000" WaitType="READY" />
+            <uit:TerminalGetTextAtPosition Column="35" DelayMS="300" DisplayName="Get Text at Position - SubItem" sap:VirtualizedContainerService.HintSize="478,88" sap2010:WorkflowViewState.IdRef="TerminalGetTextAtPosition_3" Length="6" Row="7" Text="[SubItem]" TimeoutMS="5000" WaitType="READY" />
+            <uit:TerminalGetTextAtPosition Column="22" DelayMS="300" DisplayName="Get Text at Position - Substitution code" sap:VirtualizedContainerService.HintSize="478,88" sap2010:WorkflowViewState.IdRef="TerminalGetTextAtPosition_4" Length="1" Row="7" Text="[SubstitutionCodeBilling]" TimeoutMS="5000" WaitType="READY" />
+            <If Condition="[( SubstitutionCodeBilling = &quot;N&quot; ) and ( SubItem = &quot;000000&quot; )]" sap:VirtualizedContainerService.HintSize="478,645" sap2010:WorkflowViewState.IdRef="If_1">
+              <If.Then>
+                <Sequence sap:VirtualizedContainerService.HintSize="400,356" sap2010:WorkflowViewState.IdRef="Sequence_15">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:LogMessage DisplayName="Log Message - No apply substitution" sap:VirtualizedContainerService.HintSize="338,92" sap2010:WorkflowViewState.IdRef="LogMessage_7" Level="Info" Message="[&quot;MartBot: The substitution code and SubItem aren't required to change.&quot;]" />
+                  <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Excel\Processing Report.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="338,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="Excel\Processing Report.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_ReportPath">[in_ReportPath]</InArgument>
+                      <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">[in_TransactionItem]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_OutputMessage">The substitution code and SubItem aren't required to change.</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_Status">Success</InArgument>
+                    </ui:InvokeWorkflowFile.Arguments>
+                  </ui:InvokeWorkflowFile>
+                </Sequence>
+              </If.Then>
+              <If.Else>
+                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Retalix\Retalix - Updated Substitute Code and Item.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="379,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="Retalix - Utilitites\Retalix - Updated Substitute Code and Item.xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">
+                      <VisualBasicValue x:TypeArguments="ui:QueueItem" ExpressionText="in_TransactionItem" />
+                    </InArgument>
+                    <InArgument x:TypeArguments="ui:BusinessRuleException" x:Key="out_BusinessException">
+                      <VisualBasicValue x:TypeArguments="ui:BusinessRuleException" ExpressionText="out_BusinessException" />
+                    </InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_ReportPath">
+                      <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_ReportPath" />
+                    </InArgument>
+                    <InArgument x:TypeArguments="uit:TerminalConnection" x:Key="in_TerminalConnection">
+                      <VisualBasicValue x:TypeArguments="uit:TerminalConnection" ExpressionText="in_TerminalConnection" />
+                    </InArgument>
+                  </ui:InvokeWorkflowFile.Arguments>
+                </ui:InvokeWorkflowFile>
+              </If.Else>
+            </If>
+          </Sequence>
+        </ActivityAction>
+      </uit:TerminalSession.Body>
+    </uit:TerminalSession>
+  </Sequence>
+</Activity>
