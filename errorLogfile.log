@@ -1,0 +1,6 @@
+[2023-05-11 10:35:00.643561  22ec][ERROR ] no such column: unused1:
+SELECT unused1 FROM "user";
+[2023-05-11 10:35:00.646563  22ec][ERROR ] no such column: softkeyboardSet:
+SELECT softkeyboardSet FROM profile;
+[2023-05-11 10:35:01.025574  22ec][ERROR ] no such column: password:
+SELECT password FROM cert;

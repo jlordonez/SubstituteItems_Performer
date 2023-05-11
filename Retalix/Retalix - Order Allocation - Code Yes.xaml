@@ -125,24 +125,12 @@
             </sap:WorkflowViewStateService.ViewState>
             <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Retalix - Utilitites\Retalix - Get Item Ordered.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="799,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="Retalix - Utilitites\Retalix - Get Item Ordered.xaml">
               <ui:InvokeWorkflowFile.Arguments>
-                <InArgument x:TypeArguments="uit:TerminalConnection" x:Key="in_TerminalConnection">
-                  <VisualBasicValue x:TypeArguments="uit:TerminalConnection" ExpressionText="in_TerminalConnection" />
-                </InArgument>
-                <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">
-                  <VisualBasicValue x:TypeArguments="ui:QueueItem" ExpressionText="in_TransactionItem" />
-                </InArgument>
-                <OutArgument x:TypeArguments="x:String" x:Key="out_Ordered">
-                  <VisualBasicReference x:TypeArguments="x:String" ExpressionText="GetOrdered" />
-                </OutArgument>
-                <OutArgument x:TypeArguments="ui:BusinessRuleException" x:Key="out_BusinessException">
-                  <VisualBasicReference x:TypeArguments="ui:BusinessRuleException" ExpressionText="out_BusinessException" />
-                </OutArgument>
-                <InArgument x:TypeArguments="x:String" x:Key="in_ReportPath">
-                  <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_ReportPath" />
-                </InArgument>
-                <InArgument x:TypeArguments="x:String" x:Key="in_Item">
-                  <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_TransactionItem.SpecificContent(&quot;Item&quot;).ToString" />
-                </InArgument>
+                <InArgument x:TypeArguments="uit:TerminalConnection" x:Key="in_TerminalConnection">[in_TerminalConnection]</InArgument>
+                <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">[in_TransactionItem]</InArgument>
+                <OutArgument x:TypeArguments="x:String" x:Key="out_Ordered">[GetOrdered]</OutArgument>
+                <OutArgument x:TypeArguments="ui:BusinessRuleException" x:Key="out_BusinessException">[out_BusinessException]</OutArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_ReportPath">[in_ReportPath]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_Item">[in_TransactionItem.SpecificContent("Item").ToString]</InArgument>
               </ui:InvokeWorkflowFile.Arguments>
             </ui:InvokeWorkflowFile>
             <If Condition="[out_BusinessException is Nothing]" sap:VirtualizedContainerService.HintSize="799,1920" sap2010:WorkflowViewState.IdRef="If_6">
@@ -220,10 +208,18 @@
                     <If.Then>
                       <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Excel\Processing Report.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_11" UnSafe="False" WorkflowFileName="Excel\Processing Report.xaml">
                         <ui:InvokeWorkflowFile.Arguments>
-                          <InArgument x:TypeArguments="x:String" x:Key="in_ReportPath">[in_ReportPath]</InArgument>
-                          <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">[in_TransactionItem]</InArgument>
-                          <InArgument x:TypeArguments="x:String" x:Key="in_OutputMessage">No substitution needed</InArgument>
-                          <InArgument x:TypeArguments="x:String" x:Key="in_Status">Success</InArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="in_ReportPath">
+                            <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_ReportPath" />
+                          </InArgument>
+                          <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">
+                            <VisualBasicValue x:TypeArguments="ui:QueueItem" ExpressionText="in_TransactionItem" />
+                          </InArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="in_OutputMessage">
+                            <Literal x:TypeArguments="x:String">No substitution needed</Literal>
+                          </InArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="in_Status">
+                            <Literal x:TypeArguments="x:String">Success</Literal>
+                          </InArgument>
                         </ui:InvokeWorkflowFile.Arguments>
                       </ui:InvokeWorkflowFile>
                     </If.Then>

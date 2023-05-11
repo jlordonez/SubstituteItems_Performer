@@ -293,6 +293,9 @@
                           <InArgument x:TypeArguments="x:String" x:Key="in_ReportPath">
                             <VisualBasicValue x:TypeArguments="x:String" ExpressionText="out_ReportPath" />
                           </InArgument>
+                          <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_SubstituteItemsPreviousDay">
+                            <VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="out_dt_SubstituteItemsPreviousDay" />
+                          </InArgument>
                         </ui:InvokeWorkflowFile.Arguments>
                       </ui:InvokeWorkflowFile>
                       <TryCatch DisplayName="Try Catch Set Transaction Status (Success)" sap:VirtualizedContainerService.HintSize="438,341" sap2010:WorkflowViewState.IdRef="TryCatch_10">
@@ -490,7 +493,7 @@
                   <Transition.To>
                     <State x:Name="__ReferenceID3" sap2010:Annotation.AnnotationText="Read configuration file and initialize applications used in the process." DisplayName="Initialization" sap:VirtualizedContainerService.HintSize="254,104" sap2010:WorkflowViewState.IdRef="State_2">
                       <State.Entry>
-                        <TryCatch DisplayName="Try initializing settings and applications" sap:VirtualizedContainerService.HintSize="578,2634" sap2010:WorkflowViewState.IdRef="TryCatch_2">
+                        <TryCatch DisplayName="Try initializing settings and applications" sap:VirtualizedContainerService.HintSize="578,2754" sap2010:WorkflowViewState.IdRef="TryCatch_2">
                           <sap:WorkflowViewStateService.ViewState>
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
                               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -614,13 +617,21 @@
                               </If>
                               <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke InitiAllApplications workflow" sap:VirtualizedContainerService.HintSize="478,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="Framework\InitAllApplications.xaml">
                                 <ui:InvokeWorkflowFile.Arguments>
-                                  <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[Config]</InArgument>
-                                  <OutArgument x:TypeArguments="s:Exception" x:Key="out_SystemException">[SystemException]</OutArgument>
-                                  <OutArgument x:TypeArguments="uit:TerminalConnection" x:Key="out_TerminalConnection">[TerminalConnection]</OutArgument>
-                                  <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dt_SubstituteItems">[out_dt_SubstituteItems]</OutArgument>
-                                  <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dt_SubstituteItemsPreviousDay">[out_dt_SubstituteItemsPreviousDay]</OutArgument>
-                                  <OutArgument x:TypeArguments="x:String" x:Key="out_ReportPath">[out_ReportPath]</OutArgument>
-                                  <OutArgument x:TypeArguments="x:String" x:Key="out_ReportPathPreviousDay">[out_ReportPathPreviousDay]</OutArgument>
+                                  <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">
+                                    <VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="Config" />
+                                  </InArgument>
+                                  <OutArgument x:TypeArguments="s:Exception" x:Key="out_SystemException">
+                                    <VisualBasicReference x:TypeArguments="s:Exception" ExpressionText="SystemException" />
+                                  </OutArgument>
+                                  <OutArgument x:TypeArguments="uit:TerminalConnection" x:Key="out_TerminalConnection">
+                                    <VisualBasicReference x:TypeArguments="uit:TerminalConnection" ExpressionText="TerminalConnection" />
+                                  </OutArgument>
+                                  <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dt_SubstituteItemsPreviousDay">
+                                    <VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="out_dt_SubstituteItemsPreviousDay" />
+                                  </OutArgument>
+                                  <OutArgument x:TypeArguments="x:String" x:Key="out_ReportPath">
+                                    <VisualBasicReference x:TypeArguments="x:String" ExpressionText="out_ReportPath" />
+                                  </OutArgument>
                                 </ui:InvokeWorkflowFile.Arguments>
                               </ui:InvokeWorkflowFile>
                             </Sequence>
