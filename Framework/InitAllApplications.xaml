@@ -1,17 +1,20 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Initialize_Applications" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uit="http://schemas.uipath.com/workflow/activities/terminal" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Initialize_Applications" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uit="http://schemas.uipath.com/workflow/activities/terminal" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
     <x:Property Name="out_SystemException" Type="OutArgument(s:Exception)" />
     <x:Property Name="out_TerminalConnection" Type="OutArgument(uit:TerminalConnection)" />
-    <x:Property Name="out_reportPath" Type="OutArgument(x:String)" />
+    <x:Property Name="out_dt_SubstituteItems" Type="OutArgument(sd:DataTable)" />
+    <x:Property Name="out_dt_SubstituteItemsPreviousDay" Type="OutArgument(sd:DataTable)" />
+    <x:Property Name="out_ReportPath" Type="OutArgument(x:String)" />
+    <x:Property Name="out_ReportPathPreviousDay" Type="OutArgument(x:String)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>697,892</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1006,1544</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Initialization_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
-    <scg:List x:TypeArguments="x:String" Capacity="58">
+    <scg:List x:TypeArguments="x:String" Capacity="32">
       <x:String>System.Activities.XamlIntegration</x:String>
       <x:String>System.Activities.Validation</x:String>
       <x:String>System.Activities</x:String>
@@ -42,10 +45,12 @@
       <x:String>UiPath.Terminal.Service</x:String>
       <x:String>System.Reflection</x:String>
       <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Xml.Serialization</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="88">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="51">
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
@@ -90,41 +95,124 @@
       <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
       <AssemblyReference>UiPath.Workflow</AssemblyReference>
       <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>Microsoft.Win32.Primitives</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Open applications used in the process and do necessary initialization procedures (e.g., login)." DisplayName="Initialize All Applications" sap:VirtualizedContainerService.HintSize="486,827" sap2010:WorkflowViewState.IdRef="Sequence_9">
+  <Sequence sap2010:Annotation.AnnotationText="Open applications used in the process and do necessary initialization procedures (e.g., login)." DisplayName="Initialize All Applications" sap:VirtualizedContainerService.HintSize="498,1479" sap2010:WorkflowViewState.IdRef="Sequence_9">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="str_TimeOfDay" />
+    </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log message (Initialize applications)" sap:VirtualizedContainerService.HintSize="424,92" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[&quot;Opening applications...&quot;]" />
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Retalix\Retalix - LogIn.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="424,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Retalix\Retalix - LogIn.xaml">
-      <ui:InvokeWorkflowFile.Arguments>
-        <OutArgument x:TypeArguments="s:Exception" x:Key="out_SystemException">
-          <VisualBasicReference x:TypeArguments="s:Exception" ExpressionText="out_SystemException" />
-        </OutArgument>
-        <OutArgument x:TypeArguments="uit:TerminalConnection" x:Key="out_TerminalConnection">
-          <VisualBasicReference x:TypeArguments="uit:TerminalConnection" ExpressionText="out_TerminalConnection" />
-        </OutArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="in_Port">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_Config(&quot;Port&quot;).ToString" />
-        </InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="in_Host">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_Config(&quot;Host&quot;).ToString" />
-        </InArgument>
-      </ui:InvokeWorkflowFile.Arguments>
-    </ui:InvokeWorkflowFile>
-    <If Condition="[out_SystemException is Nothing]" DisplayName="If - Check exception to create blank report" sap:VirtualizedContainerService.HintSize="424,389" sap2010:WorkflowViewState.IdRef="If_1">
+    <ui:LogMessage DisplayName="Log message (Initialize applications)" sap:VirtualizedContainerService.HintSize="436,92" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[&quot;Opening applications...&quot;]" />
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="436,303" sap2010:WorkflowViewState.IdRef="CommentOut_1">
+      <ui:CommentOut.Body>
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="400,224" sap2010:WorkflowViewState.IdRef="Sequence_10">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Retalix\Retalix - LogIn.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="338,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Retalix\Retalix - LogIn.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+              <OutArgument x:TypeArguments="s:Exception" x:Key="out_SystemException">
+                <VisualBasicReference x:TypeArguments="s:Exception" ExpressionText="out_SystemException" />
+              </OutArgument>
+              <OutArgument x:TypeArguments="uit:TerminalConnection" x:Key="out_TerminalConnection">
+                <VisualBasicReference x:TypeArguments="uit:TerminalConnection" ExpressionText="out_TerminalConnection" />
+              </OutArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_Port">
+                <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_Config(&quot;Port&quot;).ToString" />
+              </InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_Host">
+                <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_Config(&quot;Host&quot;).ToString" />
+              </InArgument>
+            </ui:InvokeWorkflowFile.Arguments>
+          </ui:InvokeWorkflowFile>
+        </Sequence>
+      </ui:CommentOut.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:CommentOut>
+    <If sap2010:Annotation.AnnotationText="Description:&#xA;Create blank substitute items report for each Buyer and return the file path from Substitute items Report Previous Day." Condition="[out_SystemException is Nothing]" DisplayName="If - Check exception to create blank report" sap:VirtualizedContainerService.HintSize="436,446" sap2010:WorkflowViewState.IdRef="If_1">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
       <If.Then>
-        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Excel\Create Substitute Items Report.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="346,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Excel\Create Substitute Items Report.xaml">
+        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Excel\Create_SubstituteItemsReport.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="342,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="Excel\Create_SubstituteItemsReport.xaml">
           <ui:InvokeWorkflowFile.Arguments>
-            <OutArgument x:TypeArguments="x:String" x:Key="out_reportPath">[out_reportPath]</OutArgument>
-            <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
+            <OutArgument x:TypeArguments="x:String" x:Key="out_reportPath">
+              <VisualBasicReference x:TypeArguments="x:String" ExpressionText="out_ReportPath" />
+            </OutArgument>
+            <OutArgument x:TypeArguments="x:String" x:Key="out_TimeOfDay">
+              <VisualBasicReference x:TypeArguments="x:String" ExpressionText="str_TimeOfDay" />
+            </OutArgument>
+            <OutArgument x:TypeArguments="x:String" x:Key="out_reportPathPreviousDay">
+              <VisualBasicReference x:TypeArguments="x:String" ExpressionText="out_ReportPathPreviousDay" />
+            </OutArgument>
+            <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">
+              <VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="in_Config" />
+            </InArgument>
           </ui:InvokeWorkflowFile.Arguments>
         </ui:InvokeWorkflowFile>
       </If.Then>
     </If>
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Description:&#xA;Extract datatable from Substitute Items Report from previous day." DisplayName="Excel Utilities\Extract_dt_FromExcelFile.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="436,170" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="Excel Utilities\Extract_dt_FromExcelFile.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Sheet">
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_Config(&quot;Sheet_SubstituteItemsName&quot;).ToString" />
+        </InArgument>
+        <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_ExtractedDataTable">
+          <VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="out_dt_SubstituteItemsPreviousDay" />
+        </OutArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_InputFilePath">
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="out_ReportPathPreviousDay" />
+        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Range">
+          <Literal x:TypeArguments="x:String">A4</Literal>
+        </InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:InvokeWorkflowFile>
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Description:&#xA;Extract DataTable from Input - Substitute Items.xlsx file" DisplayName="Excel Utilities\Extract_dt_FromExcelFile.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="436,155" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="Excel Utilities\Extract_dt_FromExcelFile.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Sheet">
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_Config(&quot;Sheet_SubstituteItemsName&quot;).ToString" />
+        </InArgument>
+        <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_ExtractedDataTable">
+          <VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="out_dt_SubstituteItems" />
+        </OutArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_InputFilePath">
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_Config(&quot;PathFolderSubstituteReport&quot;).ToString+ &quot;Input\&quot; + in_Config(&quot;File_SubstituteItemsName&quot;).ToString" />
+        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Range">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:InvokeWorkflowFile>
   </Sequence>
 </Activity>
