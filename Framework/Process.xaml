@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Process" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uit="http://schemas.uipath.com/workflow/activities/terminal" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Process" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uit="http://schemas.uipath.com/workflow/activities/terminal" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property sap2010:Annotation.AnnotationText="Transaction item to be processed." Name="in_TransactionItem" Type="InArgument(ui:QueueItem)" />
     <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
@@ -6,11 +6,12 @@
     <x:Property Name="out_BusinessException" Type="OutArgument(ui:BusinessRuleException)" />
     <x:Property Name="in_ReportPath" Type="InArgument(x:String)" />
     <x:Property Name="in_dt_SubstituteItemsPreviousDay" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="in_dic_ScheduledRun_BuyersFacility" Type="InArgument(scg:Dictionary(x:String, s:String[]))" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1006,1878</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1006,2468</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ProcessTransaction_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="35">
@@ -52,7 +53,7 @@
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="55">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="110">
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
@@ -107,9 +108,10 @@
       <AssemblyReference>Microsoft.Win32.Primitives</AssemblyReference>
       <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
       <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="698,1773" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="698,2403" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="sd:DataTable" Name="dt_SubstituteItemsPreviousDayFiltered" />
     </Sequence.Variables>
@@ -125,7 +127,46 @@
         <InArgument x:TypeArguments="uit:TerminalConnection" x:Key="in_TerminalConnection">[in_TerminalConnection]</InArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
-    <ui:FilterDataTable sap2010:Annotation.AnnotationText="Description:&#xD;&#xA;Exclude the rows from Substitute Items Previous day DataTable if the following conditions are met:&#xD;&#xA;&#xD;&#xA;1. &quot;Status&quot; column is equal to &quot;NO ITEMS FOUND&quot;&#xD;&#xA;2.  &quot;Status&quot; column contains &quot;SUCCESSFULLY UPDATED&quot;.&#xD;&#xA;3.  &quot;Status&quot; column is equal to &quot;NO CHANGES PREVIOUS DAY&quot;" DataTable="[in_dt_SubstituteItemsPreviousDay]" DisplayName="Filter Data Table - Substitute Items Previous Day" FilterRowsMode="Remove" sap:VirtualizedContainerService.HintSize="636,308" sap2010:WorkflowViewState.IdRef="FilterDataTable_1" OutputDataTable="[dt_SubstituteItemsPreviousDayFiltered]" SelectColumnsMode="Keep">
+    <ui:ForEach x:TypeArguments="x:Object" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="636,590" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[in_dic_ScheduledRun_BuyersFacility(&quot;Buyer&quot;)]">
+      <ui:ForEach.Body>
+        <ActivityAction x:TypeArguments="x:Object">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:Object" Name="Buyer" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="498,465" sap2010:WorkflowViewState.IdRef="Sequence_8">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:ForEach x:TypeArguments="s:String[]" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="436,354" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[in_dic_ScheduledRun_BuyersFacility(&quot;Facility&quot;)]">
+              <ui:ForEach.Body>
+                <ActivityAction x:TypeArguments="s:String[]">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="s:String[]" Name="Facility" />
+                  </ActivityAction.Argument>
+                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="400,229" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <Assign sap2010:Annotation.AnnotationText="We need to validate if if the buyer and facility is equal to the Transaction Item&#xD;&#xA;" sap:VirtualizedContainerService.HintSize="338,118" sap2010:WorkflowViewState.IdRef="Assign_1">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </Assign>
+                  </Sequence>
+                </ActivityAction>
+              </ui:ForEach.Body>
+            </ui:ForEach>
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEach.Body>
+    </ui:ForEach>
+    <ui:FilterDataTable sap2010:Annotation.AnnotationText="Description:&#xA;Exclude the rows from Substitute Items Previous day DataTable if the following conditions are met:&#xA;&#xA;1. &quot;Status&quot; column is equal to &quot;NO ITEMS FOUND&quot;&#xA;2.  &quot;Status&quot; column contains &quot;SUCCESSFULLY UPDATED&quot;.&#xA;3.  &quot;Status&quot; column is equal to &quot;NO CHANGES PREVIOUS DAY&quot;" DataTable="[in_dt_SubstituteItemsPreviousDay]" DisplayName="Filter Data Table - Substitute Items Previous Day" FilterRowsMode="Remove" sap:VirtualizedContainerService.HintSize="636,308" sap2010:WorkflowViewState.IdRef="FilterDataTable_1" OutputDataTable="[dt_SubstituteItemsPreviousDayFiltered]" SelectColumnsMode="Keep">
       <ui:FilterDataTable.Filters>
         <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
           <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
@@ -165,7 +206,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:FilterDataTable>
-    <If Condition="[dt_SubstituteItemsPreviousDayFiltered.AsEnumerable.Any(Function(DataRow)DataRow(&quot;Item&quot;).ToString.Trim.Equals(in_TransactionItem.SpecificContent(&quot;Item&quot;).ToString.Trim) AndAlso &#xD;&#xA;DataRow(&quot;Facility&quot;).ToString.Trim.Equals(CInt(in_TransactionItem.SpecificContent(&quot;Facility&quot;).ToString.Trim).ToString) AndAlso&#xD;&#xA;DataRow(&quot;Buyer&quot;).ToString.Trim.Equals(in_TransactionItem.SpecificContent(&quot;Buyer&quot;).ToString.Trim) AndAlso&#xD;&#xA;DataRow(&quot;Substitution Code Previous&quot;).ToString.Trim.ToUpper.Equals(in_TransactionItem.SpecificContent(&quot;Substitution Code&quot;).ToString.Trim.ToUpper) AndAlso&#xD;&#xA;DataRow(&quot;SubItem&quot;).ToString.Trim.Equals(in_TransactionItem.SpecificContent(&quot;SubItem&quot;).ToString.Trim)&#xD;&#xA;)]" DisplayName="Validate if  Transaction Item exists into the Substitution Items Previous Day DataTable" sap:VirtualizedContainerService.HintSize="636,957" sap2010:WorkflowViewState.IdRef="If_2">
+    <If Condition="[dt_SubstituteItemsPreviousDayFiltered.AsEnumerable.Any(Function(DataRow)DataRow(&quot;Item&quot;).ToString.Trim.Equals(in_TransactionItem.SpecificContent(&quot;Item&quot;).ToString.Trim) AndAlso &#xA;DataRow(&quot;Facility&quot;).ToString.Trim.Equals(CInt(in_TransactionItem.SpecificContent(&quot;Facility&quot;).ToString.Trim).ToString) AndAlso&#xA;DataRow(&quot;Buyer&quot;).ToString.Trim.Equals(in_TransactionItem.SpecificContent(&quot;Buyer&quot;).ToString.Trim) AndAlso&#xA;DataRow(&quot;Substitution Code Previous&quot;).ToString.Trim.ToUpper.Equals(in_TransactionItem.SpecificContent(&quot;Substitution Code&quot;).ToString.Trim.ToUpper) AndAlso&#xA;DataRow(&quot;SubItem&quot;).ToString.Trim.Equals(in_TransactionItem.SpecificContent(&quot;SubItem&quot;).ToString.Trim)&#xA;)]" DisplayName="Validate if  Transaction Item exists into the Substitution Items Previous Day DataTable" sap:VirtualizedContainerService.HintSize="636,957" sap2010:WorkflowViewState.IdRef="If_2">
       <If.Then>
         <Sequence sap:VirtualizedContainerService.HintSize="400,356" sap2010:WorkflowViewState.IdRef="Sequence_4">
           <sap:WorkflowViewStateService.ViewState>
@@ -176,18 +217,10 @@
           <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="338,92" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;MartBot: The Transaction Item&quot; + in_TransactionItem.SpecificContent(&quot;Item&quot;).ToString + &quot; exists in the Substitution Items Previous Day DataTable&quot;]" />
           <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Excel\Processing Report.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="338,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="Excel\Processing Report.xaml">
             <ui:InvokeWorkflowFile.Arguments>
-              <InArgument x:TypeArguments="x:String" x:Key="in_ReportPath">
-                <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_ReportPath" />
-              </InArgument>
-              <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">
-                <VisualBasicValue x:TypeArguments="ui:QueueItem" ExpressionText="in_TransactionItem" />
-              </InArgument>
-              <InArgument x:TypeArguments="x:String" x:Key="in_OutputMessage">
-                <Literal x:TypeArguments="x:String">Skiped</Literal>
-              </InArgument>
-              <InArgument x:TypeArguments="x:String" x:Key="in_Status">
-                <Literal x:TypeArguments="x:String">NO CHANGES PREVIOUS DAY</Literal>
-              </InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_ReportPath">[in_ReportPath]</InArgument>
+              <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">[in_TransactionItem]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_OutputMessage">Skiped</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_Status">NO CHANGES PREVIOUS DAY</InArgument>
             </ui:InvokeWorkflowFile.Arguments>
           </ui:InvokeWorkflowFile>
         </Sequence>

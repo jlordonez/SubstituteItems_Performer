@@ -5,6 +5,7 @@
     <x:Property Name="out_TerminalConnection" Type="OutArgument(uit:TerminalConnection)" />
     <x:Property Name="out_dt_SubstituteItemsPreviousDay" Type="OutArgument(sd:DataTable)" />
     <x:Property Name="out_ReportPath" Type="OutArgument(x:String)" />
+    <x:Property Name="out_dic_ScheduledRun_BuyersFacility" Type="OutArgument(scg:Dictionary(x:String, s:String[]))" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
@@ -142,24 +143,19 @@
             <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">
               <VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="in_Config" />
             </InArgument>
+            <OutArgument x:TypeArguments="scg:Dictionary(x:String, s:String[])" x:Key="out_dic_ScheduledRun_BuyersFacility">
+              <VisualBasicReference x:TypeArguments="scg:Dictionary(x:String, s:String[])" ExpressionText="out_dic_ScheduledRun_BuyersFacility" />
+            </OutArgument>
           </ui:InvokeWorkflowFile.Arguments>
         </ui:InvokeWorkflowFile>
       </If.Then>
     </If>
     <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Description:&#xA;Extract datatable from Substitute Items Report from previous day." DisplayName="Excel Utilities\Extract_dt_FromExcelFile.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="420,170" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="Excel Utilities\Extract_dt_FromExcelFile.xaml">
       <ui:InvokeWorkflowFile.Arguments>
-        <InArgument x:TypeArguments="x:String" x:Key="in_Sheet">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_Config(&quot;Sheet_SubstituteItemsName&quot;).ToString" />
-        </InArgument>
-        <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_ExtractedDataTable">
-          <VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="out_dt_SubstituteItemsPreviousDay" />
-        </OutArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="in_InputFilePath">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="str_ReportPathPreviousDay" />
-        </InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="in_Range">
-          <Literal x:TypeArguments="x:String">A4</Literal>
-        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Sheet">[in_Config("Sheet_SubstituteItemsName").ToString]</InArgument>
+        <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_ExtractedDataTable">[out_dt_SubstituteItemsPreviousDay]</OutArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_InputFilePath">[str_ReportPathPreviousDay]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Range">A4</InArgument>
       </ui:InvokeWorkflowFile.Arguments>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">

@@ -2,27 +2,31 @@
   <x:Members>
     <x:Property sap2010:Annotation.AnnotationText="Allows the Orchestrator queue name to be passed as an argument, instead of only being defined in the configuration file." Name="in_OrchestratorQueueName" Type="InArgument(x:String)" />
     <x:Property sap2010:Annotation.AnnotationText="Allows the Orchestrator folder name where the queue is created to be passed as an argument, instead of only being defined in the configuration file." Name="in_OrchestratorQueueFolder" Type="InArgument(x:String)" />
-    <x:Property Name="out_TimeOfDay" Type="InArgument(x:String)" />
-    <x:Property Name="out_ReportPathPreviousDay" Type="InArgument(x:String)" />
-    <x:Property Name="out_dt_SubstituteItems" Type="InArgument(sd:DataTable)" />
-    <x:Property Name="out_dt_SubstituteItemsPreviousDay" Type="InArgument(sd:DataTable)" />
-    <x:Property Name="out_ReportPath" Type="InArgument(x:String)" />
+    <x:Property Name="in_TimeOfDay" Type="InArgument(x:String)" />
+    <x:Property Name="in_ReportPathPreviousDay" Type="InArgument(x:String)" />
+    <x:Property Name="in_dt_SubstituteItems" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="in_dt_SubstituteItemsPreviousDay" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="in_ReportPath" Type="InArgument(x:String)" />
+    <x:Property Name="in_dic_ScheduledRun_BuyersFacility" Type="InArgument(scg:Dictionary(x:String, s:String[]))" />
   </x:Members>
-  <this:Main.out_TimeOfDay>
+  <this:Main.in_TimeOfDay>
     <InArgument x:TypeArguments="x:String" />
-  </this:Main.out_TimeOfDay>
-  <this:Main.out_ReportPathPreviousDay>
+  </this:Main.in_TimeOfDay>
+  <this:Main.in_ReportPathPreviousDay>
     <InArgument x:TypeArguments="x:String" />
-  </this:Main.out_ReportPathPreviousDay>
-  <this:Main.out_dt_SubstituteItems>
+  </this:Main.in_ReportPathPreviousDay>
+  <this:Main.in_dt_SubstituteItems>
     <InArgument x:TypeArguments="sd:DataTable" />
-  </this:Main.out_dt_SubstituteItems>
-  <this:Main.out_dt_SubstituteItemsPreviousDay>
+  </this:Main.in_dt_SubstituteItems>
+  <this:Main.in_dt_SubstituteItemsPreviousDay>
     <InArgument x:TypeArguments="sd:DataTable" />
-  </this:Main.out_dt_SubstituteItemsPreviousDay>
-  <this:Main.out_ReportPath>
+  </this:Main.in_dt_SubstituteItemsPreviousDay>
+  <this:Main.in_ReportPath>
     <InArgument x:TypeArguments="x:String" />
-  </this:Main.out_ReportPath>
+  </this:Main.in_ReportPath>
+  <this:Main.in_dic_ScheduledRun_BuyersFacility>
+    <InArgument x:TypeArguments="scg:Dictionary(x:String, s:String[])" />
+  </this:Main.in_dic_ScheduledRun_BuyersFacility>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
@@ -291,10 +295,13 @@
                             <VisualBasicReference x:TypeArguments="ui:BusinessRuleException" ExpressionText="BusinessException" />
                           </OutArgument>
                           <InArgument x:TypeArguments="x:String" x:Key="in_ReportPath">
-                            <VisualBasicValue x:TypeArguments="x:String" ExpressionText="out_ReportPath" />
+                            <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_ReportPath" />
                           </InArgument>
                           <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_SubstituteItemsPreviousDay">
-                            <VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="out_dt_SubstituteItemsPreviousDay" />
+                            <VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="in_dt_SubstituteItemsPreviousDay" />
+                          </InArgument>
+                          <InArgument x:TypeArguments="scg:Dictionary(x:String, s:String[])" x:Key="in_dic_ScheduledRun_BuyersFacility">
+                            <VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, s:String[])" ExpressionText="in_dic_ScheduledRun_BuyersFacility" />
                           </InArgument>
                         </ui:InvokeWorkflowFile.Arguments>
                       </ui:InvokeWorkflowFile>
@@ -493,7 +500,7 @@
                   <Transition.To>
                     <State x:Name="__ReferenceID3" sap2010:Annotation.AnnotationText="Read configuration file and initialize applications used in the process." DisplayName="Initialization" sap:VirtualizedContainerService.HintSize="254,104" sap2010:WorkflowViewState.IdRef="State_2">
                       <State.Entry>
-                        <TryCatch DisplayName="Try initializing settings and applications" sap:VirtualizedContainerService.HintSize="578,2754" sap2010:WorkflowViewState.IdRef="TryCatch_2">
+                        <TryCatch DisplayName="Try initializing settings and applications" sap:VirtualizedContainerService.HintSize="578,2634" sap2010:WorkflowViewState.IdRef="TryCatch_2">
                           <sap:WorkflowViewStateService.ViewState>
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
                               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -627,10 +634,13 @@
                                     <VisualBasicReference x:TypeArguments="uit:TerminalConnection" ExpressionText="TerminalConnection" />
                                   </OutArgument>
                                   <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dt_SubstituteItemsPreviousDay">
-                                    <VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="out_dt_SubstituteItemsPreviousDay" />
+                                    <VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="in_dt_SubstituteItemsPreviousDay" />
                                   </OutArgument>
                                   <OutArgument x:TypeArguments="x:String" x:Key="out_ReportPath">
-                                    <VisualBasicReference x:TypeArguments="x:String" ExpressionText="out_ReportPath" />
+                                    <VisualBasicReference x:TypeArguments="x:String" ExpressionText="in_ReportPath" />
+                                  </OutArgument>
+                                  <OutArgument x:TypeArguments="scg:Dictionary(x:String, s:String[])" x:Key="out_dic_ScheduledRun_BuyersFacility">
+                                    <VisualBasicReference x:TypeArguments="scg:Dictionary(x:String, s:String[])" ExpressionText="in_dic_ScheduledRun_BuyersFacility" />
                                   </OutArgument>
                                 </ui:InvokeWorkflowFile.Arguments>
                               </ui:InvokeWorkflowFile>
@@ -716,7 +726,7 @@
                                   <TryCatch.Try>
                                     <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke CloseAllApplications workflow" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_21" UnSafe="False" WorkflowFileName="Framework\CloseAllApplications.xaml">
                                       <ui:InvokeWorkflowFile.Arguments>
-                                        <InArgument x:TypeArguments="x:String" x:Key="in_ReportPath">[out_ReportPath]</InArgument>
+                                        <InArgument x:TypeArguments="x:String" x:Key="in_ReportPath">[in_ReportPath]</InArgument>
                                         <InArgument x:TypeArguments="s:Exception" x:Key="in_SystemException">[SystemException]</InArgument>
                                         <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[Config]</InArgument>
                                       </ui:InvokeWorkflowFile.Arguments>
