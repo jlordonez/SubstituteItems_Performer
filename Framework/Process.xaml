@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Process" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uit="http://schemas.uipath.com/workflow/activities/terminal" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Process" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uit="http://schemas.uipath.com/workflow/activities/terminal" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property sap2010:Annotation.AnnotationText="Transaction item to be processed." Name="in_TransactionItem" Type="InArgument(ui:QueueItem)" />
     <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
@@ -7,11 +7,15 @@
     <x:Property Name="in_ReportPath" Type="InArgument(x:String)" />
     <x:Property Name="in_dt_SubstituteItemsPreviousDay" Type="InArgument(sd:DataTable)" />
     <x:Property Name="in_dic_ScheduledRun_BuyersFacility" Type="InArgument(scg:Dictionary(x:String, s:String[]))" />
+    <x:Property Name="io_dt_SubstituteItems_FinalReport" Type="InArgument(sd:DataTable)" />
   </x:Members>
+  <this:Process.io_dt_SubstituteItems_FinalReport>
+    <InArgument x:TypeArguments="sd:DataTable" />
+  </this:Process.io_dt_SubstituteItems_FinalReport>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1006,3490</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>981,3683</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ProcessTransaction_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="35">
@@ -111,7 +115,7 @@
       <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="698,3385" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="698,3538" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="sd:DataTable" Name="dt_SubstituteItemsPreviousDayFiltered" />
       <Variable x:TypeArguments="x:Boolean" Name="bool_StatusBuyersFacility" />
@@ -194,7 +198,7 @@
         </ActivityAction>
       </ui:ForEach.Body>
     </ui:ForEach>
-    <If sap2010:Annotation.AnnotationText="Description:&#xA;Validate if Buyers and Facility into the Stat Run are allowed to be processed" Condition="[bool_StatusBuyersFacility]" DisplayName="If - Validate bool_StatusBuyersFacility" sap:VirtualizedContainerService.HintSize="636,907" sap2010:WorkflowViewState.IdRef="If_9">
+    <If sap2010:Annotation.AnnotationText="Description:&#xA;Validate if Buyers and Facility into the Stat Run are allowed to be processed" Condition="[bool_StatusBuyersFacility]" DisplayName="If - Validate bool_StatusBuyersFacility" sap:VirtualizedContainerService.HintSize="636,1060" sap2010:WorkflowViewState.IdRef="If_9">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
@@ -213,14 +217,24 @@
         </Sequence>
       </If.Then>
       <If.Else>
-        <Sequence sap:VirtualizedContainerService.HintSize="400,486" sap2010:WorkflowViewState.IdRef="Sequence_13">
+        <Sequence sap:VirtualizedContainerService.HintSize="440,639" sap2010:WorkflowViewState.IdRef="Sequence_13">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="338,92" sap2010:WorkflowViewState.IdRef="LogMessage_8" Level="Info" Message="[&quot;MartBot: The Buyer &quot; + in_TransactionItem.SpecificContent(&quot;Buyer&quot;).ToString + &quot; And Facility &quot; + in_TransactionItem.SpecificContent(&quot;Facility&quot;).ToString.Trim + &quot; are NOT Allowed to be processed&quot;]" />
-          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Excel\Processing Report.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="338,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_8" UnSafe="False" WorkflowFileName="Excel\Processing Report.xaml">
+          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="378,92" sap2010:WorkflowViewState.IdRef="LogMessage_8" Level="Info" Message="[&quot;MartBot: The Buyer &quot; + in_TransactionItem.SpecificContent(&quot;Buyer&quot;).ToString + &quot; And Facility &quot; + in_TransactionItem.SpecificContent(&quot;Facility&quot;).ToString.Trim + &quot; are NOT Allowed to be processed&quot;]" />
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Excel\Add_SubstituteItemsProcessedReport.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="378,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_9" UnSafe="False" WorkflowFileName="Excel\Add_SubstituteItemsProcessedReport.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+              <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_dt_SubstituteItems_FinalReport">
+                <VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="io_dt_SubstituteItems_FinalReport" />
+              </InOutArgument>
+              <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem" />
+              <InArgument x:TypeArguments="x:String" x:Key="in_OutputMessage" />
+              <InArgument x:TypeArguments="x:String" x:Key="in_Status" />
+            </ui:InvokeWorkflowFile.Arguments>
+          </ui:InvokeWorkflowFile>
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Excel\Processing Report.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="378,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_8" UnSafe="False" WorkflowFileName="Excel\Processing Report.xaml">
             <ui:InvokeWorkflowFile.Arguments>
               <InArgument x:TypeArguments="x:String" x:Key="in_ReportPath">
                 <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_ReportPath" />
@@ -236,7 +250,7 @@
               </InArgument>
             </ui:InvokeWorkflowFile.Arguments>
           </ui:InvokeWorkflowFile>
-          <Throw DisplayName="Throw BRE" Exception="[New BusinessRuleException(&quot;The Buyer &quot; + in_TransactionItem.SpecificContent(&quot;Buyer&quot;).ToString + &quot; And Facility &quot; + in_TransactionItem.SpecificContent(&quot;Facility&quot;).ToString.Trim + &quot; are NOT Allowed to be processed&quot;)]" sap:VirtualizedContainerService.HintSize="338,90" sap2010:WorkflowViewState.IdRef="Throw_2" />
+          <Throw DisplayName="Throw BRE" Exception="[New BusinessRuleException(&quot;The Buyer &quot; + in_TransactionItem.SpecificContent(&quot;Buyer&quot;).ToString + &quot; And Facility &quot; + in_TransactionItem.SpecificContent(&quot;Facility&quot;).ToString.Trim + &quot; are NOT Allowed to be processed&quot;)]" sap:VirtualizedContainerService.HintSize="378,90" sap2010:WorkflowViewState.IdRef="Throw_2" />
         </Sequence>
       </If.Else>
     </If>

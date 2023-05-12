@@ -9,7 +9,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1052,1331</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1052,1536</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Create_Substitute_Items_Report_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -101,7 +101,7 @@
       <AssemblyReference>DocumentFormat.OpenXml</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Description: This Workflow is used to Create Substitute Items report depending on the Buyer Code." DisplayName="Create_Substitute_Items_Report" sap:VirtualizedContainerService.HintSize="1062,1186" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Description: This Workflow is used to validate if the time schedule when the substitute items should be excecuted during the Day depending on the Buyer Code and Facility." DisplayName="Create_Substitute_Items_Report" sap:VirtualizedContainerService.HintSize="1062,1431" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="str_TimeOfDay" />
     </Sequence.Variables>
@@ -111,7 +111,7 @@
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log Message - Start Secuence" sap:VirtualizedContainerService.HintSize="1000,92" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;MartBot: Starts to create a Substitute Items report in Excel.&quot;]" />
+    <ui:LogMessage DisplayName="Log Message - Start Secuence" sap:VirtualizedContainerService.HintSize="1000,92" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;MartBot: Starting Validate Scheduled Runs.&quot;]" />
     <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="1000,132" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
       <ui:MultipleAssign.AssignOperations>
         <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
@@ -134,7 +134,7 @@
         </scg:List>
       </ui:MultipleAssign.AssignOperations>
     </ui:MultipleAssign>
-    <Switch x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="Description:&#xD;&#xA;This switch is used to validate if the Time of Day when the Performer proces is excecuted or Triggered into the time window of 15 minutes." DisplayName="Switch - Schedule Runs" Expression="[If(DateTime.Parse(str_TimeOfDay).TimeOfDay &gt;= New TimeSpan(06,50,0) And DateTime.Parse(str_TimeOfDay).TimeOfDay &lt;= New TimeSpan(09,5,0),&#xD;&#xA;&#x9;&quot;A&quot;, &#xD;&#xA;&#x9;If(DateTime.Parse(str_TimeOfDay).TimeOfDay &gt;= New TimeSpan(11,50,0) And DateTime.Parse(str_TimeOfDay).TimeOfDay &lt;= New TimeSpan(12,5,0),&#xD;&#xA;&#x9;&#x9;&quot;B&quot;,&#xD;&#xA;&#x9;&#x9;If(DateTime.Parse(str_TimeOfDay).TimeOfDay &gt;= New TimeSpan(12,30,0) And DateTime.Parse(str_TimeOfDay).TimeOfDay &lt;= New TimeSpan(12,45,0),&#xD;&#xA;            &quot;C&quot;,&#xD;&#xA;           If(DateTime.Parse(str_TimeOfDay).TimeOfDay &gt;= New TimeSpan(13,0,0) And DateTime.Parse(str_TimeOfDay).TimeOfDay &lt;= New TimeSpan(13,15,0),&#xD;&#xA;                &quot;D&quot;,&#xD;&#xA;                If(DateTime.Parse(str_TimeOfDay).TimeOfDay &gt;= New TimeSpan(14,0,0) And DateTime.Parse(str_TimeOfDay).TimeOfDay &lt;= New TimeSpan(14,15,0),&#xD;&#xA;                    &quot;E&quot;,&#xD;&#xA;                    If(DateTime.Parse(str_TimeOfDay).TimeOfDay &gt;= New TimeSpan(17,10,0) And DateTime.Parse(str_TimeOfDay).TimeOfDay &lt;= New TimeSpan(17,25,0),&#xD;&#xA;                        &quot;F&quot;,&#xD;&#xA;                        If(DateTime.Parse(str_TimeOfDay).TimeOfDay &gt;= New TimeSpan(19,10,0) And DateTime.Parse(str_TimeOfDay).TimeOfDay &lt;= New TimeSpan(19,24,55),&#xD;&#xA;                            &quot;G&quot;,&#xD;&#xA;                            If(DateTime.Parse(str_TimeOfDay).TimeOfDay &gt;= New TimeSpan(19,25,0) And DateTime.Parse(str_TimeOfDay).TimeOfDay &lt;= New TimeSpan(19,35,0),&#xD;&#xA;                                &quot;H&quot;,&#xD;&#xA;                                &quot;NO VALID&quot;&#xD;&#xA;                            )&#xD;&#xA;                        )&#xD;&#xA;                    )&#xD;&#xA;                )            &#xD;&#xA;            )&#xD;&#xA;        )&#xD;&#xA;    )&#xD;&#xA;)]" sap:VirtualizedContainerService.HintSize="1000,740" sap2010:WorkflowViewState.IdRef="Switch`1_3">
+    <Switch x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="Description:&#xA;This switch is used to validate if the Time of Day when the Performer proces is excecuted or Triggered into the time window of 15 minutes." DisplayName="Switch - Schedule Runs" Expression="[If(DateTime.Parse(str_TimeOfDay).TimeOfDay &gt;= New TimeSpan(06,50,0) And DateTime.Parse(str_TimeOfDay).TimeOfDay &lt;= New TimeSpan(09,5,0),&#xA;&#x9;&quot;A&quot;, &#xA;&#x9;If(DateTime.Parse(str_TimeOfDay).TimeOfDay &gt;= New TimeSpan(11,50,0) And DateTime.Parse(str_TimeOfDay).TimeOfDay &lt;= New TimeSpan(12,5,0),&#xA;&#x9;&#x9;&quot;B&quot;,&#xA;&#x9;&#x9;If(DateTime.Parse(str_TimeOfDay).TimeOfDay &gt;= New TimeSpan(12,30,0) And DateTime.Parse(str_TimeOfDay).TimeOfDay &lt;= New TimeSpan(12,45,0),&#xA;            &quot;C&quot;,&#xA;           If(DateTime.Parse(str_TimeOfDay).TimeOfDay &gt;= New TimeSpan(13,0,0) And DateTime.Parse(str_TimeOfDay).TimeOfDay &lt;= New TimeSpan(13,15,0),&#xA;                &quot;D&quot;,&#xA;                If(DateTime.Parse(str_TimeOfDay).TimeOfDay &gt;= New TimeSpan(14,0,0) And DateTime.Parse(str_TimeOfDay).TimeOfDay &lt;= New TimeSpan(14,15,0),&#xA;                    &quot;E&quot;,&#xA;                    If(DateTime.Parse(str_TimeOfDay).TimeOfDay &gt;= New TimeSpan(17,10,0) And DateTime.Parse(str_TimeOfDay).TimeOfDay &lt;= New TimeSpan(17,25,0),&#xA;                        &quot;F&quot;,&#xA;                        If(DateTime.Parse(str_TimeOfDay).TimeOfDay &gt;= New TimeSpan(19,10,0) And DateTime.Parse(str_TimeOfDay).TimeOfDay &lt;= New TimeSpan(19,24,55),&#xA;                            &quot;G&quot;,&#xA;                            If(DateTime.Parse(str_TimeOfDay).TimeOfDay &gt;= New TimeSpan(19,25,0) And DateTime.Parse(str_TimeOfDay).TimeOfDay &lt;= New TimeSpan(19,35,0),&#xA;                                &quot;H&quot;,&#xA;                                &quot;NO VALID&quot;&#xA;                            )&#xA;                        )&#xA;                    )&#xA;                )            &#xA;            )&#xA;        )&#xA;    )&#xA;)]" sap:VirtualizedContainerService.HintSize="1000,985" sap2010:WorkflowViewState.IdRef="Switch`1_3">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -142,7 +142,7 @@
           <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <Sequence x:Key="A" DisplayName="&quot;The Current Time is Between 08:50 To 09:05&quot;" sap:VirtualizedContainerService.HintSize="400,803" sap2010:WorkflowViewState.IdRef="Sequence_4">
+      <Sequence x:Key="A" DisplayName="&quot;The Current Time is Between 08:50 To 09:05&quot;" sap:VirtualizedContainerService.HintSize="400,578" sap2010:WorkflowViewState.IdRef="Sequence_4">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -179,15 +179,8 @@
             <InArgument x:TypeArguments="x:String">[in_Config("PathFolderSubstituteReport").ToString + "Output\" + "SubstituteItems_Final_Report_" + Today.AddDays(-1).ToString("yyyy-MMM-dd_") + "8-50"+".xlsx"]</InArgument>
           </Assign.Value>
         </Assign>
-        <ui:CopyFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="the report is copied with the today date" Destination="[out_reportPath]" DisplayName="Copy File - Negative Points Balance Report" sap:VirtualizedContainerService.HintSize="338,185" sap2010:WorkflowViewState.IdRef="CopyFile_1" Overwrite="True" Path="Data\Temp\Substitute Items - Template.xlsx">
-          <sap:WorkflowViewStateService.ViewState>
-            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-            </scg:Dictionary>
-          </sap:WorkflowViewStateService.ViewState>
-        </ui:CopyFile>
       </Sequence>
-      <Sequence x:Key="B" DisplayName="&quot;The Current Time is Between 11:50 To 12:00&quot;" sap:VirtualizedContainerService.HintSize="400,803" sap2010:WorkflowViewState.IdRef="Sequence_5">
+      <Sequence x:Key="B" DisplayName="&quot;The Current Time is Between 11:50 To 12:00&quot;" sap:VirtualizedContainerService.HintSize="400,578" sap2010:WorkflowViewState.IdRef="Sequence_5">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -223,15 +216,8 @@
             <InArgument x:TypeArguments="x:String">[in_Config("PathFolderSubstituteReport").ToString + "Output\" + "SubstituteItems_Final_Report_" + Today.AddDays(-1).ToString("yyyy-MMM-dd_") + "11-50"+".xlsx"]</InArgument>
           </Assign.Value>
         </Assign>
-        <ui:CopyFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="the report is copied with the today date" Destination="[out_reportPath]" DisplayName="Copy File - Negative Points Balance Report" sap:VirtualizedContainerService.HintSize="338,185" sap2010:WorkflowViewState.IdRef="CopyFile_2" Overwrite="True" Path="Data\Temp\Substitute Items - Template.xlsx">
-          <sap:WorkflowViewStateService.ViewState>
-            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-            </scg:Dictionary>
-          </sap:WorkflowViewStateService.ViewState>
-        </ui:CopyFile>
       </Sequence>
-      <Sequence x:Key="C" DisplayName="&quot;The Current Time is Between 12:30 To 12:45&quot;" sap:VirtualizedContainerService.HintSize="400,803" sap2010:WorkflowViewState.IdRef="Sequence_6">
+      <Sequence x:Key="C" DisplayName="&quot;The Current Time is Between 12:30 To 12:45&quot;" sap:VirtualizedContainerService.HintSize="400,578" sap2010:WorkflowViewState.IdRef="Sequence_6">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -267,15 +253,8 @@
             <InArgument x:TypeArguments="x:String">[in_Config("PathFolderSubstituteReport").ToString + "Output\" + "SubstituteItems_Final_Report_" + Today.AddDays(-1).ToString("yyyy-MMM-dd_") + "12-30"+".xlsx"]</InArgument>
           </Assign.Value>
         </Assign>
-        <ui:CopyFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="the report is copied with the today date" Destination="[out_reportPath]" DisplayName="Copy File - Negative Points Balance Report" sap:VirtualizedContainerService.HintSize="338,185" sap2010:WorkflowViewState.IdRef="CopyFile_3" Overwrite="True" Path="Data\Temp\Substitute Items - Template.xlsx">
-          <sap:WorkflowViewStateService.ViewState>
-            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-            </scg:Dictionary>
-          </sap:WorkflowViewStateService.ViewState>
-        </ui:CopyFile>
       </Sequence>
-      <Sequence x:Key="D" DisplayName="&quot;The Current Time is Between 13:00 To 13:15&quot;" sap:VirtualizedContainerService.HintSize="400,803" sap2010:WorkflowViewState.IdRef="Sequence_7">
+      <Sequence x:Key="D" DisplayName="&quot;The Current Time is Between 13:00 To 13:15&quot;" sap:VirtualizedContainerService.HintSize="400,578" sap2010:WorkflowViewState.IdRef="Sequence_7">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -311,15 +290,8 @@
             <InArgument x:TypeArguments="x:String">[in_Config("PathFolderSubstituteReport").ToString + "Output\" + "SubstituteItems_Final_Report_" + Today.AddDays(-1).ToString("yyyy-MMM-dd_") + "13-00"+".xlsx"]</InArgument>
           </Assign.Value>
         </Assign>
-        <ui:CopyFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="the report is copied with the today date" Destination="[out_reportPath]" DisplayName="Copy File - Negative Points Balance Report" sap:VirtualizedContainerService.HintSize="338,185" sap2010:WorkflowViewState.IdRef="CopyFile_4" Overwrite="True" Path="Data\Temp\Substitute Items - Template.xlsx">
-          <sap:WorkflowViewStateService.ViewState>
-            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-            </scg:Dictionary>
-          </sap:WorkflowViewStateService.ViewState>
-        </ui:CopyFile>
       </Sequence>
-      <Sequence x:Key="E" DisplayName="&quot;The Current Time is Between 14:00 To 14:15&quot;" sap:VirtualizedContainerService.HintSize="400,803" sap2010:WorkflowViewState.IdRef="Sequence_8">
+      <Sequence x:Key="E" DisplayName="&quot;The Current Time is Between 14:00 To 14:15&quot;" sap:VirtualizedContainerService.HintSize="400,578" sap2010:WorkflowViewState.IdRef="Sequence_8">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -355,15 +327,8 @@
             <InArgument x:TypeArguments="x:String">[in_Config("PathFolderSubstituteReport").ToString+ "Output\" + "SubstituteItems_Final_Report_" + Today.AddDays(-1).ToString("yyyy-MMM-dd_") + "14-00"+".xlsx"]</InArgument>
           </Assign.Value>
         </Assign>
-        <ui:CopyFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="the report is copied with the today date" Destination="[out_reportPath]" DisplayName="Copy File - Negative Points Balance Report" sap:VirtualizedContainerService.HintSize="338,185" sap2010:WorkflowViewState.IdRef="CopyFile_5" Overwrite="True" Path="Data\Temp\Substitute Items - Template.xlsx">
-          <sap:WorkflowViewStateService.ViewState>
-            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-            </scg:Dictionary>
-          </sap:WorkflowViewStateService.ViewState>
-        </ui:CopyFile>
       </Sequence>
-      <Sequence x:Key="F" DisplayName="&quot;The Current Time is Between 17:10 To 17:25&quot;" sap:VirtualizedContainerService.HintSize="400,803" sap2010:WorkflowViewState.IdRef="Sequence_9">
+      <Sequence x:Key="F" DisplayName="&quot;The Current Time is Between 17:10 To 17:25&quot;" sap:VirtualizedContainerService.HintSize="400,578" sap2010:WorkflowViewState.IdRef="Sequence_9">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -399,15 +364,8 @@
             <InArgument x:TypeArguments="x:String">[in_Config("PathFolderSubstituteReport").ToString + "Output\" + "SubstituteItems_Final_Report_" + Today.AddDays(-1).ToString("yyyy-MMM-dd_") + "17-10"+".xlsx"]</InArgument>
           </Assign.Value>
         </Assign>
-        <ui:CopyFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="the report is copied with the today date" Destination="[out_reportPath]" DisplayName="Copy File - Negative Points Balance Report" sap:VirtualizedContainerService.HintSize="338,185" sap2010:WorkflowViewState.IdRef="CopyFile_6" Overwrite="True" Path="Data\Temp\Substitute Items - Template.xlsx">
-          <sap:WorkflowViewStateService.ViewState>
-            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-            </scg:Dictionary>
-          </sap:WorkflowViewStateService.ViewState>
-        </ui:CopyFile>
       </Sequence>
-      <Sequence x:Key="G" DisplayName="&quot;The Current Time is Between 19:10 To 19:24&quot;" sap:VirtualizedContainerService.HintSize="400,803" sap2010:WorkflowViewState.IdRef="Sequence_10">
+      <Sequence x:Key="G" DisplayName="&quot;The Current Time is Between 19:10 To 19:24&quot;" sap:VirtualizedContainerService.HintSize="400,578" sap2010:WorkflowViewState.IdRef="Sequence_10">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -443,15 +401,8 @@
             <InArgument x:TypeArguments="x:String" xml:space="preserve">[in_Config("PathFolderSubstituteReport").ToString  + "Output\" + "SubstituteItems_Final_Report_" + Today.AddDays(-1).ToString("yyyy-MMM-dd_") + "19-10"+".xlsx"]</InArgument>
           </Assign.Value>
         </Assign>
-        <ui:CopyFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="the report is copied with the today date" Destination="[out_reportPath]" DisplayName="Copy File - Negative Points Balance Report" sap:VirtualizedContainerService.HintSize="338,185" sap2010:WorkflowViewState.IdRef="CopyFile_7" Overwrite="True" Path="Data\Temp\Substitute Items - Template.xlsx">
-          <sap:WorkflowViewStateService.ViewState>
-            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-            </scg:Dictionary>
-          </sap:WorkflowViewStateService.ViewState>
-        </ui:CopyFile>
       </Sequence>
-      <Sequence x:Key="H" DisplayName="&quot;The Current Time is Between 19:25 To 19:35&quot;" sap:VirtualizedContainerService.HintSize="400,803" sap2010:WorkflowViewState.IdRef="Sequence_11">
+      <Sequence x:Key="H" DisplayName="&quot;The Current Time is Between 19:25 To 19:35&quot;" sap:VirtualizedContainerService.HintSize="400,578" sap2010:WorkflowViewState.IdRef="Sequence_11">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -487,13 +438,6 @@
             <InArgument x:TypeArguments="x:String">[in_Config("PathFolderSubstituteReport").ToString + "Output\" + "SubstituteItems_Final_Report_" + Today.AddDays(-1).ToString("yyyy-MMM-dd_") + "19-20"+".xlsx"]</InArgument>
           </Assign.Value>
         </Assign>
-        <ui:CopyFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="the report is copied with the today date" Destination="[out_reportPath]" DisplayName="Copy File - Negative Points Balance Report" sap:VirtualizedContainerService.HintSize="338,185" sap2010:WorkflowViewState.IdRef="CopyFile_8" Overwrite="True" Path="Data\Temp\Substitute Items - Template.xlsx">
-          <sap:WorkflowViewStateService.ViewState>
-            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-            </scg:Dictionary>
-          </sap:WorkflowViewStateService.ViewState>
-        </ui:CopyFile>
       </Sequence>
       <Sequence x:Key="NO VALID" sap:VirtualizedContainerService.HintSize="400,333" sap2010:WorkflowViewState.IdRef="Sequence_12">
         <sap:WorkflowViewStateService.ViewState>
