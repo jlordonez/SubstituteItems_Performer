@@ -2,14 +2,14 @@
   <x:Members>
     <x:Property Name="in_TransactionItem" Type="InArgument(ui:QueueItem)" />
     <x:Property Name="in_Ordered" Type="InArgument(x:Int32)" />
-    <x:Property Name="in_ReportPath" Type="InArgument(x:String)" />
     <x:Property Name="in_TerminalConnection" Type="InArgument(uit:TerminalConnection)" />
     <x:Property Name="out_SubItemCheck" Type="OutArgument(x:Boolean)" />
+    <x:Property Name="io_dt_SubstituteItems_FinalReport" Type="InOutArgument(sd:DataTable)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>697,3620</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1006,3861</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Retalix___Confirm_enought_open_count_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="43">
@@ -117,7 +117,7 @@
       <AssemblyReference>System.Data.SqlClient</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Confirm if there is enough open count in the Item today to cover the ordered" DisplayName="Retalix___Confirm_enought_open_count" sap:VirtualizedContainerService.HintSize="614,3555" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Confirm if there is enough open count in the Item today to cover the ordered" DisplayName="Retalix___Confirm_enought_open_count" sap:VirtualizedContainerService.HintSize="643,3796" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="ExtractPurchaseOrders" />
       <Variable x:TypeArguments="sd:DataTable" Name="dt_PurchaseOrder" />
@@ -135,35 +135,35 @@
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <uit:TerminalSession ConnectionString="{x:Null}" ContinueOnError="{x:Null}" OutputConnection="{x:Null}" SSHPassword="{x:Null}" SSHUserName="{x:Null}" CloseConnection="False" DelayMS="1000" DisplayName="Terminal Session" ExistingConnection="[in_TerminalConnection]" sap:VirtualizedContainerService.HintSize="552,1319" sap2010:WorkflowViewState.IdRef="TerminalSession_1" TimeoutMS="50000">
+    <uit:TerminalSession ConnectionString="{x:Null}" ContinueOnError="{x:Null}" OutputConnection="{x:Null}" SSHPassword="{x:Null}" SSHUserName="{x:Null}" CloseConnection="False" DelayMS="1000" DisplayName="Terminal Session" ExistingConnection="[in_TerminalConnection]" sap:VirtualizedContainerService.HintSize="581,1560" sap2010:WorkflowViewState.IdRef="TerminalSession_1" TimeoutMS="50000">
       <uit:TerminalSession.Body>
         <ActivityAction x:TypeArguments="uit:TerminalConnection">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="uit:TerminalConnection" Name="terminalSession" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="441,1219" sap2010:WorkflowViewState.IdRef="Sequence_3">
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="496,1460" sap2010:WorkflowViewState.IdRef="Sequence_3">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Retalix\Retalix - Return Main Menu.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="379,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Retalix - Utilitites\Retalix - Return Main Menu.xaml">
+            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Retalix\Retalix - Return Main Menu.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="434,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Retalix - Utilitites\Retalix - Return Main Menu.xaml">
               <ui:InvokeWorkflowFile.Arguments>
                 <InArgument x:TypeArguments="uit:TerminalConnection" x:Key="in_TerminalConnection">[in_TerminalConnection]</InArgument>
               </ui:InvokeWorkflowFile.Arguments>
             </ui:InvokeWorkflowFile>
-            <uit:TerminalSendKeys DelayMS="300" DisplayName="&quot;Send Keys - Purchase Menu&quot;" sap:VirtualizedContainerService.HintSize="379,60" sap2010:WorkflowViewState.IdRef="TerminalSendKeys_3" Keys="10" TimeoutMS="5000" WaitType="READY" />
-            <uit:TerminalSendControlKey DelayMS="1000" DisplayName="Send Control Key" sap:VirtualizedContainerService.HintSize="379,60" sap2010:WorkflowViewState.IdRef="TerminalSendControlKey_3" Key="Transmit" TimeoutMS="5000" WaitType="READY" />
-            <uit:TerminalSendKeys DelayMS="300" DisplayName="&quot;Send Keys - Item / P.O X-REF&quot;" sap:VirtualizedContainerService.HintSize="379,60" sap2010:WorkflowViewState.IdRef="TerminalSendKeys_4" Keys="12" TimeoutMS="5000" WaitType="READY" />
-            <uit:TerminalSendKeys DelayMS="300" DisplayName="&quot;Send Keys - Item&quot;" sap:VirtualizedContainerService.HintSize="379,60" sap2010:WorkflowViewState.IdRef="TerminalSendKeys_5" Keys="[in_TransactionItem.SpecificContent(&quot;Item&quot;).ToString]" TimeoutMS="5000" WaitType="READY" />
-            <uit:TerminalMoveCursor Column="55" DelayMS="300" DisplayName="Move Cursor" sap:VirtualizedContainerService.HintSize="379,60" sap2010:WorkflowViewState.IdRef="TerminalMoveCursor_1" Row="24" TimeoutMS="5000" WaitType="READY" />
-            <uit:TerminalSendKeys DelayMS="300" DisplayName="&quot;Send Keys - Facility&quot;" sap:VirtualizedContainerService.HintSize="379,60" sap2010:WorkflowViewState.IdRef="TerminalSendKeys_6" Keys="[in_TransactionItem.SpecificContent(&quot;Facility&quot;).ToString]" TimeoutMS="5000" WaitType="READY" />
-            <uit:TerminalSendControlKey DelayMS="1000" DisplayName="Send Control Key" sap:VirtualizedContainerService.HintSize="379,60" sap2010:WorkflowViewState.IdRef="TerminalSendControlKey_4" Key="Transmit" TimeoutMS="5000" WaitType="READY" />
-            <uit:TerminalGetScreenArea Column="2" DelayMS="300" DisplayName="Get Screen Area - " EndColumn="80" EndRow="23" sap:VirtualizedContainerService.HintSize="379,163" sap2010:WorkflowViewState.IdRef="TerminalGetScreenArea_1" Row="5" Text="[ExtractPurchaseOrders]" TimeoutMS="5000" WaitType="READY" />
-            <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="379,52" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+            <uit:TerminalSendKeys DelayMS="300" DisplayName="&quot;Send Keys - Purchase Menu&quot;" sap:VirtualizedContainerService.HintSize="434,60" sap2010:WorkflowViewState.IdRef="TerminalSendKeys_3" Keys="10" TimeoutMS="5000" WaitType="READY" />
+            <uit:TerminalSendControlKey DelayMS="1000" DisplayName="Send Control Key" sap:VirtualizedContainerService.HintSize="434,60" sap2010:WorkflowViewState.IdRef="TerminalSendControlKey_3" Key="Transmit" TimeoutMS="5000" WaitType="READY" />
+            <uit:TerminalSendKeys DelayMS="300" DisplayName="&quot;Send Keys - Item / P.O X-REF&quot;" sap:VirtualizedContainerService.HintSize="434,60" sap2010:WorkflowViewState.IdRef="TerminalSendKeys_4" Keys="12" TimeoutMS="5000" WaitType="READY" />
+            <uit:TerminalSendKeys DelayMS="300" DisplayName="&quot;Send Keys - Item&quot;" sap:VirtualizedContainerService.HintSize="434,60" sap2010:WorkflowViewState.IdRef="TerminalSendKeys_5" Keys="[in_TransactionItem.SpecificContent(&quot;Item&quot;).ToString]" TimeoutMS="5000" WaitType="READY" />
+            <uit:TerminalMoveCursor Column="55" DelayMS="300" DisplayName="Move Cursor" sap:VirtualizedContainerService.HintSize="434,60" sap2010:WorkflowViewState.IdRef="TerminalMoveCursor_1" Row="24" TimeoutMS="5000" WaitType="READY" />
+            <uit:TerminalSendKeys DelayMS="300" DisplayName="&quot;Send Keys - Facility&quot;" sap:VirtualizedContainerService.HintSize="434,60" sap2010:WorkflowViewState.IdRef="TerminalSendKeys_6" Keys="[in_TransactionItem.SpecificContent(&quot;Facility&quot;).ToString]" TimeoutMS="5000" WaitType="READY" />
+            <uit:TerminalSendControlKey DelayMS="1000" DisplayName="Send Control Key" sap:VirtualizedContainerService.HintSize="434,60" sap2010:WorkflowViewState.IdRef="TerminalSendControlKey_4" Key="Transmit" TimeoutMS="5000" WaitType="READY" />
+            <uit:TerminalGetScreenArea Column="2" DelayMS="300" DisplayName="Get Screen Area - " EndColumn="80" EndRow="23" sap:VirtualizedContainerService.HintSize="434,163" sap2010:WorkflowViewState.IdRef="TerminalGetScreenArea_1" Row="5" Text="[ExtractPurchaseOrders]" TimeoutMS="5000" WaitType="READY" />
+            <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="434,293" sap2010:WorkflowViewState.IdRef="TryCatch_1">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   <x:Boolean x:Key="IsPinned">False</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
@@ -208,8 +208,8 @@
         </ActivityAction>
       </uit:TerminalSession.Body>
     </uit:TerminalSession>
-    <ui:GenerateDataTable ColumnSeparators="{x:Null}" ColumnSizes="{x:Null}" NewLineSeparator="{x:Null}" Positions="{x:Null}" AutoDetectTypes="False" CSVParsing="False" DataTable="[dt_PurchaseOrder]" DisplayName="Generate Data Table" sap:VirtualizedContainerService.HintSize="552,201" sap2010:WorkflowViewState.IdRef="GenerateDataTable_1" Input="[ExtractPurchaseOrders]" />
-    <ui:FilterDataTable DataTable="[dt_PurchaseOrder]" DisplayName="Filter Data Table - Today's Date" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="552,161" sap2010:WorkflowViewState.IdRef="FilterDataTable_1" OutputDataTable="[dt_PurchaseOrder]" SelectColumnsMode="Keep">
+    <ui:GenerateDataTable ColumnSeparators="{x:Null}" ColumnSizes="{x:Null}" NewLineSeparator="{x:Null}" Positions="{x:Null}" AutoDetectTypes="False" CSVParsing="False" DataTable="[dt_PurchaseOrder]" DisplayName="Generate Data Table" sap:VirtualizedContainerService.HintSize="581,201" sap2010:WorkflowViewState.IdRef="GenerateDataTable_1" Input="[ExtractPurchaseOrders]" />
+    <ui:FilterDataTable DataTable="[dt_PurchaseOrder]" DisplayName="Filter Data Table - Today's Date" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="581,161" sap2010:WorkflowViewState.IdRef="FilterDataTable_1" OutputDataTable="[dt_PurchaseOrder]" SelectColumnsMode="Keep">
       <ui:FilterDataTable.Filters>
         <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
           <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
@@ -244,7 +244,7 @@
         </scg:List>
       </ui:FilterDataTable.SelectColumns>
     </ui:FilterDataTable>
-    <ui:FilterDataTable DataTable="[dt_PurchaseOrder]" DisplayName="Filter Data Table - APPRO or BO/PART " FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="552,161" sap2010:WorkflowViewState.IdRef="FilterDataTable_2" OutputDataTable="[dt_PurchaseOrder]" SelectColumnsMode="Keep">
+    <ui:FilterDataTable DataTable="[dt_PurchaseOrder]" DisplayName="Filter Data Table - APPRO or BO/PART " FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="581,161" sap2010:WorkflowViewState.IdRef="FilterDataTable_2" OutputDataTable="[dt_PurchaseOrder]" SelectColumnsMode="Keep">
       <ui:FilterDataTable.Filters>
         <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
           <ui:FilterOperationArgument BooleanOperator="And" Operator="CONTAINS">
@@ -271,7 +271,7 @@
         </scg:List>
       </ui:FilterDataTable.SelectColumns>
     </ui:FilterDataTable>
-    <ui:FilterDataTable DataTable="[dt_PurchaseOrder]" DisplayName="Filter Data Table - RCVD " FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="552,161" sap2010:WorkflowViewState.IdRef="FilterDataTable_3" OutputDataTable="[dt_PurchaseOrder]" SelectColumnsMode="Keep">
+    <ui:FilterDataTable DataTable="[dt_PurchaseOrder]" DisplayName="Filter Data Table - RCVD " FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="581,161" sap2010:WorkflowViewState.IdRef="FilterDataTable_3" OutputDataTable="[dt_PurchaseOrder]" SelectColumnsMode="Keep">
       <ui:FilterDataTable.Filters>
         <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
           <ui:FilterOperationArgument Operand="{x:Null}" BooleanOperator="And" Operator="EMPTY">
@@ -287,7 +287,7 @@
         </scg:List>
       </ui:FilterDataTable.SelectColumns>
     </ui:FilterDataTable>
-    <ui:FilterDataTable DataTable="[dt_PurchaseOrder]" DisplayName="Filter Data Table - OPEN / BACKORD" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="552,161" sap2010:WorkflowViewState.IdRef="FilterDataTable_4" OutputDataTable="[dt_PurchaseOrder]" SelectColumnsMode="Keep">
+    <ui:FilterDataTable DataTable="[dt_PurchaseOrder]" DisplayName="Filter Data Table - OPEN / BACKORD" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="581,161" sap2010:WorkflowViewState.IdRef="FilterDataTable_4" OutputDataTable="[dt_PurchaseOrder]" SelectColumnsMode="Keep">
       <ui:FilterDataTable.Filters>
         <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
           <ui:FilterOperationArgument BooleanOperator="And" Operator="CONTAINS">
@@ -314,15 +314,15 @@
         </scg:List>
       </ui:FilterDataTable.SelectColumns>
     </ui:FilterDataTable>
-    <If Condition="[dt_PurchaseOrder.Rows.Count &gt; 0]" sap:VirtualizedContainerService.HintSize="552,1009" sap2010:WorkflowViewState.IdRef="If_1">
+    <If Condition="[dt_PurchaseOrder.Rows.Count &gt; 0]" sap:VirtualizedContainerService.HintSize="581,1009" sap2010:WorkflowViewState.IdRef="If_1">
       <If.Then>
-        <Sequence sap:VirtualizedContainerService.HintSize="474,733" sap2010:WorkflowViewState.IdRef="Sequence_8">
+        <Sequence sap:VirtualizedContainerService.HintSize="503,733" sap2010:WorkflowViewState.IdRef="Sequence_8">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <Assign DisplayName="Assign - Get Open" sap:VirtualizedContainerService.HintSize="412,61" sap2010:WorkflowViewState.IdRef="Assign_3">
+          <Assign DisplayName="Assign - Get Open" sap:VirtualizedContainerService.HintSize="441,61" sap2010:WorkflowViewState.IdRef="Assign_3">
             <Assign.To>
               <OutArgument x:TypeArguments="x:String">[StrOpen]</OutArgument>
             </Assign.To>
@@ -330,7 +330,7 @@
               <InArgument x:TypeArguments="x:String">[dt_PurchaseOrder.Rows(0)(11).ToString]</InArgument>
             </Assign.Value>
           </Assign>
-          <Assign sap:VirtualizedContainerService.HintSize="412,61" sap2010:WorkflowViewState.IdRef="Assign_4">
+          <Assign sap:VirtualizedContainerService.HintSize="441,61" sap2010:WorkflowViewState.IdRef="Assign_4">
             <Assign.To>
               <OutArgument x:TypeArguments="x:Int32">[Open]</OutArgument>
             </Assign.To>
@@ -338,19 +338,27 @@
               <InArgument x:TypeArguments="x:Int32">[Int32.Parse( StrOpen )]</InArgument>
             </Assign.Value>
           </Assign>
-          <If sap2010:Annotation.AnnotationText="On Hand + Open count &gt; Ordered " Condition="[( OnHand + Open ) &gt; in_Ordered]" sap:VirtualizedContainerService.HintSize="412,420" sap2010:WorkflowViewState.IdRef="If_2">
+          <If sap2010:Annotation.AnnotationText="On Hand + Open count &gt; Ordered " Condition="[( OnHand + Open ) &gt; in_Ordered]" sap:VirtualizedContainerService.HintSize="441,420" sap2010:WorkflowViewState.IdRef="If_2">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
             <If.Then>
-              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Excel\Processing Report.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="Excel\Processing Report.xaml">
+              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Excel\Add_SubstituteItemsProcessedReport.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="363,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="Excel\Add_SubstituteItemsProcessedReport.xaml">
                 <ui:InvokeWorkflowFile.Arguments>
-                  <InArgument x:TypeArguments="x:String" x:Key="in_ReportPath">[in_ReportPath]</InArgument>
-                  <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">[in_TransactionItem]</InArgument>
-                  <InArgument x:TypeArguments="x:String" x:Key="in_OutputMessage">The substitution is not necessary</InArgument>
-                  <InArgument x:TypeArguments="x:String" x:Key="in_Status">Success</InArgument>
+                  <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_dt_SubstituteItems_FinalReport">
+                    <VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="io_dt_SubstituteItems_FinalReport" />
+                  </InOutArgument>
+                  <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">
+                    <VisualBasicValue x:TypeArguments="ui:QueueItem" ExpressionText="in_TransactionItem" />
+                  </InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_OutputMessage">
+                    <Literal x:TypeArguments="x:String">The substitution is not necessary</Literal>
+                  </InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_Status">
+                    <Literal x:TypeArguments="x:String">Success</Literal>
+                  </InArgument>
                 </ui:InvokeWorkflowFile.Arguments>
               </ui:InvokeWorkflowFile>
             </If.Then>

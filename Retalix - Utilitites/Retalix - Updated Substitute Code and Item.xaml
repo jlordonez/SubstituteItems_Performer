@@ -1,9 +1,9 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Retalix___Updated_Substitute_Code_and_Item" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uit="http://schemas.uipath.com/workflow/activities/terminal" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Retalix___Updated_Substitute_Code_and_Item" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uit="http://schemas.uipath.com/workflow/activities/terminal" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_TransactionItem" Type="InArgument(ui:QueueItem)" />
     <x:Property Name="out_BusinessException" Type="InArgument(ui:BusinessRuleException)" />
-    <x:Property Name="in_ReportPath" Type="InArgument(x:String)" />
     <x:Property Name="in_TerminalConnection" Type="InArgument(uit:TerminalConnection)" />
+    <x:Property Name="io_dt_SubstituteItems_FinalReport" Type="InOutArgument(sd:DataTable)" />
   </x:Members>
   <this:Retalix___Updated_Substitute_Code_and_Item.in_TransactionItem>
     <InArgument x:TypeArguments="ui:QueueItem" />
@@ -11,16 +11,13 @@
   <this:Retalix___Updated_Substitute_Code_and_Item.out_BusinessException>
     <InArgument x:TypeArguments="ui:BusinessRuleException" />
   </this:Retalix___Updated_Substitute_Code_and_Item.out_BusinessException>
-  <this:Retalix___Updated_Substitute_Code_and_Item.in_ReportPath>
-    <InArgument x:TypeArguments="x:String" />
-  </this:Retalix___Updated_Substitute_Code_and_Item.in_ReportPath>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>697,2035</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1006,2035</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Retalix___Updated_Substitute_Code_and_Item_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
-    <scg:List x:TypeArguments="x:String" Capacity="33">
+    <scg:List x:TypeArguments="x:String" Capacity="66">
       <x:String>System.Activities</x:String>
       <x:String>System.Activities.Statements</x:String>
       <x:String>System.Activities.Expressions</x:String>
@@ -54,6 +51,7 @@
       <x:String>UiPath.Terminal.Activities</x:String>
       <x:String>UiPath.Terminal.Advanced.Activities</x:String>
       <x:String>System.Reflection</x:String>
+      <x:String>System.Xml.Serialization</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -100,9 +98,12 @@
       <AssemblyReference>System.Memory</AssemblyReference>
       <AssemblyReference>System.Private.Uri</AssemblyReference>
       <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="In the window Billing Item Information updated the item and get the message output" DisplayName="Retalix___Updated_Substitute_Code_and_Item" sap:VirtualizedContainerService.HintSize="636,1970" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="In the window Billing Item Information updated the item and get the message output" DisplayName="Retalix___Updated_Substitute_Code_and_Item" sap:VirtualizedContainerService.HintSize="661,1970" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="SubItemMessage" />
     </Sequence.Variables>
@@ -112,19 +113,19 @@
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <uit:TerminalSession ConnectionString="{x:Null}" ContinueOnError="{x:Null}" OutputConnection="{x:Null}" SSHPassword="{x:Null}" SSHUserName="{x:Null}" CloseConnection="False" DelayMS="1000" DisplayName="Terminal Session" ExistingConnection="[in_TerminalConnection]" sap:VirtualizedContainerService.HintSize="574,1828" sap2010:WorkflowViewState.IdRef="TerminalSession_1" TimeoutMS="50000">
+    <uit:TerminalSession ConnectionString="{x:Null}" ContinueOnError="{x:Null}" OutputConnection="{x:Null}" SSHPassword="{x:Null}" SSHUserName="{x:Null}" CloseConnection="False" DelayMS="1000" DisplayName="Terminal Session" ExistingConnection="[in_TerminalConnection]" sap:VirtualizedContainerService.HintSize="599,1828" sap2010:WorkflowViewState.IdRef="TerminalSession_1" TimeoutMS="50000">
       <uit:TerminalSession.Body>
         <ActivityAction x:TypeArguments="uit:TerminalConnection">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="uit:TerminalConnection" Name="terminalSession" />
           </ActivityAction.Argument>
-          <Sequence sap:VirtualizedContainerService.HintSize="540,1728" sap2010:WorkflowViewState.IdRef="Sequence_8">
+          <Sequence sap:VirtualizedContainerService.HintSize="565,1728" sap2010:WorkflowViewState.IdRef="Sequence_8">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <If Condition="[String.IsNullOrEmpty( in_TransactionItem.SpecificContent(&quot;SubItem&quot;).ToString)]" sap:VirtualizedContainerService.HintSize="478,1617" sap2010:WorkflowViewState.IdRef="If_3">
+            <If Condition="[String.IsNullOrEmpty( in_TransactionItem.SpecificContent(&quot;SubItem&quot;).ToString)]" sap:VirtualizedContainerService.HintSize="503,1617" sap2010:WorkflowViewState.IdRef="If_3">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -132,14 +133,14 @@
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
               <If.Then>
-                <Sequence sap:VirtualizedContainerService.HintSize="400,457" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                <Sequence sap:VirtualizedContainerService.HintSize="425,457" sap2010:WorkflowViewState.IdRef="Sequence_6">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <ui:LogMessage DisplayName="Log Message - SubItem doesn't exist" sap:VirtualizedContainerService.HintSize="338,92" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Warn" Message="[&quot;MartBot: There isn't subItem in the input file.&quot;]" />
-                  <Assign DisplayName="Assign - Business Exception" sap:VirtualizedContainerService.HintSize="338,61" sap2010:WorkflowViewState.IdRef="Assign_2">
+                  <ui:LogMessage DisplayName="Log Message - SubItem doesn't exist" sap:VirtualizedContainerService.HintSize="363,92" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Warn" Message="[&quot;MartBot: There isn't subItem in the input file.&quot;]" />
+                  <Assign DisplayName="Assign - Business Exception" sap:VirtualizedContainerService.HintSize="363,61" sap2010:WorkflowViewState.IdRef="Assign_2">
                     <Assign.To>
                       <OutArgument x:TypeArguments="ui:BusinessRuleException">[out_BusinessException]</OutArgument>
                     </Assign.To>
@@ -147,35 +148,43 @@
                       <InArgument x:TypeArguments="ui:BusinessRuleException">[New BusinessRuleException("There isn't subItem in the input file.")]</InArgument>
                     </Assign.Value>
                   </Assign>
-                  <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Excel\Processing Report.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="338,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="Excel\Processing Report.xaml">
+                  <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Excel\Add_SubstituteItemsProcessedReport.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="363,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="Excel\Add_SubstituteItemsProcessedReport.xaml">
                     <ui:InvokeWorkflowFile.Arguments>
-                      <InArgument x:TypeArguments="x:String" x:Key="in_ReportPath">[in_ReportPath]</InArgument>
-                      <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">[in_TransactionItem]</InArgument>
-                      <InArgument x:TypeArguments="x:String" x:Key="in_OutputMessage">[out_BusinessException.Message]</InArgument>
-                      <InArgument x:TypeArguments="x:String" x:Key="in_Status">Incomplete Input</InArgument>
+                      <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_dt_SubstituteItems_FinalReport">
+                        <VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="io_dt_SubstituteItems_FinalReport" />
+                      </InOutArgument>
+                      <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">
+                        <VisualBasicValue x:TypeArguments="ui:QueueItem" ExpressionText="in_TransactionItem" />
+                      </InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_OutputMessage">
+                        <VisualBasicValue x:TypeArguments="x:String" ExpressionText="out_BusinessException.Message" />
+                      </InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_Status">
+                        <Literal x:TypeArguments="x:String">Incomplete Input</Literal>
+                      </InArgument>
                     </ui:InvokeWorkflowFile.Arguments>
                   </ui:InvokeWorkflowFile>
                 </Sequence>
               </If.Then>
               <If.Else>
-                <Sequence sap:VirtualizedContainerService.HintSize="400,984" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                <Sequence sap:VirtualizedContainerService.HintSize="425,984" sap2010:WorkflowViewState.IdRef="Sequence_7">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <ui:LogMessage DisplayName="Log Message - Apply substitution" sap:VirtualizedContainerService.HintSize="338,92" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[&quot;MartBot: There isn't subItem in the input file.&quot;]" />
-                  <uit:TerminalMoveCursor Column="22" DelayMS="300" DisplayName="Move Cursor" sap:VirtualizedContainerService.HintSize="338,60" sap2010:WorkflowViewState.IdRef="TerminalMoveCursor_3" Row="7" TimeoutMS="5000" WaitType="READY" />
-                  <uit:TerminalSendKeys DelayMS="300" DisplayName="&quot;Send Keys - Substitution Code&quot;" sap:VirtualizedContainerService.HintSize="338,60" sap2010:WorkflowViewState.IdRef="TerminalSendKeys_3" Keys="[in_TransactionItem.SpecificContent(&quot;Substitution Code&quot;).ToString]" TimeoutMS="5000" WaitType="READY" />
-                  <uit:TerminalMoveCursor Column="35" DelayMS="300" DisplayName="Move Cursor" sap:VirtualizedContainerService.HintSize="338,60" sap2010:WorkflowViewState.IdRef="TerminalMoveCursor_2" Row="7" TimeoutMS="5000" WaitType="READY" />
-                  <uit:TerminalSendKeys DelayMS="300" DisplayName="&quot;Send Keys - SubItem&quot;" sap:VirtualizedContainerService.HintSize="338,60" sap2010:WorkflowViewState.IdRef="TerminalSendKeys_2" Keys="[in_TransactionItem.SpecificContent(&quot;SubItem&quot;).ToString]" TimeoutMS="5000" WaitType="READY" />
-                  <uit:TerminalSendControlKey DelayMS="1000" DisplayName="Send Control Key" sap:VirtualizedContainerService.HintSize="338,60" sap2010:WorkflowViewState.IdRef="TerminalSendControlKey_2" Key="Transmit" TimeoutMS="5000" WaitType="READY" />
-                  <uit:TerminalGetTextAtPosition Column="2" DelayMS="300" DisplayName="Get Text at Position - Message" sap:VirtualizedContainerService.HintSize="338,88" sap2010:WorkflowViewState.IdRef="TerminalGetTextAtPosition_2" Length="40" Row="1" Text="[SubItemMessage]" TimeoutMS="5000" WaitType="READY" />
-                  <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Excel\Processing Report.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="338,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="Excel\Processing Report.xaml">
+                  <ui:LogMessage DisplayName="Log Message - Apply substitution" sap:VirtualizedContainerService.HintSize="363,92" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[&quot;MartBot: There isn't subItem in the input file.&quot;]" />
+                  <uit:TerminalMoveCursor Column="22" DelayMS="300" DisplayName="Move Cursor" sap:VirtualizedContainerService.HintSize="363,60" sap2010:WorkflowViewState.IdRef="TerminalMoveCursor_3" Row="7" TimeoutMS="5000" WaitType="READY" />
+                  <uit:TerminalSendKeys DelayMS="300" DisplayName="&quot;Send Keys - Substitution Code&quot;" sap:VirtualizedContainerService.HintSize="363,60" sap2010:WorkflowViewState.IdRef="TerminalSendKeys_3" Keys="[in_TransactionItem.SpecificContent(&quot;Substitution Code&quot;).ToString]" TimeoutMS="5000" WaitType="READY" />
+                  <uit:TerminalMoveCursor Column="35" DelayMS="300" DisplayName="Move Cursor" sap:VirtualizedContainerService.HintSize="363,60" sap2010:WorkflowViewState.IdRef="TerminalMoveCursor_2" Row="7" TimeoutMS="5000" WaitType="READY" />
+                  <uit:TerminalSendKeys DelayMS="300" DisplayName="&quot;Send Keys - SubItem&quot;" sap:VirtualizedContainerService.HintSize="363,60" sap2010:WorkflowViewState.IdRef="TerminalSendKeys_2" Keys="[in_TransactionItem.SpecificContent(&quot;SubItem&quot;).ToString]" TimeoutMS="5000" WaitType="READY" />
+                  <uit:TerminalSendControlKey DelayMS="1000" DisplayName="Send Control Key" sap:VirtualizedContainerService.HintSize="363,60" sap2010:WorkflowViewState.IdRef="TerminalSendControlKey_2" Key="Transmit" TimeoutMS="5000" WaitType="READY" />
+                  <uit:TerminalGetTextAtPosition Column="2" DelayMS="300" DisplayName="Get Text at Position - Message" sap:VirtualizedContainerService.HintSize="363,88" sap2010:WorkflowViewState.IdRef="TerminalGetTextAtPosition_2" Length="40" Row="1" Text="[SubItemMessage]" TimeoutMS="5000" WaitType="READY" />
+                  <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Excel\Add_SubstituteItemsProcessedReport.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="363,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="Excel\Add_SubstituteItemsProcessedReport.xaml">
                     <ui:InvokeWorkflowFile.Arguments>
-                      <InArgument x:TypeArguments="x:String" x:Key="in_ReportPath">
-                        <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_ReportPath" />
-                      </InArgument>
+                      <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_dt_SubstituteItems_FinalReport">
+                        <VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="io_dt_SubstituteItems_FinalReport" />
+                      </InOutArgument>
                       <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">
                         <VisualBasicValue x:TypeArguments="ui:QueueItem" ExpressionText="in_TransactionItem" />
                       </InArgument>
