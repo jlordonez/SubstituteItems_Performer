@@ -12,7 +12,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>976,3911</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>976,2786</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ProcessTransaction_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="35">
@@ -112,7 +112,7 @@
       <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="736,3846" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="698,2721" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="sd:DataTable" Name="dt_SubstituteItemsPreviousDayFiltered" />
       <Variable x:TypeArguments="x:Boolean" Name="bool_StatusBuyersFacility" />
@@ -123,125 +123,138 @@
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log Message Process Start" sap:VirtualizedContainerService.HintSize="674,92" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Started Process&quot;]" />
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Retalix - Return Main Menu.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="674,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="Retalix - Utilitites\Retalix - Return Main Menu.xaml">
+    <ui:LogMessage DisplayName="Log Message Process Start" sap:VirtualizedContainerService.HintSize="636,92" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Started Process&quot;]" />
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Retalix - Return Main Menu.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="636,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="Retalix - Utilitites\Retalix - Return Main Menu.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <InArgument x:TypeArguments="uit:TerminalConnection" x:Key="in_TerminalConnection">[in_TerminalConnection]</InArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
-    <Assign DisplayName="Assign -  Initialize bool_StatusBuyersFacility" sap:VirtualizedContainerService.HintSize="674,61" sap2010:WorkflowViewState.IdRef="Assign_4">
-      <Assign.To>
-        <OutArgument x:TypeArguments="x:Boolean">[bool_StatusBuyersFacility]</OutArgument>
-      </Assign.To>
-      <Assign.Value>
-        <InArgument x:TypeArguments="x:Boolean">False</InArgument>
-      </Assign.Value>
-    </Assign>
-    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each Buyer from Dictionary" sap:VirtualizedContainerService.HintSize="674,985" sap2010:WorkflowViewState.IdRef="ForEach`1_6" Values="[in_dic_ScheduledRun_BuyersFacility(&quot;Buyers&quot;)]">
-      <ui:ForEach.Body>
-        <ActivityAction x:TypeArguments="x:String">
-          <ActivityAction.Argument>
-            <DelegateInArgument x:TypeArguments="x:String" Name="Buyer" />
-          </ActivityAction.Argument>
-          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="638,860" sap2010:WorkflowViewState.IdRef="Sequence_8">
+    <Sequence DisplayName="Validate if Buyers and Facility are into the Stat Run are allowed to be processed" sap:VirtualizedContainerService.HintSize="636,428" sap2010:WorkflowViewState.IdRef="Sequence_15">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <Assign DisplayName="Assign -  Initialize bool_StatusBuyersFacility" sap:VirtualizedContainerService.HintSize="437,61" sap2010:WorkflowViewState.IdRef="Assign_4">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:Boolean">[bool_StatusBuyersFacility]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+        </Assign.Value>
+      </Assign>
+      <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each Buyer from Dictionary" sap:VirtualizedContainerService.HintSize="437,52" sap2010:WorkflowViewState.IdRef="ForEach`1_6" Values="[in_dic_ScheduledRun_BuyersFacility(&quot;Buyers&quot;)]">
+        <ui:ForEach.Body>
+          <ActivityAction x:TypeArguments="x:String">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="x:String" Name="Buyer" />
+            </ActivityAction.Argument>
+            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="638,860" sap2010:WorkflowViewState.IdRef="Sequence_8">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each - Facility from Dictionary" sap:VirtualizedContainerService.HintSize="576,749" sap2010:WorkflowViewState.IdRef="ForEach`1_5" Values="[in_dic_ScheduledRun_BuyersFacility(&quot;Facility&quot;)]">
+                <ui:ForEach.Body>
+                  <ActivityAction x:TypeArguments="x:String">
+                    <ActivityAction.Argument>
+                      <DelegateInArgument x:TypeArguments="x:String" Name="Facility" />
+                    </ActivityAction.Argument>
+                    <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="540,624" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <If Condition="[if(in_TransactionItem.SpecificContent(&quot;Buyer&quot;).ToString.Trim.Equals(Buyer.ToString.Trim) AndAlso Cint(in_TransactionItem.SpecificContent(&quot;Facility&quot;).ToString).ToString.Trim.Equals(Facility.ToString.Trim), True, False)]" DisplayName="If - Validate if Transaction Item (Buyers and Facility) are allowed to be processed" sap:VirtualizedContainerService.HintSize="478,513" sap2010:WorkflowViewState.IdRef="If_11">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <If.Then>
+                          <Sequence sap:VirtualizedContainerService.HintSize="400,237" sap2010:WorkflowViewState.IdRef="Sequence_14">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <Assign DisplayName="Assign -  Initialize bool_StatusBuyersFacility" sap:VirtualizedContainerService.HintSize="338,61" sap2010:WorkflowViewState.IdRef="Assign_5">
+                              <Assign.To>
+                                <OutArgument x:TypeArguments="x:Boolean">[bool_StatusBuyersFacility]</OutArgument>
+                              </Assign.To>
+                              <Assign.Value>
+                                <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+                              </Assign.Value>
+                            </Assign>
+                            <ui:Break sap:VirtualizedContainerService.HintSize="338,25" sap2010:WorkflowViewState.IdRef="Break_3" />
+                          </Sequence>
+                        </If.Then>
+                      </If>
+                    </Sequence>
+                  </ActivityAction>
+                </ui:ForEach.Body>
+              </ui:ForEach>
+            </Sequence>
+          </ActivityAction>
+        </ui:ForEach.Body>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </ui:ForEach>
+      <If sap2010:Annotation.AnnotationText="Description:&#xA;Validate if Buyers and Facility into the Stat Run are allowed to be processed" Condition="[bool_StatusBuyersFacility]" DisplayName="If - Validate bool_StatusBuyersFacility" sap:VirtualizedContainerService.HintSize="437,124" sap2010:WorkflowViewState.IdRef="If_9">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <If.Then>
+          <Sequence sap:VirtualizedContainerService.HintSize="400,203" sap2010:WorkflowViewState.IdRef="Sequence_12">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each - Facility from Dictionary" sap:VirtualizedContainerService.HintSize="576,749" sap2010:WorkflowViewState.IdRef="ForEach`1_5" Values="[in_dic_ScheduledRun_BuyersFacility(&quot;Facility&quot;)]">
-              <ui:ForEach.Body>
-                <ActivityAction x:TypeArguments="x:String">
-                  <ActivityAction.Argument>
-                    <DelegateInArgument x:TypeArguments="x:String" Name="Facility" />
-                  </ActivityAction.Argument>
-                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="540,624" sap2010:WorkflowViewState.IdRef="Sequence_7">
-                    <sap:WorkflowViewStateService.ViewState>
-                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                      </scg:Dictionary>
-                    </sap:WorkflowViewStateService.ViewState>
-                    <If Condition="[if(in_TransactionItem.SpecificContent(&quot;Buyer&quot;).ToString.Trim.Equals(Buyer.ToString.Trim) AndAlso Cint(in_TransactionItem.SpecificContent(&quot;Facility&quot;).ToString).ToString.Trim.Equals(Facility.ToString.Trim), True, False)]" DisplayName="If - Validate if Transaction Item (Buyers and Facility) are allowed to be processed" sap:VirtualizedContainerService.HintSize="478,513" sap2010:WorkflowViewState.IdRef="If_11">
-                      <sap:WorkflowViewStateService.ViewState>
-                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                        </scg:Dictionary>
-                      </sap:WorkflowViewStateService.ViewState>
-                      <If.Then>
-                        <Sequence sap:VirtualizedContainerService.HintSize="400,237" sap2010:WorkflowViewState.IdRef="Sequence_14">
-                          <sap:WorkflowViewStateService.ViewState>
-                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                            </scg:Dictionary>
-                          </sap:WorkflowViewStateService.ViewState>
-                          <Assign DisplayName="Assign -  Initialize bool_StatusBuyersFacility" sap:VirtualizedContainerService.HintSize="338,61" sap2010:WorkflowViewState.IdRef="Assign_5">
-                            <Assign.To>
-                              <OutArgument x:TypeArguments="x:Boolean">[bool_StatusBuyersFacility]</OutArgument>
-                            </Assign.To>
-                            <Assign.Value>
-                              <InArgument x:TypeArguments="x:Boolean">True</InArgument>
-                            </Assign.Value>
-                          </Assign>
-                          <ui:Break sap:VirtualizedContainerService.HintSize="338,25" sap2010:WorkflowViewState.IdRef="Break_3" />
-                        </Sequence>
-                      </If.Then>
-                    </If>
-                  </Sequence>
-                </ActivityAction>
-              </ui:ForEach.Body>
-            </ui:ForEach>
+            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="338,92" sap2010:WorkflowViewState.IdRef="LogMessage_7" Level="Info" Message="[&quot;UiPathBot: The Buyer &quot; + in_TransactionItem.SpecificContent(&quot;Buyer&quot;).ToString + &quot; And Facility &quot; + in_TransactionItem.SpecificContent(&quot;Facility&quot;).ToString.Trim + &quot; are Allowed to be processed&quot;]" />
           </Sequence>
-        </ActivityAction>
-      </ui:ForEach.Body>
-    </ui:ForEach>
-    <If sap2010:Annotation.AnnotationText="Description:&#xA;Validate if Buyers and Facility into the Stat Run are allowed to be processed" Condition="[bool_StatusBuyersFacility]" DisplayName="If - Validate bool_StatusBuyersFacility" sap:VirtualizedContainerService.HintSize="674,907" sap2010:WorkflowViewState.IdRef="If_9">
-      <sap:WorkflowViewStateService.ViewState>
-        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-          <x:Boolean x:Key="IsPinned">False</x:Boolean>
-        </scg:Dictionary>
-      </sap:WorkflowViewStateService.ViewState>
-      <If.Then>
-        <Sequence sap:VirtualizedContainerService.HintSize="400,203" sap2010:WorkflowViewState.IdRef="Sequence_12">
-          <sap:WorkflowViewStateService.ViewState>
-            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            </scg:Dictionary>
-          </sap:WorkflowViewStateService.ViewState>
-          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="338,92" sap2010:WorkflowViewState.IdRef="LogMessage_7" Level="Info" Message="[&quot;UiPathBot: The Buyer &quot; + in_TransactionItem.SpecificContent(&quot;Buyer&quot;).ToString + &quot; And Facility &quot; + in_TransactionItem.SpecificContent(&quot;Facility&quot;).ToString.Trim + &quot; are Allowed to be processed&quot;]" />
-        </Sequence>
-      </If.Then>
-      <If.Else>
-        <Sequence sap:VirtualizedContainerService.HintSize="425,486" sap2010:WorkflowViewState.IdRef="Sequence_13">
-          <sap:WorkflowViewStateService.ViewState>
-            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            </scg:Dictionary>
-          </sap:WorkflowViewStateService.ViewState>
-          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="363,92" sap2010:WorkflowViewState.IdRef="LogMessage_8" Level="Info" Message="[&quot;MartBot: The Buyer &quot; + in_TransactionItem.SpecificContent(&quot;Buyer&quot;).ToString + &quot; And Facility &quot; + in_TransactionItem.SpecificContent(&quot;Facility&quot;).ToString.Trim + &quot; are NOT Allowed to be processed&quot;]" />
-          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Excel\Add_SubstituteItemsProcessedReport.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="363,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_9" UnSafe="False" WorkflowFileName="Excel\Add_SubstituteItemsProcessedReport.xaml">
-            <ui:InvokeWorkflowFile.Arguments>
-              <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_dt_SubstituteItems_FinalReport">
-                <VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="io_dt_SubstituteItems_FinalReport" />
-              </InOutArgument>
-              <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">
-                <VisualBasicValue x:TypeArguments="ui:QueueItem" ExpressionText="in_TransactionItem" />
-              </InArgument>
-              <InArgument x:TypeArguments="x:String" x:Key="in_OutputMessage">
-                <Literal x:TypeArguments="x:String">Skiped</Literal>
-              </InArgument>
-              <InArgument x:TypeArguments="x:String" x:Key="in_Status">
-                <VisualBasicValue x:TypeArguments="x:String" ExpressionText="&quot;The Buyer &quot; + in_TransactionItem.SpecificContent(&quot;Buyer&quot;).ToString + &quot; And Facility &quot; + in_TransactionItem.SpecificContent(&quot;Facility&quot;).ToString.Trim + &quot; are NOT Allowed to be processed&quot;" />
-              </InArgument>
-            </ui:InvokeWorkflowFile.Arguments>
-          </ui:InvokeWorkflowFile>
-          <Throw DisplayName="Throw BRE" Exception="[New BusinessRuleException(&quot;The Buyer &quot; + in_TransactionItem.SpecificContent(&quot;Buyer&quot;).ToString + &quot; And Facility &quot; + in_TransactionItem.SpecificContent(&quot;Facility&quot;).ToString.Trim + &quot; are NOT Allowed to be processed&quot;)]" sap:VirtualizedContainerService.HintSize="363,90" sap2010:WorkflowViewState.IdRef="Throw_2" />
-        </Sequence>
-      </If.Else>
-    </If>
-    <ui:FilterDataTable sap2010:Annotation.AnnotationText="Description:&#xA;Exclude the rows from Substitute Items Previous day DataTable if the following conditions are met:&#xA;&#xA;1. &quot;Status&quot; column is equal to &quot;NO ITEMS FOUND&quot;&#xA;2.  &quot;Status&quot; column contains &quot;SUCCESSFULLY UPDATED&quot;.&#xA;3.  &quot;Status&quot; column is equal to &quot;NO CHANGES PREVIOUS DAY&quot;" DataTable="[in_dt_SubstituteItemsPreviousDay]" DisplayName="Filter Data Table - Substitute Items Previous Day" FilterRowsMode="Remove" sap:VirtualizedContainerService.HintSize="674,308" sap2010:WorkflowViewState.IdRef="FilterDataTable_1" OutputDataTable="[dt_SubstituteItemsPreviousDayFiltered]" SelectColumnsMode="Keep">
+        </If.Then>
+        <If.Else>
+          <Sequence sap:VirtualizedContainerService.HintSize="425,486" sap2010:WorkflowViewState.IdRef="Sequence_13">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="363,92" sap2010:WorkflowViewState.IdRef="LogMessage_8" Level="Info" Message="[&quot;MartBot: The Buyer &quot; + in_TransactionItem.SpecificContent(&quot;Buyer&quot;).ToString + &quot; And Facility &quot; + in_TransactionItem.SpecificContent(&quot;Facility&quot;).ToString.Trim + &quot; are NOT Allowed to be processed&quot;]" />
+            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Excel\Add_SubstituteItemsProcessedReport.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="363,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_9" UnSafe="False" WorkflowFileName="Excel\Add_SubstituteItemsProcessedReport.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_dt_SubstituteItems_FinalReport">
+                  <VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="io_dt_SubstituteItems_FinalReport" />
+                </InOutArgument>
+                <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">
+                  <VisualBasicValue x:TypeArguments="ui:QueueItem" ExpressionText="in_TransactionItem" />
+                </InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_OutputMessage">
+                  <Literal x:TypeArguments="x:String">Skiped</Literal>
+                </InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_Status">
+                  <VisualBasicValue x:TypeArguments="x:String" ExpressionText="&quot;The Buyer &quot; + in_TransactionItem.SpecificContent(&quot;Buyer&quot;).ToString + &quot; And Facility &quot; + in_TransactionItem.SpecificContent(&quot;Facility&quot;).ToString.Trim + &quot; are NOT Allowed to be processed&quot;" />
+                </InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <Throw DisplayName="Throw BRE" Exception="[New BusinessRuleException(&quot;The Buyer &quot; + in_TransactionItem.SpecificContent(&quot;Buyer&quot;).ToString + &quot; And Facility &quot; + in_TransactionItem.SpecificContent(&quot;Facility&quot;).ToString.Trim + &quot; are NOT Allowed to be processed&quot;)]" sap:VirtualizedContainerService.HintSize="363,90" sap2010:WorkflowViewState.IdRef="Throw_2" />
+          </Sequence>
+        </If.Else>
+      </If>
+    </Sequence>
+    <ui:FilterDataTable sap2010:Annotation.AnnotationText="Description:&#xA;Exclude the rows from Substitute Items Previous day DataTable if the following conditions are met:&#xA;&#xA;1. &quot;Status&quot; column is equal to &quot;NO ITEMS FOUND&quot;&#xA;2.  &quot;Status&quot; column contains &quot;SUCCESSFULLY UPDATED&quot;.&#xA;3.  &quot;Status&quot; column is equal to &quot;NO CHANGES PREVIOUS DAY&quot;" DataTable="[in_dt_SubstituteItemsPreviousDay]" DisplayName="Filter Data Table - Substitute Items Previous Day" FilterRowsMode="Remove" sap:VirtualizedContainerService.HintSize="636,308" sap2010:WorkflowViewState.IdRef="FilterDataTable_1" OutputDataTable="[dt_SubstituteItemsPreviousDayFiltered]" SelectColumnsMode="Keep">
       <ui:FilterDataTable.Filters>
         <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
           <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
@@ -281,16 +294,17 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:FilterDataTable>
-    <If Condition="[dt_SubstituteItemsPreviousDayFiltered.AsEnumerable.Any(Function(DataRow)DataRow(&quot;Item&quot;).ToString.Trim.Equals(in_TransactionItem.SpecificContent(&quot;Item&quot;).ToString.Trim) AndAlso &#xA;DataRow(&quot;Facility&quot;).ToString.Trim.Equals(CInt(in_TransactionItem.SpecificContent(&quot;Facility&quot;).ToString.Trim).ToString) AndAlso&#xA;DataRow(&quot;Buyer&quot;).ToString.Trim.Equals(in_TransactionItem.SpecificContent(&quot;Buyer&quot;).ToString.Trim) AndAlso&#xA;DataRow(&quot;Substitution Code Previous&quot;).ToString.Trim.ToUpper.Equals(in_TransactionItem.SpecificContent(&quot;Substitution Code&quot;).ToString.Trim.ToUpper) AndAlso&#xA;DataRow(&quot;SubItem&quot;).ToString.Trim.Equals(in_TransactionItem.SpecificContent(&quot;SubItem&quot;).ToString.Trim)&#xA;)]" DisplayName="Validate if  Transaction Item exists into the Substitution Items Previous Day DataTable" sap:VirtualizedContainerService.HintSize="674,957" sap2010:WorkflowViewState.IdRef="If_2">
+    <If Condition="[dt_SubstituteItemsPreviousDayFiltered.AsEnumerable.Any(Function(DataRow)DataRow(&quot;Item&quot;).ToString.Trim.Equals(in_TransactionItem.SpecificContent(&quot;Item&quot;).ToString.Trim) AndAlso &#xA;DataRow(&quot;Facility&quot;).ToString.Trim.Equals(CInt(in_TransactionItem.SpecificContent(&quot;Facility&quot;).ToString.Trim).ToString) AndAlso&#xA;DataRow(&quot;Buyer&quot;).ToString.Trim.Equals(in_TransactionItem.SpecificContent(&quot;Buyer&quot;).ToString.Trim) AndAlso&#xA;DataRow(&quot;Substitution Code Previous&quot;).ToString.Trim.ToUpper.Equals(in_TransactionItem.SpecificContent(&quot;Substitution Code&quot;).ToString.Trim.ToUpper) AndAlso&#xA;DataRow(&quot;SubItem&quot;).ToString.Trim.Equals(in_TransactionItem.SpecificContent(&quot;SubItem&quot;).ToString.Trim)&#xA;)]" DisplayName="Validate if  Transaction Item exists into the Substitution Items Previous Day DataTable" sap:VirtualizedContainerService.HintSize="636,1437" sap2010:WorkflowViewState.IdRef="If_2">
       <If.Then>
-        <Sequence sap:VirtualizedContainerService.HintSize="425,356" sap2010:WorkflowViewState.IdRef="Sequence_4">
+        <Sequence sap:VirtualizedContainerService.HintSize="440,356" sap2010:WorkflowViewState.IdRef="Sequence_4">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="363,92" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;MartBot: The Transaction Item&quot; + in_TransactionItem.SpecificContent(&quot;Item&quot;).ToString + &quot; exists in the Substitution Items Previous Day DataTable&quot;]" />
-          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Excel\Add_SubstituteItemsProcessedReport.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="363,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_10" UnSafe="False" WorkflowFileName="Excel\Add_SubstituteItemsProcessedReport.xaml">
+          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="378,92" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;MartBot: The Transaction Item&quot; + in_TransactionItem.SpecificContent(&quot;Item&quot;).ToString + &quot; exists in the Substitution Items Previous Day DataTable&quot;]" />
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Excel\Add_SubstituteItemsProcessedReport.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="378,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_10" UnSafe="False" WorkflowFileName="Excel\Add_SubstituteItemsProcessedReport.xaml">
             <ui:InvokeWorkflowFile.Arguments>
               <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_dt_SubstituteItems_FinalReport">[io_dt_SubstituteItems_FinalReport]</InOutArgument>
               <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">[in_TransactionItem]</InArgument>
@@ -301,44 +315,113 @@
         </Sequence>
       </If.Then>
       <If.Else>
-        <Sequence sap:VirtualizedContainerService.HintSize="558,425" sap2010:WorkflowViewState.IdRef="Sequence_6">
+        <Sequence sap:VirtualizedContainerService.HintSize="558,905" sap2010:WorkflowViewState.IdRef="Sequence_6">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
           <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="496,92" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;MartBot: The Transaction Item&quot; + in_TransactionItem.SpecificContent(&quot;Item&quot;).ToString + &quot; does NOT exist in the Substitution Items Previous Day DataTable&quot;]" />
-          <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[in_TransactionItem.SpecificContent(&quot;Substitution Code&quot;).ToString]" sap:VirtualizedContainerService.HintSize="496,182" sap2010:WorkflowViewState.IdRef="Switch`1_2">
-            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" x:Key="Y" DisplayName="Retalix\Order Allocation - Code Yes.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="365,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Retalix\Retalix - Order Allocation - Code Yes.xaml">
-              <ui:InvokeWorkflowFile.Arguments>
-                <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">[in_TransactionItem]</InArgument>
-                <InArgument x:TypeArguments="uit:TerminalConnection" x:Key="in_TerminalConnection">[in_TerminalConnection]</InArgument>
-                <OutArgument x:TypeArguments="ui:BusinessRuleException" x:Key="out_BusinessException">[out_BusinessException]</OutArgument>
-                <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_dt_SubstituteItems_FinalReport">[io_dt_SubstituteItems_FinalReport]</InOutArgument>
-              </ui:InvokeWorkflowFile.Arguments>
-            </ui:InvokeWorkflowFile>
-            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" x:Key="N" DisplayName="Retalix - Purchasing Menu - Code N.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="363,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="Retalix\Retalix - Purchasing Menu - Code N.xaml">
-              <ui:InvokeWorkflowFile.Arguments>
-                <InArgument x:TypeArguments="uit:TerminalConnection" x:Key="in_TerminalConnection">[in_TerminalConnection]</InArgument>
-                <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">[in_TransactionItem]</InArgument>
-                <InArgument x:TypeArguments="ui:BusinessRuleException" x:Key="out_BusinessException">[out_BusinessException]</InArgument>
-                <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_dt_SubstituteItems_FinalReport">[io_dt_SubstituteItems_FinalReport]</InOutArgument>
-              </ui:InvokeWorkflowFile.Arguments>
+          <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[in_TransactionItem.SpecificContent(&quot;Substitution Code&quot;).ToString]" sap:VirtualizedContainerService.HintSize="496,662" sap2010:WorkflowViewState.IdRef="Switch`1_2">
+            <Sequence x:Key="Y" sap:VirtualizedContainerService.HintSize="441,434" sap2010:WorkflowViewState.IdRef="Sequence_24">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-            </ui:InvokeWorkflowFile>
-            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" x:Key="F" DisplayName="Retalix\Retalix - Purchasing Menu - Code F.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="360,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="Retalix\Retalix - Purchasing Menu - Code F.xaml">
-              <ui:InvokeWorkflowFile.Arguments>
-                <InArgument x:TypeArguments="uit:TerminalConnection" x:Key="in_TerminalConnection">[in_TerminalConnection]</InArgument>
-                <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">[in_TransactionItem]</InArgument>
-                <OutArgument x:TypeArguments="ui:BusinessRuleException" x:Key="out_BusinessException">[out_BusinessException]</OutArgument>
-                <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_dt_SubstituteItems_FinalReport">[io_dt_SubstituteItems_FinalReport]</InOutArgument>
-              </ui:InvokeWorkflowFile.Arguments>
-            </ui:InvokeWorkflowFile>
+              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Description:&#xD;&#xA;Validate the following columns: Iltem, Facility, buter, Substitution Code, SubItem" DisplayName="Excel\Validate_TransactionItemIsIncomplete.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="379,170" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_11" UnSafe="False" WorkflowFileName="Excel\Validate_TransactionItemIsIncomplete.xaml">
+                <ui:InvokeWorkflowFile.Arguments>
+                  <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">
+                    <VisualBasicValue x:TypeArguments="ui:QueueItem" ExpressionText="in_TransactionItem" />
+                  </InArgument>
+                  <InArgument x:TypeArguments="sd:DataTable" x:Key="io_dt_SubstituteItems_FinalReport">
+                    <VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="io_dt_SubstituteItems_FinalReport" />
+                  </InArgument>
+                  <InArgument x:TypeArguments="s:String[]" x:Key="in_array_ColumnsToValidate">
+                    <VisualBasicValue x:TypeArguments="s:String[]" ExpressionText="{}{&quot;Item&quot;, &quot;Facility&quot;, &quot;Buyer&quot;, &quot;Substitution Code&quot;, &quot;SubItem&quot;}" />
+                  </InArgument>
+                </ui:InvokeWorkflowFile.Arguments>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </ui:InvokeWorkflowFile>
+              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Retalix\Order Allocation - Code Yes.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="379,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Retalix\Retalix - Order Allocation - Code Yes.xaml">
+                <ui:InvokeWorkflowFile.Arguments>
+                  <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">[in_TransactionItem]</InArgument>
+                  <InArgument x:TypeArguments="uit:TerminalConnection" x:Key="in_TerminalConnection">[in_TerminalConnection]</InArgument>
+                  <OutArgument x:TypeArguments="ui:BusinessRuleException" x:Key="out_BusinessException">[out_BusinessException]</OutArgument>
+                  <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_dt_SubstituteItems_FinalReport">[io_dt_SubstituteItems_FinalReport]</InOutArgument>
+                </ui:InvokeWorkflowFile.Arguments>
+              </ui:InvokeWorkflowFile>
+            </Sequence>
+            <Sequence x:Key="N" sap:VirtualizedContainerService.HintSize="438,434" sap2010:WorkflowViewState.IdRef="Sequence_25">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Description:&#xA;Validate the following columns: Iltem, Facility, buter, Substitution Code." DisplayName="Excel\Validate_TransactionItemIsIncomplete.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="376,170" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_12" UnSafe="False" WorkflowFileName="Excel\Validate_TransactionItemIsIncomplete.xaml">
+                <ui:InvokeWorkflowFile.Arguments>
+                  <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">
+                    <VisualBasicValue x:TypeArguments="ui:QueueItem" ExpressionText="in_TransactionItem" />
+                  </InArgument>
+                  <InArgument x:TypeArguments="sd:DataTable" x:Key="io_dt_SubstituteItems_FinalReport">
+                    <VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="io_dt_SubstituteItems_FinalReport" />
+                  </InArgument>
+                  <InArgument x:TypeArguments="s:String[]" x:Key="in_array_ColumnsToValidate">
+                    <VisualBasicValue x:TypeArguments="s:String[]" ExpressionText="{}{&quot;Item&quot;, &quot;Facility&quot;, &quot;Buyer&quot;, &quot;Substitution Code&quot;}" />
+                  </InArgument>
+                </ui:InvokeWorkflowFile.Arguments>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </ui:InvokeWorkflowFile>
+              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Retalix - Purchasing Menu - Code N.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="376,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="Retalix\Retalix - Purchasing Menu - Code N.xaml">
+                <ui:InvokeWorkflowFile.Arguments>
+                  <InArgument x:TypeArguments="uit:TerminalConnection" x:Key="in_TerminalConnection">[in_TerminalConnection]</InArgument>
+                  <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">[in_TransactionItem]</InArgument>
+                  <InArgument x:TypeArguments="ui:BusinessRuleException" x:Key="out_BusinessException">[out_BusinessException]</InArgument>
+                  <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_dt_SubstituteItems_FinalReport">[io_dt_SubstituteItems_FinalReport]</InOutArgument>
+                </ui:InvokeWorkflowFile.Arguments>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </ui:InvokeWorkflowFile>
+            </Sequence>
+            <Sequence x:Key="F" sap:VirtualizedContainerService.HintSize="440,434" sap2010:WorkflowViewState.IdRef="Sequence_26">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Description:&#xA;Validate the following columns: Iltem, Facility, Buyer, Substitution Code, SubItem" DisplayName="Excel\Validate_TransactionItemIsIncomplete.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="378,170" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_13" UnSafe="False" WorkflowFileName="Excel\Validate_TransactionItemIsIncomplete.xaml">
+                <ui:InvokeWorkflowFile.Arguments>
+                  <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">[in_TransactionItem]</InArgument>
+                  <InArgument x:TypeArguments="sd:DataTable" x:Key="io_dt_SubstituteItems_FinalReport">[io_dt_SubstituteItems_FinalReport]</InArgument>
+                  <InArgument x:TypeArguments="s:String[]" x:Key="in_array_ColumnsToValidate">[{"Item", "Facility", "Buyer", "Substitution Code", "SubItem"}]</InArgument>
+                </ui:InvokeWorkflowFile.Arguments>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </ui:InvokeWorkflowFile>
+              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Retalix\Retalix - Purchasing Menu - Code F.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="378,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="Retalix\Retalix - Purchasing Menu - Code F.xaml">
+                <ui:InvokeWorkflowFile.Arguments>
+                  <InArgument x:TypeArguments="uit:TerminalConnection" x:Key="in_TerminalConnection">[in_TerminalConnection]</InArgument>
+                  <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">[in_TransactionItem]</InArgument>
+                  <OutArgument x:TypeArguments="ui:BusinessRuleException" x:Key="out_BusinessException">[out_BusinessException]</OutArgument>
+                  <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_dt_SubstituteItems_FinalReport">[io_dt_SubstituteItems_FinalReport]</InOutArgument>
+                </ui:InvokeWorkflowFile.Arguments>
+              </ui:InvokeWorkflowFile>
+            </Sequence>
           </Switch>
         </Sequence>
       </If.Else>

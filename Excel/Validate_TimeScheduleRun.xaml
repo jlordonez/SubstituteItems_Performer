@@ -9,7 +9,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1052,1251</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1052,1080</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Create_Substitute_Items_Report_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -101,7 +101,7 @@
       <AssemblyReference>DocumentFormat.OpenXml</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Description: This Workflow is used to validate if the time schedule when the substitute items should be excecuted during the Day depending on the Buyer Code and Facility." DisplayName="Create_Substitute_Items_Report" sap:VirtualizedContainerService.HintSize="1062,1186" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Description: This Workflow is used to validate if the time schedule when the substitute items should be excecuted during the Day depending on the Buyer Code and Facility." DisplayName="Create_Substitute_Items_Report" sap:VirtualizedContainerService.HintSize="1062,807" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="str_TimeOfDay" />
     </Sequence.Variables>
@@ -134,7 +134,7 @@
         </scg:List>
       </ui:MultipleAssign.AssignOperations>
     </ui:MultipleAssign>
-    <Switch x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="Description:&#xA;This switch is used to validate if the Time of Day when the Performer proces is excecuted or Triggered into the time window of 15 minutes." DisplayName="Switch - Schedule Runs" Expression="[If(DateTime.Parse(str_TimeOfDay).TimeOfDay &gt;= New TimeSpan(08,50,0) And DateTime.Parse(str_TimeOfDay).TimeOfDay &lt;= New TimeSpan(10,50,0),&#xD;&#xA;&#x9;&quot;A&quot;, &#xD;&#xA;&#x9;If(DateTime.Parse(str_TimeOfDay).TimeOfDay &gt;= New TimeSpan(11,50,0) And DateTime.Parse(str_TimeOfDay).TimeOfDay &lt;= New TimeSpan(12,5,0),&#xD;&#xA;&#x9;&#x9;&quot;B&quot;,&#xD;&#xA;&#x9;&#x9;If(DateTime.Parse(str_TimeOfDay).TimeOfDay &gt;= New TimeSpan(12,30,0) And DateTime.Parse(str_TimeOfDay).TimeOfDay &lt;= New TimeSpan(12,45,0),&#xD;&#xA;            &quot;C&quot;,&#xD;&#xA;           If(DateTime.Parse(str_TimeOfDay).TimeOfDay &gt;= New TimeSpan(13,0,0) And DateTime.Parse(str_TimeOfDay).TimeOfDay &lt;= New TimeSpan(13,15,0),&#xD;&#xA;                &quot;D&quot;,&#xD;&#xA;                If(DateTime.Parse(str_TimeOfDay).TimeOfDay &gt;= New TimeSpan(14,0,0) And DateTime.Parse(str_TimeOfDay).TimeOfDay &lt;= New TimeSpan(14,15,0),&#xD;&#xA;                    &quot;E&quot;,&#xD;&#xA;                    If(DateTime.Parse(str_TimeOfDay).TimeOfDay &gt;= New TimeSpan(17,10,0) And DateTime.Parse(str_TimeOfDay).TimeOfDay &lt;= New TimeSpan(17,25,0),&#xD;&#xA;                        &quot;F&quot;,&#xD;&#xA;                        If(DateTime.Parse(str_TimeOfDay).TimeOfDay &gt;= New TimeSpan(19,10,0) And DateTime.Parse(str_TimeOfDay).TimeOfDay &lt;= New TimeSpan(19,24,55),&#xD;&#xA;                            &quot;G&quot;,&#xD;&#xA;                            If(DateTime.Parse(str_TimeOfDay).TimeOfDay &gt;= New TimeSpan(19,25,0) And DateTime.Parse(str_TimeOfDay).TimeOfDay &lt;= New TimeSpan(19,35,0),&#xD;&#xA;                                &quot;H&quot;,&#xD;&#xA;                                &quot;NO VALID&quot;&#xD;&#xA;                            )&#xD;&#xA;                        )&#xD;&#xA;                    )&#xD;&#xA;                )            &#xD;&#xA;            )&#xD;&#xA;        )&#xD;&#xA;    )&#xD;&#xA;)]" sap:VirtualizedContainerService.HintSize="1000,740" sap2010:WorkflowViewState.IdRef="Switch`1_3">
+    <Switch x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="Description:&#xA;This switch is used to validate if the Time of Day when the Performer proces is excecuted or Triggered into the time window of 15 minutes." DisplayName="Switch - Schedule Runs" Expression="[If(DateTime.Parse(str_TimeOfDay).TimeOfDay &gt;= New TimeSpan(08,50,0) And DateTime.Parse(str_TimeOfDay).TimeOfDay &lt;= New TimeSpan(14,05,0),&#xD;&#xA;&#x9;&quot;A&quot;, &#xD;&#xA;&#x9;If(DateTime.Parse(str_TimeOfDay).TimeOfDay &gt;= New TimeSpan(11,50,0) And DateTime.Parse(str_TimeOfDay).TimeOfDay &lt;= New TimeSpan(12,5,0),&#xD;&#xA;&#x9;&#x9;&quot;B&quot;,&#xD;&#xA;&#x9;&#x9;If(DateTime.Parse(str_TimeOfDay).TimeOfDay &gt;= New TimeSpan(12,30,0) And DateTime.Parse(str_TimeOfDay).TimeOfDay &lt;= New TimeSpan(12,45,0),&#xD;&#xA;            &quot;C&quot;,&#xD;&#xA;           If(DateTime.Parse(str_TimeOfDay).TimeOfDay &gt;= New TimeSpan(13,0,0) And DateTime.Parse(str_TimeOfDay).TimeOfDay &lt;= New TimeSpan(13,15,0),&#xD;&#xA;                &quot;D&quot;,&#xD;&#xA;                If(DateTime.Parse(str_TimeOfDay).TimeOfDay &gt;= New TimeSpan(14,0,0) And DateTime.Parse(str_TimeOfDay).TimeOfDay &lt;= New TimeSpan(14,15,0),&#xD;&#xA;                    &quot;E&quot;,&#xD;&#xA;                    If(DateTime.Parse(str_TimeOfDay).TimeOfDay &gt;= New TimeSpan(17,10,0) And DateTime.Parse(str_TimeOfDay).TimeOfDay &lt;= New TimeSpan(17,25,0),&#xD;&#xA;                        &quot;F&quot;,&#xD;&#xA;                        If(DateTime.Parse(str_TimeOfDay).TimeOfDay &gt;= New TimeSpan(19,10,0) And DateTime.Parse(str_TimeOfDay).TimeOfDay &lt;= New TimeSpan(19,24,55),&#xD;&#xA;                            &quot;G&quot;,&#xD;&#xA;                            If(DateTime.Parse(str_TimeOfDay).TimeOfDay &gt;= New TimeSpan(19,25,0) And DateTime.Parse(str_TimeOfDay).TimeOfDay &lt;= New TimeSpan(19,35,0),&#xD;&#xA;                                &quot;H&quot;,&#xD;&#xA;                                &quot;NO VALID&quot;&#xD;&#xA;                            )&#xD;&#xA;                        )&#xD;&#xA;                    )&#xD;&#xA;                )            &#xD;&#xA;            )&#xD;&#xA;        )&#xD;&#xA;    )&#xD;&#xA;)]" sap:VirtualizedContainerService.HintSize="1000,361" sap2010:WorkflowViewState.IdRef="Switch`1_3">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -291,7 +291,7 @@
           </Assign.Value>
         </Assign>
       </Sequence>
-      <Sequence x:Key="E" DisplayName="&quot;The Current Time is Between 14:00 To 14:15&quot;" sap:VirtualizedContainerService.HintSize="400,578" sap2010:WorkflowViewState.IdRef="Sequence_8">
+      <Sequence x:Key="E" DisplayName="&quot;The Current Time is Between 14:00 To 14:15&quot;" sap:VirtualizedContainerService.HintSize="400,503" sap2010:WorkflowViewState.IdRef="Sequence_8">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -328,7 +328,7 @@
           </Assign.Value>
         </Assign>
       </Sequence>
-      <Sequence x:Key="F" DisplayName="&quot;The Current Time is Between 17:10 To 17:25&quot;" sap:VirtualizedContainerService.HintSize="400,578" sap2010:WorkflowViewState.IdRef="Sequence_9">
+      <Sequence x:Key="F" DisplayName="&quot;The Current Time is Between 17:10 To 17:25&quot;" sap:VirtualizedContainerService.HintSize="400,503" sap2010:WorkflowViewState.IdRef="Sequence_9">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>

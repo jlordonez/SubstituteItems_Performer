@@ -8,7 +8,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>976,1732</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>976,1772</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Filter_SubstituteItemsProcessedReport_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="58">
@@ -175,7 +175,7 @@ Select d).CopyToDataTable]</InArgument>
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
-                        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="338,92" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;UiPathBot: There are NOT items into the Substitute Items Processed DataTable for the Buyer &quot; + Buyer.ToString]" />
+                        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="338,92" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;UiPathBot: There are NOT items into the Substitute Items Processed DataTable for the Buyer &quot; + Buyer.Item(&quot;Buyer&quot;).ToString]" />
                       </Sequence>
                     </If.Else>
                   </If>
