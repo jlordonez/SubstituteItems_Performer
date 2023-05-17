@@ -134,7 +134,7 @@
         </scg:List>
       </ui:MultipleAssign.AssignOperations>
     </ui:MultipleAssign>
-    <Switch x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="Description:&#xA;This switch is used to validate if the Time of Day when the Performer proces is excecuted or Triggered into the time window of 15 minutes." DisplayName="Switch - Schedule Runs" Expression="[If(DateTime.Parse(str_TimeOfDay).TimeOfDay &gt;= New TimeSpan(08,50,0) And DateTime.Parse(str_TimeOfDay).TimeOfDay &lt;= New TimeSpan(09,50,0),&#xD;&#xA;&#x9;&quot;A&quot;, &#xD;&#xA;&#x9;If(DateTime.Parse(str_TimeOfDay).TimeOfDay &gt;= New TimeSpan(11,50,0) And DateTime.Parse(str_TimeOfDay).TimeOfDay &lt;= New TimeSpan(12,5,0),&#xD;&#xA;&#x9;&#x9;&quot;B&quot;,&#xD;&#xA;&#x9;&#x9;If(DateTime.Parse(str_TimeOfDay).TimeOfDay &gt;= New TimeSpan(12,30,0) And DateTime.Parse(str_TimeOfDay).TimeOfDay &lt;= New TimeSpan(12,45,0),&#xD;&#xA;            &quot;C&quot;,&#xD;&#xA;           If(DateTime.Parse(str_TimeOfDay).TimeOfDay &gt;= New TimeSpan(13,0,0) And DateTime.Parse(str_TimeOfDay).TimeOfDay &lt;= New TimeSpan(13,15,0),&#xD;&#xA;                &quot;D&quot;,&#xD;&#xA;                If(DateTime.Parse(str_TimeOfDay).TimeOfDay &gt;= New TimeSpan(14,0,0) And DateTime.Parse(str_TimeOfDay).TimeOfDay &lt;= New TimeSpan(14,15,0),&#xD;&#xA;                    &quot;E&quot;,&#xD;&#xA;                    If(DateTime.Parse(str_TimeOfDay).TimeOfDay &gt;= New TimeSpan(17,10,0) And DateTime.Parse(str_TimeOfDay).TimeOfDay &lt;= New TimeSpan(17,25,0),&#xD;&#xA;                        &quot;F&quot;,&#xD;&#xA;                        If(DateTime.Parse(str_TimeOfDay).TimeOfDay &gt;= New TimeSpan(19,10,0) And DateTime.Parse(str_TimeOfDay).TimeOfDay &lt;= New TimeSpan(19,24,55),&#xD;&#xA;                            &quot;G&quot;,&#xD;&#xA;                            If(DateTime.Parse(str_TimeOfDay).TimeOfDay &gt;= New TimeSpan(19,25,0) And DateTime.Parse(str_TimeOfDay).TimeOfDay &lt;= New TimeSpan(19,35,0),&#xD;&#xA;                                &quot;H&quot;,&#xD;&#xA;                                &quot;NO VALID&quot;&#xD;&#xA;                            )&#xD;&#xA;                        )&#xD;&#xA;                    )&#xD;&#xA;                )            &#xD;&#xA;            )&#xD;&#xA;        )&#xD;&#xA;    )&#xD;&#xA;)]" sap:VirtualizedContainerService.HintSize="1000,740" sap2010:WorkflowViewState.IdRef="Switch`1_3">
+    <Switch x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="Description:&#xA;This switch is used to validate if the Time of Day when the Performer proces is excecuted or Triggered into the time window of 15 minutes." DisplayName="Switch - Schedule Runs" Expression="[If(DateTime.Parse(str_TimeOfDay).TimeOfDay &gt;= New TimeSpan(08,50,0) And DateTime.Parse(str_TimeOfDay).TimeOfDay &lt;= New TimeSpan(10,50,0),&#xD;&#xA;&#x9;&quot;A&quot;, &#xD;&#xA;&#x9;If(DateTime.Parse(str_TimeOfDay).TimeOfDay &gt;= New TimeSpan(11,50,0) And DateTime.Parse(str_TimeOfDay).TimeOfDay &lt;= New TimeSpan(12,5,0),&#xD;&#xA;&#x9;&#x9;&quot;B&quot;,&#xD;&#xA;&#x9;&#x9;If(DateTime.Parse(str_TimeOfDay).TimeOfDay &gt;= New TimeSpan(12,30,0) And DateTime.Parse(str_TimeOfDay).TimeOfDay &lt;= New TimeSpan(12,45,0),&#xD;&#xA;            &quot;C&quot;,&#xD;&#xA;           If(DateTime.Parse(str_TimeOfDay).TimeOfDay &gt;= New TimeSpan(13,0,0) And DateTime.Parse(str_TimeOfDay).TimeOfDay &lt;= New TimeSpan(13,15,0),&#xD;&#xA;                &quot;D&quot;,&#xD;&#xA;                If(DateTime.Parse(str_TimeOfDay).TimeOfDay &gt;= New TimeSpan(14,0,0) And DateTime.Parse(str_TimeOfDay).TimeOfDay &lt;= New TimeSpan(14,15,0),&#xD;&#xA;                    &quot;E&quot;,&#xD;&#xA;                    If(DateTime.Parse(str_TimeOfDay).TimeOfDay &gt;= New TimeSpan(17,10,0) And DateTime.Parse(str_TimeOfDay).TimeOfDay &lt;= New TimeSpan(17,25,0),&#xD;&#xA;                        &quot;F&quot;,&#xD;&#xA;                        If(DateTime.Parse(str_TimeOfDay).TimeOfDay &gt;= New TimeSpan(19,10,0) And DateTime.Parse(str_TimeOfDay).TimeOfDay &lt;= New TimeSpan(19,24,55),&#xD;&#xA;                            &quot;G&quot;,&#xD;&#xA;                            If(DateTime.Parse(str_TimeOfDay).TimeOfDay &gt;= New TimeSpan(19,25,0) And DateTime.Parse(str_TimeOfDay).TimeOfDay &lt;= New TimeSpan(19,35,0),&#xD;&#xA;                                &quot;H&quot;,&#xD;&#xA;                                &quot;NO VALID&quot;&#xD;&#xA;                            )&#xD;&#xA;                        )&#xD;&#xA;                    )&#xD;&#xA;                )            &#xD;&#xA;            )&#xD;&#xA;        )&#xD;&#xA;    )&#xD;&#xA;)]" sap:VirtualizedContainerService.HintSize="1000,740" sap2010:WorkflowViewState.IdRef="Switch`1_3">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -142,7 +142,7 @@
           <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <Sequence x:Key="A" DisplayName="&quot;The Current Time is Between 08:50 To 09:05&quot;" sap:VirtualizedContainerService.HintSize="400,578" sap2010:WorkflowViewState.IdRef="Sequence_4">
+      <Sequence x:Key="A" DisplayName="&quot;The Current Time is Between 08:50 To 09:05&quot;" sap:VirtualizedContainerService.HintSize="400,503" sap2010:WorkflowViewState.IdRef="Sequence_4">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -155,7 +155,7 @@
             <OutArgument x:TypeArguments="scg:Dictionary(x:String, s:String[])">[out_dic_ScheduledRun_BuyersFacility]</OutArgument>
           </Assign.To>
           <Assign.Value>
-            <InArgument x:TypeArguments="scg:Dictionary(x:String, s:String[])">[new Dictionary(Of String, String()) From{{"Buyers", {"79","51", "2", "48", "Z9", "84"}}, {"Facility", {"2","4"}}}]</InArgument>
+            <InArgument x:TypeArguments="scg:Dictionary(x:String, s:String[])">[new Dictionary(Of String, String()) From{{"Buyers", {"79","51", "2", "48", "Z9", "84"}}, {"Facility", {"2","4"}}, {"Time", {"8-50"}}}]</InArgument>
           </Assign.Value>
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -192,7 +192,7 @@
             <OutArgument x:TypeArguments="scg:Dictionary(x:String, s:String[])">[out_dic_ScheduledRun_BuyersFacility]</OutArgument>
           </Assign.To>
           <Assign.Value>
-            <InArgument x:TypeArguments="scg:Dictionary(x:String, s:String[])">[new Dictionary(Of String, String()) From{{"Buyers", {"51", "2", "48", "Z9", "84"}}, {"Facility", {"2", "3"}}}]</InArgument>
+            <InArgument x:TypeArguments="scg:Dictionary(x:String, s:String[])">[new Dictionary(Of String, String()) From{{"Buyers", {"51", "2", "48", "Z9", "84"}}, {"Facility", {"2", "3"}}, {"Time", {"11-50"}}}]</InArgument>
           </Assign.Value>
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -229,7 +229,7 @@
             <OutArgument x:TypeArguments="scg:Dictionary(x:String, s:String[])">[out_dic_ScheduledRun_BuyersFacility]</OutArgument>
           </Assign.To>
           <Assign.Value>
-            <InArgument x:TypeArguments="scg:Dictionary(x:String, s:String[])">[new Dictionary(Of String, String()) From{{"Buyers", {"98", "90"}}, {"Facility", {"2"}}}]</InArgument>
+            <InArgument x:TypeArguments="scg:Dictionary(x:String, s:String[])">[new Dictionary(Of String, String()) From{{"Buyers", {"98", "90"}}, {"Facility", {"2"}}, {"Time", {"12-30"}}}]</InArgument>
           </Assign.Value>
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -266,7 +266,7 @@
             <OutArgument x:TypeArguments="scg:Dictionary(x:String, s:String[])">[out_dic_ScheduledRun_BuyersFacility]</OutArgument>
           </Assign.To>
           <Assign.Value>
-            <InArgument x:TypeArguments="scg:Dictionary(x:String, s:String[])">[new Dictionary(Of String, String()) From{{"Buyers", {"79", "24", "39", "93", "87", "22"}}, {"Facility", {"2"}}}]</InArgument>
+            <InArgument x:TypeArguments="scg:Dictionary(x:String, s:String[])">[new Dictionary(Of String, String()) From{{"Buyers", {"79", "24", "39", "93", "87", "22"}}, {"Facility", {"2"}}, {"Time", {"13-00"}}}]</InArgument>
           </Assign.Value>
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -291,7 +291,7 @@
           </Assign.Value>
         </Assign>
       </Sequence>
-      <Sequence x:Key="E" DisplayName="&quot;The Current Time is Between 14:00 To 14:15&quot;" sap:VirtualizedContainerService.HintSize="400,503" sap2010:WorkflowViewState.IdRef="Sequence_8">
+      <Sequence x:Key="E" DisplayName="&quot;The Current Time is Between 14:00 To 14:15&quot;" sap:VirtualizedContainerService.HintSize="400,578" sap2010:WorkflowViewState.IdRef="Sequence_8">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -303,7 +303,7 @@
             <OutArgument x:TypeArguments="scg:Dictionary(x:String, s:String[])">[out_dic_ScheduledRun_BuyersFacility]</OutArgument>
           </Assign.To>
           <Assign.Value>
-            <InArgument x:TypeArguments="scg:Dictionary(x:String, s:String[])">[new Dictionary(Of String, String()) From{{"Buyers", {"79", "24", "39", "93", "87", "22"}}, {"Facility", {"3"}}}]</InArgument>
+            <InArgument x:TypeArguments="scg:Dictionary(x:String, s:String[])">[new Dictionary(Of String, String()) From{{"Buyers", {"79", "24", "39", "93", "87", "22"}}, {"Facility", {"3"}}, {"Time", {"14-00"}}}]</InArgument>
           </Assign.Value>
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -328,7 +328,7 @@
           </Assign.Value>
         </Assign>
       </Sequence>
-      <Sequence x:Key="F" DisplayName="&quot;The Current Time is Between 17:10 To 17:25&quot;" sap:VirtualizedContainerService.HintSize="400,503" sap2010:WorkflowViewState.IdRef="Sequence_9">
+      <Sequence x:Key="F" DisplayName="&quot;The Current Time is Between 17:10 To 17:25&quot;" sap:VirtualizedContainerService.HintSize="400,578" sap2010:WorkflowViewState.IdRef="Sequence_9">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -340,7 +340,7 @@
             <OutArgument x:TypeArguments="scg:Dictionary(x:String, s:String[])">[out_dic_ScheduledRun_BuyersFacility]</OutArgument>
           </Assign.To>
           <Assign.Value>
-            <InArgument x:TypeArguments="scg:Dictionary(x:String, s:String[])">[new Dictionary(Of String, String()) From{{"Buyers", {"97"}}, {"Facility", {"3"}}}]</InArgument>
+            <InArgument x:TypeArguments="scg:Dictionary(x:String, s:String[])">[new Dictionary(Of String, String()) From{{"Buyers", {"97"}}, {"Facility", {"3"}}, {"Time", {"17-10"}}}]</InArgument>
           </Assign.Value>
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -377,7 +377,7 @@
             <OutArgument x:TypeArguments="scg:Dictionary(x:String, s:String[])">[out_dic_ScheduledRun_BuyersFacility]</OutArgument>
           </Assign.To>
           <Assign.Value>
-            <InArgument x:TypeArguments="scg:Dictionary(x:String, s:String[])">[new Dictionary(Of String, String()) From{{"Buyers", {"97"}}, {"Facility", {"2"}}}]</InArgument>
+            <InArgument x:TypeArguments="scg:Dictionary(x:String, s:String[])">[new Dictionary(Of String, String()) From{{"Buyers", {"97"}}, {"Facility", {"2"}}, {"Time", {"19-10"}}}]</InArgument>
           </Assign.Value>
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -414,7 +414,7 @@
             <OutArgument x:TypeArguments="scg:Dictionary(x:String, s:String[])">[out_dic_ScheduledRun_BuyersFacility]</OutArgument>
           </Assign.To>
           <Assign.Value>
-            <InArgument x:TypeArguments="scg:Dictionary(x:String, s:String[])">[new Dictionary(Of String, String()) From{{"Buyers", {"82", "94", "98", "Z8", "14", "23"}}, {"Facility", {"2"}}}]</InArgument>
+            <InArgument x:TypeArguments="scg:Dictionary(x:String, s:String[])">[new Dictionary(Of String, String()) From{{"Buyers", {"82", "94", "98", "Z8", "14", "23"}}, {"Facility", {"2"}}, {"Time", {"19-20"}}}]</InArgument>
           </Assign.Value>
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">

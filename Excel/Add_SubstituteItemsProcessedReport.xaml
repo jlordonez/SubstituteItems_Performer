@@ -8,7 +8,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>981,1125</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>976,1080</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Append_SubstituteItemsProcessed_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="54">
@@ -43,7 +43,7 @@
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="39">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="78">
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>System.Private.CoreLib</AssemblyReference>
@@ -82,6 +82,10 @@
       <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
       <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
       <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>System.CodeDom</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Forms</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Core</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
   <Sequence DisplayName="Add Substitute Items Processed Report" sap:VirtualizedContainerService.HintSize="400,429" sap2010:WorkflowViewState.IdRef="Sequence_1">
@@ -91,6 +95,6 @@
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
     <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="338,92" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;MartBot: Adding Substitute Items Processed to Final Report&quot;]" />
-    <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{in_TransactionItem.SpecificContent(&quot;Item&quot;).ToString, in_TransactionItem.SpecificContent(&quot;Facility&quot;).ToString, in_TransactionItem.SpecificContent(&quot;Buyer&quot;).ToString, in_TransactionItem.SpecificContent(&quot;Substitution Code&quot;).ToString, in_TransactionItem.SpecificContent(&quot;SubItem&quot;).ToString, Today.ToString(&quot;dd/MMM/yyyy&quot;), in_Status, in_OutputMessage}]" DataTable="[io_dt_SubstituteItems_FinalReport]" DisplayName="Add Data Row - Substitute Item Processed" sap:VirtualizedContainerService.HintSize="338,186" sap2010:WorkflowViewState.IdRef="AddDataRow_1" />
+    <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{in_TransactionItem.SpecificContent(&quot;Item&quot;).ToString, in_TransactionItem.SpecificContent(&quot;Facility&quot;).ToString, in_TransactionItem.SpecificContent(&quot;Buyer&quot;).ToString, in_TransactionItem.SpecificContent(&quot;Substitution Code&quot;).ToString, in_TransactionItem.SpecificContent(&quot;SubItem&quot;).ToString, &quot;&quot;, Today.ToString(&quot;dd/MMM/yyyy&quot;), in_OutputMessage, in_Status}]" DataTable="[io_dt_SubstituteItems_FinalReport]" DisplayName="Add Data Row - Substitute Item Processed" sap:VirtualizedContainerService.HintSize="338,186" sap2010:WorkflowViewState.IdRef="AddDataRow_1" />
   </Sequence>
 </Activity>
