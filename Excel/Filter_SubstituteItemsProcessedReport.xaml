@@ -1,17 +1,20 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Filter_SubstituteItemsProcessedReport" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Filter_SubstituteItemsProcessedReport" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
     <x:Property Name="in_dt_SubstituteItems_FinalReport" Type="InArgument(sd:DataTable)" />
     <x:Property Name="in_dt_NotificationsByBuyers" Type="InArgument(sd:DataTable)" />
-    <x:Property Name="in_dic_ScheduledRun_BuyersFacility" Type="InArgument(scg:Dictionary(x:String, s:String[]))" />
+    <x:Property Name="in_dic_ScheduleRun" Type="InArgument(scg:Dictionary(x:String, s:String[]))" />
   </x:Members>
+  <this:Filter_SubstituteItemsProcessedReport.in_dic_ScheduleRun>
+    <InArgument x:TypeArguments="scg:Dictionary(x:String, s:String[])" />
+  </this:Filter_SubstituteItemsProcessedReport.in_dic_ScheduleRun>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>976,1772</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>807,1772</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Filter_SubstituteItemsProcessedReport_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
-    <scg:List x:TypeArguments="x:String" Capacity="58">
+    <scg:List x:TypeArguments="x:String" Capacity="31">
       <x:String>System.Activities</x:String>
       <x:String>System.Activities.Statements</x:String>
       <x:String>System.Activities.Expressions</x:String>
@@ -46,7 +49,7 @@
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="94">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="51">
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>System.Private.CoreLib</AssemblyReference>
@@ -105,7 +108,7 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="755,92" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Start Filtering Substitute Items Processed Report by Buyers&quot;]" />
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="755,92" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;UiPathBot: Start Filtering Substitute Items Processed Report by Buyers&quot;]" />
     <If Condition="[in_dt_SubstituteItems_FinalReport isNot Nothing]" DisplayName="Validate if Substitute Items Final Report DataTable Contains DataRows" sap:VirtualizedContainerService.HintSize="755,1424" sap2010:WorkflowViewState.IdRef="If_1">
       <If.Then>
         <Sequence sap:VirtualizedContainerService.HintSize="677,1045" sap2010:WorkflowViewState.IdRef="Sequence_2">
@@ -129,7 +132,7 @@
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <If Condition="[in_dt_SubstituteItems_FinalReport.AsEnumerable.Any(Function(Row) Row(&quot;Buyer&quot;).ToString.Trim.Contains(Buyer.item(&quot;Buyers Code&quot;).ToString))]" DisplayName="Validate if Substitute Items Final Report DT contains Buyers" sap:VirtualizedContainerService.HintSize="519,708" sap2010:WorkflowViewState.IdRef="If_2">
+                  <If Condition="[in_dt_SubstituteItems_FinalReport.AsEnumerable.Any(Function(Row) Row(&quot;Buyer&quot;).ToString.TrimStart(&quot;0&quot;c).Equals(Buyer.item(&quot;Buyers Code&quot;).ToString.Trim))]" DisplayName="Validate if Substitute Items Final Report DT contains Buyers" sap:VirtualizedContainerService.HintSize="519,708" sap2010:WorkflowViewState.IdRef="If_2">
                     <If.Then>
                       <Sequence sap:VirtualizedContainerService.HintSize="441,329" sap2010:WorkflowViewState.IdRef="Sequence_5">
                         <sap:WorkflowViewStateService.ViewState>
@@ -143,7 +146,7 @@
                           </Assign.To>
                           <Assign.Value>
                             <InArgument x:TypeArguments="sd:DataTable" xml:space="preserve">[(From d In in_dt_SubstituteItems_FinalReport.AsEnumerable
-Where d("Buyer").ToString.Trim.Contains(Buyer.Item("Buyers Code").ToString)
+Where d("Buyer").ToString.TrimStart("0"c).Equals(Buyer.Item("Buyers Code").ToString.Trim)
 Select d).CopyToDataTable]</InArgument>
                           </Assign.Value>
                         </Assign>
@@ -158,11 +161,11 @@ Select d).CopyToDataTable]</InArgument>
                             <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_SubstituteItems_FinalReportByRegion">
                               <VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="dt_SubstituteItems_FinalReportByBuyer" />
                             </InArgument>
-                            <InArgument x:TypeArguments="scg:Dictionary(x:String, s:String[])" x:Key="in_dic_ScheduledRun_BuyersFacility">
-                              <VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, s:String[])" ExpressionText="in_dic_ScheduledRun_BuyersFacility" />
-                            </InArgument>
                             <InArgument x:TypeArguments="x:String" x:Key="in_Buyer">
                               <VisualBasicValue x:TypeArguments="x:String" ExpressionText="Buyer.Item(&quot;Buyers Code&quot;).ToString" />
+                            </InArgument>
+                            <InArgument x:TypeArguments="scg:Dictionary(x:String, s:String[])" x:Key="in_dic_ScheduleRun">
+                              <VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, s:String[])" ExpressionText="in_dic_ScheduleRun" />
                             </InArgument>
                           </ui:InvokeWorkflowFile.Arguments>
                         </ui:InvokeWorkflowFile>
@@ -175,7 +178,7 @@ Select d).CopyToDataTable]</InArgument>
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
-                        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="338,92" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;UiPathBot: There are NOT items into the Substitute Items Processed DataTable for the Buyer &quot; + Buyer.Item(&quot;Buyer&quot;).ToString]" />
+                        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="338,92" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;UiPathBot: There are NOT items into the Substitute Items Processed DataTable for the Buyer &quot; + Buyer.Item(&quot;Buyers Code&quot;).ToString]" />
                       </Sequence>
                     </If.Else>
                   </If>

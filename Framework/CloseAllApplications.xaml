@@ -7,7 +7,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1006,1185</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>980,1083</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>CloseAllApplications_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -87,35 +87,23 @@
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log message (close applications)" sap:VirtualizedContainerService.HintSize="412,92" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[&quot;Closing applications...&quot;]" />
+    <ui:LogMessage DisplayName="Log message (close applications)" sap:VirtualizedContainerService.HintSize="412,92" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[&quot;UiPathBot: Closing applications...&quot;]" />
     <If Condition="[in_SystemException is Nothing]" sap:VirtualizedContainerService.HintSize="412,402" sap2010:WorkflowViewState.IdRef="If_1">
       <If.Then>
         <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Email\Send Email Notification.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Email\Send Email Notification.xaml">
           <ui:InvokeWorkflowFile.Arguments>
-            <InArgument x:TypeArguments="x:String" x:Key="in_PathReport">
-              <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_ReportPath" />
-            </InArgument>
-            <InArgument x:TypeArguments="x:String" x:Key="in_BodyEmail">
-              <VisualBasicValue x:TypeArguments="x:String" ExpressionText="Nothing" />
-            </InArgument>
-            <InArgument x:TypeArguments="x:String" x:Key="in_RecipientsMail">
-              <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_Config(&quot;EmailReport&quot;).ToString" />
-            </InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="in_PathReport">[in_ReportPath]</InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="in_BodyEmail">[Nothing]</InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="in_RecipientsMail">[in_Config("EmailReport").ToString]</InArgument>
           </ui:InvokeWorkflowFile.Arguments>
         </ui:InvokeWorkflowFile>
       </If.Then>
       <If.Else>
         <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Email\Send Email Notification.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Email\Send Email Notification.xaml">
           <ui:InvokeWorkflowFile.Arguments>
-            <InArgument x:TypeArguments="x:String" x:Key="in_PathReport">
-              <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_ReportPath" />
-            </InArgument>
-            <InArgument x:TypeArguments="x:String" x:Key="in_BodyEmail">
-              <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_SystemException.Message" />
-            </InArgument>
-            <InArgument x:TypeArguments="x:String" x:Key="in_RecipientsMail">
-              <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_Config(&quot;EmailReport&quot;).ToString" />
-            </InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="in_PathReport">[in_ReportPath]</InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="in_BodyEmail">[in_SystemException.Message]</InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="in_RecipientsMail">[in_Config("EmailReport").ToString]</InArgument>
           </ui:InvokeWorkflowFile.Arguments>
         </ui:InvokeWorkflowFile>
       </If.Else>

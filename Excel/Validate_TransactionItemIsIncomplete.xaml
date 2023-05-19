@@ -10,7 +10,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>976,2246</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>980,1277</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Validate_TransactionItemIsIncomplete_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="52">
@@ -91,26 +91,26 @@
       <AssemblyReference>Microsoft.Win32.Primitives</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Validate_TransactionItemIsIncomplete" sap:VirtualizedContainerService.HintSize="678,2181" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Validate_TransactionItemIsIncomplete" sap:VirtualizedContainerService.HintSize="663,1212" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="616,92" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Start Validating Transaction Items is incomplete&quot;]" />
-    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="616,969" sap2010:WorkflowViewState.IdRef="ForEach`1_4" Values="[in_array_ColumnsToValidate]">
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="601,92" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;UiPathBot: Start Validating Transaction Items is incomplete&quot;]" />
+    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="601,969" sap2010:WorkflowViewState.IdRef="ForEach`1_4" Values="[in_array_ColumnsToValidate]">
       <ui:ForEach.Body>
         <ActivityAction x:TypeArguments="x:String">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="x:String" Name="Column" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="580,844" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="565,844" sap2010:WorkflowViewState.IdRef="Sequence_2">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <If Condition="[Not String.IsNullOrWhiteSpace(in_TransactionItem.SpecificContent(Column).ToString.Trim)]" sap:VirtualizedContainerService.HintSize="518,733" sap2010:WorkflowViewState.IdRef="If_1">
+            <If Condition="[Not String.IsNullOrWhiteSpace(in_TransactionItem.SpecificContent(Column).ToString.Trim)]" sap:VirtualizedContainerService.HintSize="503,733" sap2010:WorkflowViewState.IdRef="If_1">
               <If.Then>
                 <Sequence sap:VirtualizedContainerService.HintSize="400,203" sap2010:WorkflowViewState.IdRef="Sequence_3">
                   <sap:WorkflowViewStateService.ViewState>
@@ -122,29 +122,21 @@
                 </Sequence>
               </If.Then>
               <If.Else>
-                <Sequence sap:VirtualizedContainerService.HintSize="440,354" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                <Sequence sap:VirtualizedContainerService.HintSize="425,354" sap2010:WorkflowViewState.IdRef="Sequence_4">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Excel\Add_SubstituteItemsProcessedReport.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="378,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Excel\Add_SubstituteItemsProcessedReport.xaml">
+                  <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Excel\Add_SubstituteItemsProcessedReport.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="363,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Excel\Add_SubstituteItemsProcessedReport.xaml">
                     <ui:InvokeWorkflowFile.Arguments>
-                      <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_dt_SubstituteItems_FinalReport">
-                        <VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="io_dt_SubstituteItems_FinalReport" />
-                      </InOutArgument>
-                      <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">
-                        <VisualBasicValue x:TypeArguments="ui:QueueItem" ExpressionText="in_TransactionItem" />
-                      </InArgument>
-                      <InArgument x:TypeArguments="x:String" x:Key="in_OutputMessage">
-                        <Literal x:TypeArguments="x:String">Incomplete input</Literal>
-                      </InArgument>
-                      <InArgument x:TypeArguments="x:String" x:Key="in_Status">
-                        <Literal x:TypeArguments="x:String">Missing data in the Transaction Item</Literal>
-                      </InArgument>
+                      <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_dt_SubstituteItems_FinalReport">[io_dt_SubstituteItems_FinalReport]</InOutArgument>
+                      <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">[in_TransactionItem]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_OutputMessage">Incomplete input</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_Status">Missing data in the Transaction Item</InArgument>
                     </ui:InvokeWorkflowFile.Arguments>
                   </ui:InvokeWorkflowFile>
-                  <Throw DisplayName="Throw BRE" Exception="[new BusinessRuleException(&quot;The Transaction Item &quot; + in_TransactionItem.SpecificContent(&quot;Item&quot;).ToString + &quot; is incomplete&quot;)]" sap:VirtualizedContainerService.HintSize="378,90" sap2010:WorkflowViewState.IdRef="Throw_1" />
+                  <Throw DisplayName="Throw BRE" Exception="[new BusinessRuleException(&quot;The Transaction Item &quot; + in_TransactionItem.SpecificContent(&quot;Item&quot;).ToString + &quot; is incomplete&quot;)]" sap:VirtualizedContainerService.HintSize="363,90" sap2010:WorkflowViewState.IdRef="Throw_1" />
                 </Sequence>
               </If.Else>
             </If>

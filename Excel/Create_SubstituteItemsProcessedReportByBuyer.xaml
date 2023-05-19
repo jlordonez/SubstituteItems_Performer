@@ -3,13 +3,13 @@
     <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
     <x:Property Name="in_dt_NotificationsByBuyers" Type="InArgument(sd:DataTable)" />
     <x:Property Name="in_dt_SubstituteItems_FinalReportByRegion" Type="InArgument(sd:DataTable)" />
-    <x:Property Name="in_dic_ScheduledRun_BuyersFacility" Type="InArgument(scg:Dictionary(x:String, s:String[]))" />
     <x:Property Name="in_Buyer" Type="InArgument(x:String)" />
+    <x:Property Name="in_dic_ScheduleRun" Type="InArgument(scg:Dictionary(x:String, s:String[]))" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>976,2286</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>803,2391</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Create_SubstituteItemsProcessedReportByBuyer_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="31">
@@ -47,7 +47,7 @@
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="47">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="50">
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>System.Private.CoreLib</AssemblyReference>
@@ -94,15 +94,31 @@
       <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
       <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
       <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>System.CodeDom</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Forms</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Core</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Create_SubstituteItemsProcessedReportByBuyer" sap:VirtualizedContainerService.HintSize="602,2221" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Create_SubstituteItemsProcessedReportByBuyer" sap:VirtualizedContainerService.HintSize="602,2326" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="str_FilePath" />
+    </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
     <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="540,92" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;UiPathBot: Start Creating Substitute Items Report By Buyer&quot;]" />
+    <Assign DisplayName="Assign - FilePath" sap:VirtualizedContainerService.HintSize="540,65" sap2010:WorkflowViewState.IdRef="Assign_1">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[str_FilePath]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String" xml:space="preserve">[in_Config("PathFolderSubstituteReport").ToString + "Output\Buyers\" + 
+"FinalReport_SubstituteItems_Buyer(" + in_Buyer + ")_" + Today.ToString("yyyy-MMM-dd_") + 
+in_dic_ScheduleRun("Time")(0).ToString + ".xlsx"]</InArgument>
+      </Assign.Value>
+    </Assign>
     <Sequence DisplayName="Validate if 'Buyer' Folder Exists" sap:VirtualizedContainerService.HintSize="540,854" sap2010:WorkflowViewState.IdRef="Sequence_4">
       <Sequence.Variables>
         <Variable x:TypeArguments="x:Boolean" Name="bool_ValidateFolderExists" />
@@ -122,7 +138,7 @@
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="338,92" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;UiPathBot: The folder 'Buyer' does NOT exists on Data\Output\.&quot;]" />
+            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="338,92" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;UiPathBot: The 'Buyer' Folder does NOT exists on Data\Output\.&quot;]" />
           </Sequence>
         </If.Then>
         <If.Else>
@@ -146,7 +162,7 @@
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <ui:FileExistsX DisplayName="File Exists" Exists="[bool_ValidateFileExists]" sap:VirtualizedContainerService.HintSize="478,133" sap2010:WorkflowViewState.IdRef="FileExistsX_1" Path="[in_Config(&quot;PathFolderSubstituteReport&quot;).ToString + &quot;Output\Buyers\&quot; + &#xA;&quot;FinalReport_SubstituteItems_Buyer(&quot; + in_Buyer + &quot;)_&quot; + Today.ToString(&quot;yyyy-MMM-dd_&quot;) + &#xA;in_dic_ScheduledRun_BuyersFacility(&quot;Time&quot;)(0).ToString.Trim + &quot;.xlsx&quot;]" />
+      <ui:FileExistsX DisplayName="File Exists" Exists="[bool_ValidateFileExists]" sap:VirtualizedContainerService.HintSize="478,133" sap2010:WorkflowViewState.IdRef="FileExistsX_1" Path="[str_FilePath]" />
       <If Condition="[bool_ValidateFileExists]" DisplayName="Validate if File Exists for the Buyer" sap:VirtualizedContainerService.HintSize="478,644" sap2010:WorkflowViewState.IdRef="If_3">
         <If.Then>
           <Sequence sap:VirtualizedContainerService.HintSize="400,203" sap2010:WorkflowViewState.IdRef="Sequence_7">
@@ -155,7 +171,7 @@
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="338,92" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;UiPathBot: The File &quot; +&#xA;&quot;FinalReport_SubstituteItems_Buyer(&quot; + in_Buyer + &quot;)_&quot; + Today.ToString(&quot;yyyy-MMM-dd_&quot;) + &#xA;in_dic_ScheduledRun_BuyersFacility(&quot;Time&quot;)(0).ToString.Trim + &quot;.xlsx Exists&quot;]" />
+            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="338,92" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;UiPathBot: The File &quot; +str_FilePath+&quot; Exists&quot;]" />
           </Sequence>
         </If.Then>
         <If.Else>
@@ -165,11 +181,11 @@
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:CopyFile ContinueOnError="{x:Null}" Destination="[in_Config(&quot;PathFolderSubstituteReport&quot;).ToString + &quot;Output\Buyers\&quot; + &#xA;&quot;FinalReport_SubstituteItems_Buyer(&quot; + in_Buyer + &quot;)_&quot; + Today.ToString(&quot;yyyy-MMM-dd_&quot;) + &#xA;in_dic_ScheduledRun_BuyersFacility(&quot;Time&quot;)(0).ToString.Trim + &quot;.xlsx&quot;]" DisplayName="Copy File -  Substitute Items Report Template" sap:VirtualizedContainerService.HintSize="338,154" sap2010:WorkflowViewState.IdRef="CopyFile_1" Overwrite="True" Path="Data\Temp\Substitute Items - Template.xlsx" />
+            <ui:CopyFile ContinueOnError="{x:Null}" Destination="[str_FilePath]" DisplayName="Copy File -  Substitute Items Report Template" sap:VirtualizedContainerService.HintSize="338,154" sap2010:WorkflowViewState.IdRef="CopyFile_1" Overwrite="True" Path="Data\Temp\Substitute Items - Template.xlsx" />
           </Sequence>
         </If.Else>
       </If>
-      <ui:WriteRange AddHeaders="True" DataTable="[in_dt_SubstituteItems_FinalReportByRegion]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="478,116" sap2010:WorkflowViewState.IdRef="WriteRange_2" SheetName="[in_Config(&quot;Sheet_SubstituteItemsName&quot;).ToString]" StartingCell="A5" WorkbookPath="[in_Config(&quot;PathFolderSubstituteReport&quot;).ToString + &quot;Output\Buyers\&quot; + &#xA;&quot;FinalReport_SubstituteItems_Buyer(&quot; + in_Buyer + &quot;)_&quot; + Today.ToString(&quot;yyyy-MMM-dd_&quot;) + &#xA;in_dic_ScheduledRun_BuyersFacility(&quot;Time&quot;)(0).ToString.Trim + &quot;.xlsx&quot;]" />
+      <ui:WriteRange AddHeaders="True" DataTable="[in_dt_SubstituteItems_FinalReportByRegion]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="478,116" sap2010:WorkflowViewState.IdRef="WriteRange_2" SheetName="[in_Config(&quot;Sheet_SubstituteItemsName&quot;).ToString]" StartingCell="A5" WorkbookPath="[str_FilePath]" />
     </Sequence>
   </Sequence>
 </Activity>

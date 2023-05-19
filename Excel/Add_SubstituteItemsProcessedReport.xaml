@@ -8,7 +8,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>976,1080</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1006,1185</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Append_SubstituteItemsProcessed_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="54">
@@ -95,6 +95,6 @@
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
     <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="338,92" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;MartBot: Adding Substitute Items Processed to Final Report&quot;]" />
-    <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{in_TransactionItem.SpecificContent(&quot;Item&quot;).ToString, in_TransactionItem.SpecificContent(&quot;Facility&quot;).ToString, in_TransactionItem.SpecificContent(&quot;Buyer&quot;).ToString, in_TransactionItem.SpecificContent(&quot;Substitution Code&quot;).ToString, in_TransactionItem.SpecificContent(&quot;SubItem&quot;).ToString, &quot;&quot;, Today.ToString(&quot;dd/MMM/yyyy&quot;), in_OutputMessage, in_Status}]" DataTable="[io_dt_SubstituteItems_FinalReport]" DisplayName="Add Data Row - Substitute Item Processed" sap:VirtualizedContainerService.HintSize="338,186" sap2010:WorkflowViewState.IdRef="AddDataRow_1" />
+    <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{in_TransactionItem.SpecificContent(&quot;Item&quot;).ToString, in_TransactionItem.SpecificContent(&quot;Facility&quot;).ToString, in_TransactionItem.SpecificContent(&quot;Buyer&quot;).ToString, in_TransactionItem.SpecificContent(&quot;Substitution Code&quot;).ToString, in_TransactionItem.SpecificContent(&quot;SubItem&quot;).ToString, Today.ToString(&quot;dd/MMM/yyyy&quot;), in_OutputMessage, in_Status}]" DataTable="[io_dt_SubstituteItems_FinalReport]" DisplayName="Add Data Row - Substitute Item Processed" sap:VirtualizedContainerService.HintSize="338,186" sap2010:WorkflowViewState.IdRef="AddDataRow_1" />
   </Sequence>
 </Activity>

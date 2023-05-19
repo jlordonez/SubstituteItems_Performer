@@ -9,10 +9,10 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1006,2738</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>980,1289</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Read_Substitute_Items_Report_Previous_Day_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
-    <scg:List x:TypeArguments="x:String" Capacity="36">
+    <scg:List x:TypeArguments="x:String" Capacity="72">
       <x:String>System.Activities</x:String>
       <x:String>System.Activities.Statements</x:String>
       <x:String>System.Activities.Expressions</x:String>
@@ -49,6 +49,7 @@
       <x:String>UiPath.UIAutomationNext.Activities</x:String>
       <x:String>UiPath.Platform.ObjectLibrary</x:String>
       <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>UiPath.UIAutomationNext.Contracts</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -118,224 +119,243 @@
       <AssemblyReference>System.IO.FileSystem.DriveInfo</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Extract DataTable From Excel File" sap:VirtualizedContainerService.HintSize="540,2673" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Extract DataTable From Excel File" sap:VirtualizedContainerService.HintSize="636,1224" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="478,92" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;MartBot: Extracting DataTable From: &quot; + vbLf +&quot;Excel File: &quot; + vbLf +in_InputFilePath.Split(&quot;/&quot;c).Last + vbLf + &quot;Sheet name: &quot; + in_Sheet]" />
-    <If Condition="[Not file.Exists(in_InputFilePath)]" DisplayName="Validate if Input File exists" sap:VirtualizedContainerService.HintSize="478,612" sap2010:WorkflowViewState.IdRef="If_5">
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="574,92" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;UiPathBot: Extracting DataTable From: &quot; + vbLf +&quot;Excel File: &quot; + vbLf +in_InputFilePath.Split(&quot;/&quot;c).Last + vbLf + &quot;Sheet name: &quot; + in_Sheet]" />
+    <If Condition="[Not file.Exists(in_InputFilePath)]" DisplayName="Validate if Input File exists" sap:VirtualizedContainerService.HintSize="574,981" sap2010:WorkflowViewState.IdRef="If_5">
       <If.Then>
-        <Sequence sap:VirtualizedContainerService.HintSize="400,333" sap2010:WorkflowViewState.IdRef="Sequence_15">
+        <Sequence sap:VirtualizedContainerService.HintSize="400,304" sap2010:WorkflowViewState.IdRef="Sequence_15">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
           <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="338,92" sap2010:WorkflowViewState.IdRef="LogMessage_10" Level="Info" Message="[&quot;The Input file &quot; + in_InputFilePath + &quot;does NOT exist.&quot;]" />
-          <Throw DisplayName="Throw - SE" Exception="[New SystemException(&quot;The Substitute Items Process was not able to find the Input file &quot; + in_InputFilePath + &quot;.&quot;)]" sap:VirtualizedContainerService.HintSize="338,90" sap2010:WorkflowViewState.IdRef="Throw_1" />
+          <Assign DisplayName="Assign - Extracted DataTable is Nothing" sap:VirtualizedContainerService.HintSize="338,61" sap2010:WorkflowViewState.IdRef="Assign_8">
+            <Assign.To>
+              <OutArgument x:TypeArguments="sd:DataTable">[out_ExtractedDataTable]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="sd:DataTable">[Nothing]</InArgument>
+            </Assign.Value>
+          </Assign>
         </Sequence>
       </If.Then>
       <If.Else>
-        <Sequence sap:VirtualizedContainerService.HintSize="400,103" sap2010:WorkflowViewState.IdRef="Sequence_16">
+        <Sequence sap:VirtualizedContainerService.HintSize="496,501" sap2010:WorkflowViewState.IdRef="Sequence_17">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-        </Sequence>
-      </If.Else>
-    </If>
-    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="478,338" sap2010:WorkflowViewState.IdRef="TryCatch_1">
-      <TryCatch.Try>
-        <ui:ReadRange AddHeaders="True" DataTable="[out_ExtractedDataTable]" DisplayName="Read Range Workbook" sap:VirtualizedContainerService.HintSize="334,88" sap2010:WorkflowViewState.IdRef="ReadRange_1" Range="[in_Range]" SheetName="[in_Sheet]" WorkbookPath="[in_InputFilePath]" />
-      </TryCatch.Try>
-      <TryCatch.Catches>
-        <Catch x:TypeArguments="si:IOException" sap:VirtualizedContainerService.HintSize="404,21" sap2010:WorkflowViewState.IdRef="Catch`1_1">
-          <sap:WorkflowViewStateService.ViewState>
-            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-              <x:Boolean x:Key="IsPinned">False</x:Boolean>
-            </scg:Dictionary>
-          </sap:WorkflowViewStateService.ViewState>
-          <ActivityAction x:TypeArguments="si:IOException">
-            <ActivityAction.Argument>
-              <DelegateInArgument x:TypeArguments="si:IOException" Name="exception" />
-            </ActivityAction.Argument>
-            <Sequence DisplayName="Sequence - The Excel file is currently open" sap:VirtualizedContainerService.HintSize="698,1818" sap2010:WorkflowViewState.IdRef="Sequence_2">
-              <sap:WorkflowViewStateService.ViewState>
-                <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                </scg:Dictionary>
-              </sap:WorkflowViewStateService.ViewState>
-              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="636,92" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Warn" Message="[&quot;MartBot: The Excel file &quot; + in_InputFilePath.Split(&quot;/&quot;c).Last + &quot; is currently open.&quot;]" />
-              <ui:CloseWindow TimeoutMS="{x:Null}" UseWindow="{x:Null}" DisplayName="Close Window 'excel.exe  SubstituteIt...'" sap:VirtualizedContainerService.HintSize="636,69" sap2010:WorkflowViewState.IdRef="CloseWindow_1" Selector="&lt;wnd app='excel.exe' cls='XLMAIN' /&gt;" WaitForReady="INTERACTIVE" />
-              <Sequence DisplayName="Sequence - Control Pop Ups" sap:VirtualizedContainerService.HintSize="636,1208" sap2010:WorkflowViewState.IdRef="Sequence_8">
-                <Sequence.Variables>
-                  <Variable x:TypeArguments="x:Boolean" Name="bool_elementExists" />
-                </Sequence.Variables>
+          <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="434,206" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+            <TryCatch.Try>
+              <ui:ReadRange AddHeaders="True" DataTable="[out_ExtractedDataTable]" DisplayName="Read Range Workbook" sap:VirtualizedContainerService.HintSize="334,88" sap2010:WorkflowViewState.IdRef="ReadRange_1" Range="[in_Range]" SheetName="[in_Sheet]" WorkbookPath="[in_InputFilePath]" />
+            </TryCatch.Try>
+            <TryCatch.Catches>
+              <Catch x:TypeArguments="si:IOException" sap:VirtualizedContainerService.HintSize="400,21" sap2010:WorkflowViewState.IdRef="Catch`1_1">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                     <x:Boolean x:Key="IsPinned">False</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <ui:UiElementExists DisplayName="Element Exists 'Button  Save'" Exists="[bool_elementExists]" sap:VirtualizedContainerService.HintSize="574,107" sap2010:WorkflowViewState.IdRef="UiElementExists_1">
-                  <ui:UiElementExists.Target>
-                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="8df53aac-c000-43da-92cc-5654ff2c3329" InformativeScreenshot="490c3ae788a99aad0014bd4b19cf0598" Selector="&lt;wnd app='excel.exe' cls='NUIDialog' title='Microsoft Excel' /&gt;" TimeoutMS="1000" WaitForReady="NONE" />
-                  </ui:UiElementExists.Target>
-                </ui:UiElementExists>
-                <If Condition="[bool_elementExists]" DisplayName="Validate if &quot;save&quot; button exitst" sap:VirtualizedContainerService.HintSize="574,950" sap2010:WorkflowViewState.IdRef="If_3">
-                  <If.Then>
-                    <Sequence sap:VirtualizedContainerService.HintSize="496,674" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                <ActivityAction x:TypeArguments="si:IOException">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="si:IOException" Name="exception" />
+                  </ActivityAction.Argument>
+                  <Sequence DisplayName="Sequence - The Excel file is currently open" sap:VirtualizedContainerService.HintSize="698,1818" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="636,92" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Warn" Message="[&quot;MartBot: The Excel file &quot; + in_InputFilePath.Split(&quot;/&quot;c).Last + &quot; is currently open.&quot;]" />
+                    <ui:CloseWindow TimeoutMS="{x:Null}" UseWindow="{x:Null}" DisplayName="Close Window 'excel.exe  SubstituteIt...'" sap:VirtualizedContainerService.HintSize="636,69" sap2010:WorkflowViewState.IdRef="CloseWindow_1" Selector="&lt;wnd app='excel.exe' cls='XLMAIN' /&gt;" WaitForReady="INTERACTIVE" />
+                    <Sequence DisplayName="Sequence - Control Pop Ups" sap:VirtualizedContainerService.HintSize="636,1208" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                      <Sequence.Variables>
+                        <Variable x:TypeArguments="x:Boolean" Name="bool_elementExists" />
+                      </Sequence.Variables>
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
-                      <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Application: Microsoft Excel" sap:VirtualizedContainerService.HintSize="434,563" sap2010:WorkflowViewState.IdRef="NApplicationCard_2" ScopeGuid="c03f9b96-b5c3-43f6-8b9b-c8119c6708f5" Version="V2">
-                        <uix:NApplicationCard.Body>
-                          <ActivityAction x:TypeArguments="x:Object">
-                            <ActivityAction.Argument>
-                              <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
-                            </ActivityAction.Argument>
-                            <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="400,272" sap2010:WorkflowViewState.IdRef="Sequence_13">
-                              <sap:WorkflowViewStateService.ViewState>
-                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                </scg:Dictionary>
-                              </sap:WorkflowViewStateService.ViewState>
-                              <uix:NClick ClickType="Single" DisplayName="Click 'Save'" sap:VirtualizedContainerService.HintSize="338,157" sap2010:WorkflowViewState.IdRef="NClick_1" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="c03f9b96-b5c3-43f6-8b9b-c8119c6708f5" Version="V3">
-                                <uix:NClick.Target>
-                                  <uix:TargetAnchorable DesignTimeRectangle="89, 98, 74, 24" DesignTimeScaleFactor="1" ElementType="Button" FriendlyName="'Save'" FullSelectorArgument="&lt;uia cls='NetUIButton' name='Save' /&gt;" FuzzySelectorArgument="&lt;uia cls='NetUIButton' name='Save' role='Button' automationid='' check:fulltext='Save' /&gt;" Guid="06ffeb44-7816-4096-9dc9-2cce6a614525" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAE4AAAAcCAYAAADP7InhAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFKSURBVGhD7ZUxTsNAEEV9glyFa3AIGi7BBag4Ai1NTkBDkx6JghoaKiqkSDmA0bP00cZZGzRKPIvyn/TlZHYdy88zTtebEBYX5Edc13XOHyL2xJl5ZsWtri6cSsDiAgGLCwQsLhCwuEDA4gKBVHH3T+vhOqK2p8VAmrjL2+vhGhz1/ebh7mBfi4E0cUj62m2ra60H0sQReH57Pai/f34Ma6B1JDPa2lOKV/fCEg8DUsURbhSmxhQQgzSEqo5QieQ3NPLUag/jmIF0cQRpIHnjPw3VQYLUWTq3pBR8ikAT4sjjy2boFI2d6giSOPYQxHKkxtoS41kG0sRx8xJC6BJkUFPHqJu0D6lIKkeTgMZ2iUBqxyFAlOOlOjU+jwWP32ESLM7mHfffAmnipqjtbS3gjgsELC4QsLhAYFacmWZSnPN7hNssiMWF6PtvLMZpXv40ojoAAAAASUVORK5CYII=" InformativeScreenshot="a7caf22a8fb6ee2358f44200fbcafb8b.png" ScopeSelectorArgument="&lt;wnd app='excel.exe' cls='NUIDialog' title='Microsoft Excel' /&gt;" SearchSteps="Selector, FuzzySelector, Image" Version="V1" Visibility="Interactive">
-                                    <uix:TargetAnchorable.Anchors>
-                                      <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
-                                        <uix:Target DesignTimeRectangle="172, 98, 74, 24" ElementType="Button" FriendlyName="'Don't Save'" FullSelectorArgument="&lt;uia cls='NetUIButton' name='Don&amp;apos;t Save' /&gt;" FuzzySelectorArgument="&lt;uia cls='NetUIButton' name='Don&amp;apos;t Save' role='Button' automationid='' check:fulltext='Don&amp;apos;t Save' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAE4AAAAcCAYAAADP7InhAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGZSURBVGhD7ZTbbYNAEEVTjcugDJfhKlwCP1RBFbTiNojOx7Uuk8WBMSSRMisdeR+zO8Nh8cdcLdVKXLI9xfV9X2xAbSHu8XgULyhxSUpckhKXpMQlKXFJSlySt8RdLpcF9/u9GbeHaZrm6/XaXIsMw7DI34o5i7fF8aAad1033263RcxeoriYQzDna/yO4/gl7iwOFRcfJgN7t4hDEi8qzv8Uh4oDHkZvXiIFn5biNNZa6zPXGrRu8to84uM+6vL8Lt7r3PoyThXnxao4xdPXzSKeMf1IK4dDDmKUM6L91OE3GaGqjTOUg7ktfzeniWvJoHAVG/e2zno17yiX5JGDsdC8n0WdvtdxwWscKs5leV+cJQ741LkpxHpevUjFADXor4E1SdzDYeJUsMRoXWOtK977rbHP68EdzvV5XgoymNONoe/7OR9JEHN73Vt4W5wTH5Di1tYZbxHHLWKt9b+DAJ3tn5fmmaPveZmLZ0mwOP0/7j/zK+L87UZa8X+RunFJSlySEpekxCVZFVd8j9pTXLV9rcSl2jx/AiHx9Mq0oQZzAAAAAElFTkSuQmCC" SearchSteps="Selector, FuzzySelector, Image" />
-                                      </scg:List>
-                                    </uix:TargetAnchorable.Anchors>
-                                  </uix:TargetAnchorable>
-                                </uix:NClick.Target>
-                              </uix:NClick>
-                            </Sequence>
-                          </ActivityAction>
-                        </uix:NApplicationCard.Body>
-                        <uix:NApplicationCard.TargetApp>
-                          <uix:TargetApp Area="2305, 778, 350, 147" FilePath="C:\Program Files\Microsoft Office\root\Office16\excel.exe" IconBase64="iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGvSURBVFhH7Zc9SEJRGIZdo9B+pRoShwhChIoQhCBbgsgpGgJpKyKIaAmClqDBoSmyLQikrbaCppaksdvUGDQ1FjQ0fvlezpGjfefcn86FkF548Hr4vvO+nh/U2L+8lK6uO3XIL1O1gyA4wkYvzsQEY2JE2OjFmZjgTEwIG704ExOciQlhoxdnYoIzMSFs9Bo5LpEXqcpq+ADd+wWnDoWhZ3eWBjYKbojfBGAn90vH/CjFt/ON9zKIX/5WgNRhke5fnlz2bk4a4zOVtcY4ntUe6ytw+nBJ0MfXpxsIYzCG8Npabz0ATGEOle/OafFsx32GskcrTbUgkjOweVV2DRFEfnqE4WojO4TSGHp9f2NrQGQBrp9rwp7fe0l8OkXJpQkaLOVcuBoTbAC579gCeR6wLVyt9QA4hFhyCPsOIPVWqFgPwF1DGeji8bapFlgNoF45dcnlrYBQo/ZEcgaC0BYBQn8dJ7byPwIERfzs0KtzfIh0dGWGKZFLRxugd26MvEguT7KT+0HY6NW3kCET/cUsO7FfhI1eXJNNhI1eXJNNhI1e9SKntcki3n/N2lyx2De7iUsgzKBEqQAAAABJRU5ErkJggg==" InformativeScreenshot="4636aa49111c73ca2aec51dcd0dd8939.png" Selector="&lt;wnd app='excel.exe' cls='NUIDialog' title='Microsoft Excel' /&gt;" />
-                        </uix:NApplicationCard.TargetApp>
-                      </uix:NApplicationCard>
+                      <ui:UiElementExists DisplayName="Element Exists 'Button  Save'" Exists="[bool_elementExists]" sap:VirtualizedContainerService.HintSize="574,107" sap2010:WorkflowViewState.IdRef="UiElementExists_1">
+                        <ui:UiElementExists.Target>
+                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="8df53aac-c000-43da-92cc-5654ff2c3329" InformativeScreenshot="490c3ae788a99aad0014bd4b19cf0598" Selector="&lt;wnd app='excel.exe' cls='NUIDialog' title='Microsoft Excel' /&gt;" TimeoutMS="1000" WaitForReady="NONE" />
+                        </ui:UiElementExists.Target>
+                      </ui:UiElementExists>
+                      <If Condition="[bool_elementExists]" DisplayName="Validate if &quot;save&quot; button exitst" sap:VirtualizedContainerService.HintSize="574,950" sap2010:WorkflowViewState.IdRef="If_3">
+                        <If.Then>
+                          <Sequence sap:VirtualizedContainerService.HintSize="496,674" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Application: Microsoft Excel" sap:VirtualizedContainerService.HintSize="434,563" sap2010:WorkflowViewState.IdRef="NApplicationCard_2" ScopeGuid="c03f9b96-b5c3-43f6-8b9b-c8119c6708f5" Version="V2">
+                              <uix:NApplicationCard.Body>
+                                <ActivityAction x:TypeArguments="x:Object">
+                                  <ActivityAction.Argument>
+                                    <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
+                                  </ActivityAction.Argument>
+                                  <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="400,272" sap2010:WorkflowViewState.IdRef="Sequence_13">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <uix:NClick ClickType="Single" DisplayName="Click 'Save'" sap:VirtualizedContainerService.HintSize="338,157" sap2010:WorkflowViewState.IdRef="NClick_1" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="c03f9b96-b5c3-43f6-8b9b-c8119c6708f5" Version="V3">
+                                      <uix:NClick.Target>
+                                        <uix:TargetAnchorable DesignTimeRectangle="89, 98, 74, 24" DesignTimeScaleFactor="1" ElementType="Button" FriendlyName="'Save'" FullSelectorArgument="&lt;uia cls='NetUIButton' name='Save' /&gt;" FuzzySelectorArgument="&lt;uia cls='NetUIButton' name='Save' role='Button' automationid='' check:fulltext='Save' /&gt;" Guid="06ffeb44-7816-4096-9dc9-2cce6a614525" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAE4AAAAcCAYAAADP7InhAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFKSURBVGhD7ZUxTsNAEEV9glyFa3AIGi7BBag4Ai1NTkBDkx6JghoaKiqkSDmA0bP00cZZGzRKPIvyn/TlZHYdy88zTtebEBYX5Edc13XOHyL2xJl5ZsWtri6cSsDiAgGLCwQsLhCwuEDA4gKBVHH3T+vhOqK2p8VAmrjL2+vhGhz1/ebh7mBfi4E0cUj62m2ra60H0sQReH57Pai/f34Ma6B1JDPa2lOKV/fCEg8DUsURbhSmxhQQgzSEqo5QieQ3NPLUag/jmIF0cQRpIHnjPw3VQYLUWTq3pBR8ikAT4sjjy2boFI2d6giSOPYQxHKkxtoS41kG0sRx8xJC6BJkUFPHqJu0D6lIKkeTgMZ2iUBqxyFAlOOlOjU+jwWP32ESLM7mHfffAmnipqjtbS3gjgsELC4QsLhAYFacmWZSnPN7hNssiMWF6PtvLMZpXv40ojoAAAAASUVORK5CYII=" InformativeScreenshot="a7caf22a8fb6ee2358f44200fbcafb8b.png" ScopeSelectorArgument="&lt;wnd app='excel.exe' cls='NUIDialog' title='Microsoft Excel' /&gt;" SearchSteps="Selector, FuzzySelector, Image" Version="V1" Visibility="Interactive">
+                                          <uix:TargetAnchorable.Anchors>
+                                            <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
+                                              <uix:Target DesignTimeRectangle="172, 98, 74, 24" ElementType="Button" FriendlyName="'Don't Save'" FullSelectorArgument="&lt;uia cls='NetUIButton' name='Don&amp;apos;t Save' /&gt;" FuzzySelectorArgument="&lt;uia cls='NetUIButton' name='Don&amp;apos;t Save' role='Button' automationid='' check:fulltext='Don&amp;apos;t Save' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAE4AAAAcCAYAAADP7InhAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGZSURBVGhD7ZTbbYNAEEVTjcugDJfhKlwCP1RBFbTiNojOx7Uuk8WBMSSRMisdeR+zO8Nh8cdcLdVKXLI9xfV9X2xAbSHu8XgULyhxSUpckhKXpMQlKXFJSlySt8RdLpcF9/u9GbeHaZrm6/XaXIsMw7DI34o5i7fF8aAad1033263RcxeoriYQzDna/yO4/gl7iwOFRcfJgN7t4hDEi8qzv8Uh4oDHkZvXiIFn5biNNZa6zPXGrRu8to84uM+6vL8Lt7r3PoyThXnxao4xdPXzSKeMf1IK4dDDmKUM6L91OE3GaGqjTOUg7ktfzeniWvJoHAVG/e2zno17yiX5JGDsdC8n0WdvtdxwWscKs5leV+cJQ741LkpxHpevUjFADXor4E1SdzDYeJUsMRoXWOtK977rbHP68EdzvV5XgoymNONoe/7OR9JEHN73Vt4W5wTH5Di1tYZbxHHLWKt9b+DAJ3tn5fmmaPveZmLZ0mwOP0/7j/zK+L87UZa8X+RunFJSlySEpekxCVZFVd8j9pTXLV9rcSl2jx/AiHx9Mq0oQZzAAAAAElFTkSuQmCC" SearchSteps="Selector, FuzzySelector, Image" />
+                                            </scg:List>
+                                          </uix:TargetAnchorable.Anchors>
+                                        </uix:TargetAnchorable>
+                                      </uix:NClick.Target>
+                                    </uix:NClick>
+                                  </Sequence>
+                                </ActivityAction>
+                              </uix:NApplicationCard.Body>
+                              <uix:NApplicationCard.TargetApp>
+                                <uix:TargetApp Area="2305, 778, 350, 147" FilePath="C:\Program Files\Microsoft Office\root\Office16\excel.exe" IconBase64="iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGvSURBVFhH7Zc9SEJRGIZdo9B+pRoShwhChIoQhCBbgsgpGgJpKyKIaAmClqDBoSmyLQikrbaCppaksdvUGDQ1FjQ0fvlezpGjfefcn86FkF548Hr4vvO+nh/U2L+8lK6uO3XIL1O1gyA4wkYvzsQEY2JE2OjFmZjgTEwIG704ExOciQlhoxdnYoIzMSFs9Bo5LpEXqcpq+ADd+wWnDoWhZ3eWBjYKbojfBGAn90vH/CjFt/ON9zKIX/5WgNRhke5fnlz2bk4a4zOVtcY4ntUe6ytw+nBJ0MfXpxsIYzCG8Npabz0ATGEOle/OafFsx32GskcrTbUgkjOweVV2DRFEfnqE4WojO4TSGHp9f2NrQGQBrp9rwp7fe0l8OkXJpQkaLOVcuBoTbAC579gCeR6wLVyt9QA4hFhyCPsOIPVWqFgPwF1DGeji8bapFlgNoF45dcnlrYBQo/ZEcgaC0BYBQn8dJ7byPwIERfzs0KtzfIh0dGWGKZFLRxugd26MvEguT7KT+0HY6NW3kCET/cUsO7FfhI1eXJNNhI1eXJNNhI1e9SKntcki3n/N2lyx2De7iUsgzKBEqQAAAABJRU5ErkJggg==" InformativeScreenshot="4636aa49111c73ca2aec51dcd0dd8939.png" Selector="&lt;wnd app='excel.exe' cls='NUIDialog' title='Microsoft Excel' /&gt;" />
+                              </uix:NApplicationCard.TargetApp>
+                            </uix:NApplicationCard>
+                          </Sequence>
+                        </If.Then>
+                      </If>
                     </Sequence>
-                  </If.Then>
-                </If>
+                    <Delay DisplayName="Delay 1 Seconds" Duration="[TimeSpan.FromMilliseconds(1000)]" sap:VirtualizedContainerService.HintSize="636,90" sap2010:WorkflowViewState.IdRef="Delay_1" />
+                    <ui:ReadRange AddHeaders="True" DataTable="[out_ExtractedDataTable]" DisplayName="Read Range Workbook" sap:VirtualizedContainerService.HintSize="636,88" sap2010:WorkflowViewState.IdRef="ReadRange_2" Range="[in_Range]" SheetName="[in_Sheet]" WorkbookPath="[in_InputFilePath]" />
+                  </Sequence>
+                </ActivityAction>
+              </Catch>
+              <Catch x:TypeArguments="s:ArgumentException" sap:VirtualizedContainerService.HintSize="400,21" sap2010:WorkflowViewState.IdRef="Catch`1_2">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ActivityAction x:TypeArguments="s:ArgumentException">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="s:ArgumentException" Name="exception" />
+                  </ActivityAction.Argument>
+                  <Sequence DisplayName="Sequence -  Excel File does NOT exist" sap:VirtualizedContainerService.HintSize="400,304" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="338,92" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Warn" Message="[&quot;MartBot: The Excel file &quot; + in_InputFilePath.Split(&quot;/&quot;c).Last + &quot; does NOT exist&quot;]" />
+                    <Assign DisplayName="Assign - Initialize DT" sap:VirtualizedContainerService.HintSize="338,61" sap2010:WorkflowViewState.IdRef="Assign_7">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="sd:DataTable">[out_ExtractedDataTable]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="sd:DataTable">[new Data.DataTable]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                  </Sequence>
+                </ActivityAction>
+              </Catch>
+            </TryCatch.Catches>
+          </TryCatch>
+          <If Condition="[out_ExtractedDataTable.Rows.Count &gt; 0 AndAlso in_Sheet.ToString.Trim.Equals(in_Config(&quot;Sheet_SubstituteItemsName&quot;).ToString)]" DisplayName="Validate if DataTable Contains DataRows - Sheet Substitute Items" sap:VirtualizedContainerService.HintSize="434,52" sap2010:WorkflowViewState.IdRef="If_2">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <If.Then>
+              <Sequence sap:VirtualizedContainerService.HintSize="400,404" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="338,92" sap2010:WorkflowViewState.IdRef="LogMessage_8" Level="Info" Message="[&quot;UiPathBot: The Excel file &quot; + in_InputFilePath.Split(&quot;/&quot;c).Last + &quot; exists and contains DataRows&quot;]" />
+                <ui:FilterDataTable DataTable="[out_ExtractedDataTable]" DisplayName="Filter Data Table" FilterRowsMode="Remove" sap:VirtualizedContainerService.HintSize="338,161" sap2010:WorkflowViewState.IdRef="FilterDataTable_1" OutputDataTable="[out_ExtractedDataTable]" SelectColumnsMode="Keep">
+                  <ui:FilterDataTable.Filters>
+                    <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+                      <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
+                        <ui:FilterOperationArgument.Column>
+                          <InArgument x:TypeArguments="x:String">["Item"]</InArgument>
+                        </ui:FilterOperationArgument.Column>
+                        <ui:FilterOperationArgument.Operand>
+                          <InArgument x:TypeArguments="x:String">["0"]</InArgument>
+                        </ui:FilterOperationArgument.Operand>
+                      </ui:FilterOperationArgument>
+                      <ui:FilterOperationArgument Operand="{x:Null}" BooleanOperator="Or" Operator="EMPTY">
+                        <ui:FilterOperationArgument.Column>
+                          <InArgument x:TypeArguments="x:String">["Buyer"]</InArgument>
+                        </ui:FilterOperationArgument.Column>
+                      </ui:FilterOperationArgument>
+                    </scg:List>
+                  </ui:FilterDataTable.Filters>
+                  <ui:FilterDataTable.SelectColumns>
+                    <scg:List x:TypeArguments="InArgument" Capacity="4">
+                      <x:Null />
+                    </scg:List>
+                  </ui:FilterDataTable.SelectColumns>
+                </ui:FilterDataTable>
               </Sequence>
-              <Delay DisplayName="Delay 1 Seconds" Duration="[TimeSpan.FromMilliseconds(1000)]" sap:VirtualizedContainerService.HintSize="636,90" sap2010:WorkflowViewState.IdRef="Delay_1" />
-              <ui:ReadRange AddHeaders="True" DataTable="[out_ExtractedDataTable]" DisplayName="Read Range Workbook" sap:VirtualizedContainerService.HintSize="636,88" sap2010:WorkflowViewState.IdRef="ReadRange_2" Range="[in_Range]" SheetName="[in_Sheet]" WorkbookPath="[in_InputFilePath]" />
-            </Sequence>
-          </ActivityAction>
-        </Catch>
-        <Catch x:TypeArguments="s:ArgumentException" sap:VirtualizedContainerService.HintSize="404,21" sap2010:WorkflowViewState.IdRef="Catch`1_2">
-          <sap:WorkflowViewStateService.ViewState>
-            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-              <x:Boolean x:Key="IsPinned">False</x:Boolean>
-            </scg:Dictionary>
-          </sap:WorkflowViewStateService.ViewState>
-          <ActivityAction x:TypeArguments="s:ArgumentException">
-            <ActivityAction.Argument>
-              <DelegateInArgument x:TypeArguments="s:ArgumentException" Name="exception" />
-            </ActivityAction.Argument>
-            <Sequence DisplayName="Sequence -  Excel File does NOT exist" sap:VirtualizedContainerService.HintSize="400,304" sap2010:WorkflowViewState.IdRef="Sequence_3">
-              <sap:WorkflowViewStateService.ViewState>
-                <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                </scg:Dictionary>
-              </sap:WorkflowViewStateService.ViewState>
-              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="338,92" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Warn" Message="[&quot;MartBot: The Excel file &quot; + in_InputFilePath.Split(&quot;/&quot;c).Last + &quot; does NOT exist&quot;]" />
-              <Assign DisplayName="Assign - Initialize DT" sap:VirtualizedContainerService.HintSize="338,61" sap2010:WorkflowViewState.IdRef="Assign_7">
-                <Assign.To>
-                  <OutArgument x:TypeArguments="sd:DataTable">[out_ExtractedDataTable]</OutArgument>
-                </Assign.To>
-                <Assign.Value>
-                  <InArgument x:TypeArguments="sd:DataTable">[new Data.DataTable]</InArgument>
-                </Assign.Value>
-              </Assign>
-            </Sequence>
-          </ActivityAction>
-        </Catch>
-      </TryCatch.Catches>
-    </TryCatch>
-    <If Condition="[out_ExtractedDataTable.Rows.Count &gt; 0 AndAlso in_Sheet.ToString.Trim.Equals(in_Config(&quot;Sheet_SubstituteItemsName&quot;).ToString)]" DisplayName="Validate if DataTable Contains DataRows - Sheet Substitute Items" sap:VirtualizedContainerService.HintSize="478,680" sap2010:WorkflowViewState.IdRef="If_2">
-      <If.Then>
-        <Sequence sap:VirtualizedContainerService.HintSize="400,404" sap2010:WorkflowViewState.IdRef="Sequence_7">
-          <sap:WorkflowViewStateService.ViewState>
-            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            </scg:Dictionary>
-          </sap:WorkflowViewStateService.ViewState>
-          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="338,92" sap2010:WorkflowViewState.IdRef="LogMessage_8" Level="Info" Message="[&quot;UiPathBot: The Excel file &quot; + in_InputFilePath.Split(&quot;/&quot;c).Last + &quot; exists and contains DataRows&quot;]" />
-          <ui:FilterDataTable DataTable="[out_ExtractedDataTable]" DisplayName="Filter Data Table" FilterRowsMode="Remove" sap:VirtualizedContainerService.HintSize="338,161" sap2010:WorkflowViewState.IdRef="FilterDataTable_1" OutputDataTable="[out_ExtractedDataTable]" SelectColumnsMode="Keep">
-            <ui:FilterDataTable.Filters>
-              <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
-                <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
-                  <ui:FilterOperationArgument.Column>
-                    <InArgument x:TypeArguments="x:String">["Item"]</InArgument>
-                  </ui:FilterOperationArgument.Column>
-                  <ui:FilterOperationArgument.Operand>
-                    <InArgument x:TypeArguments="x:String">["0"]</InArgument>
-                  </ui:FilterOperationArgument.Operand>
-                </ui:FilterOperationArgument>
-                <ui:FilterOperationArgument Operand="{x:Null}" BooleanOperator="Or" Operator="EMPTY">
-                  <ui:FilterOperationArgument.Column>
-                    <InArgument x:TypeArguments="x:String">["Buyer"]</InArgument>
-                  </ui:FilterOperationArgument.Column>
-                </ui:FilterOperationArgument>
-              </scg:List>
-            </ui:FilterDataTable.Filters>
-            <ui:FilterDataTable.SelectColumns>
-              <scg:List x:TypeArguments="InArgument" Capacity="4">
-                <x:Null />
-              </scg:List>
-            </ui:FilterDataTable.SelectColumns>
-          </ui:FilterDataTable>
+            </If.Then>
+          </If>
+          <If Condition="[out_ExtractedDataTable.Rows.Count &gt; 0 AndAlso in_Sheet.ToString.Trim.Equals(in_Config(&quot;Sheet_BuyersName&quot;).ToString)]" DisplayName="Validate if DataTable Contains DataRows - Sheet Buyers" sap:VirtualizedContainerService.HintSize="434,52" sap2010:WorkflowViewState.IdRef="If_4">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <If.Then>
+              <Sequence sap:VirtualizedContainerService.HintSize="400,404" sap2010:WorkflowViewState.IdRef="Sequence_14">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="338,92" sap2010:WorkflowViewState.IdRef="LogMessage_9" Level="Info" Message="[&quot;UiPathBot: The Excel file &quot; + in_InputFilePath.Split(&quot;/&quot;c).Last + &quot; exists and contains DataRows&quot;]" />
+                <ui:FilterDataTable DataTable="[out_ExtractedDataTable]" DisplayName="Filter Data Table" FilterRowsMode="Remove" sap:VirtualizedContainerService.HintSize="338,161" sap2010:WorkflowViewState.IdRef="FilterDataTable_2" OutputDataTable="[out_ExtractedDataTable]" SelectColumnsMode="Keep">
+                  <ui:FilterDataTable.Filters>
+                    <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+                      <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
+                        <ui:FilterOperationArgument.Column>
+                          <InArgument x:TypeArguments="x:String">["Buyers Code"]</InArgument>
+                        </ui:FilterOperationArgument.Column>
+                        <ui:FilterOperationArgument.Operand>
+                          <InArgument x:TypeArguments="x:String">["0"]</InArgument>
+                        </ui:FilterOperationArgument.Operand>
+                      </ui:FilterOperationArgument>
+                      <ui:FilterOperationArgument Operand="{x:Null}" BooleanOperator="Or" Operator="EMPTY">
+                        <ui:FilterOperationArgument.Column>
+                          <InArgument x:TypeArguments="x:String">["Email"]</InArgument>
+                        </ui:FilterOperationArgument.Column>
+                      </ui:FilterOperationArgument>
+                    </scg:List>
+                  </ui:FilterDataTable.Filters>
+                  <ui:FilterDataTable.SelectColumns>
+                    <scg:List x:TypeArguments="InArgument" Capacity="4">
+                      <x:Null />
+                    </scg:List>
+                  </ui:FilterDataTable.SelectColumns>
+                </ui:FilterDataTable>
+              </Sequence>
+            </If.Then>
+          </If>
         </Sequence>
-      </If.Then>
-    </If>
-    <If Condition="[out_ExtractedDataTable.Rows.Count &gt; 0 AndAlso in_Sheet.ToString.Trim.Equals(in_Config(&quot;Sheet_BuyersName&quot;).ToString)]" DisplayName="Validate if DataTable Contains DataRows - Sheet Buyers" sap:VirtualizedContainerService.HintSize="478,680" sap2010:WorkflowViewState.IdRef="If_4">
-      <If.Then>
-        <Sequence sap:VirtualizedContainerService.HintSize="400,404" sap2010:WorkflowViewState.IdRef="Sequence_14">
-          <sap:WorkflowViewStateService.ViewState>
-            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            </scg:Dictionary>
-          </sap:WorkflowViewStateService.ViewState>
-          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="338,92" sap2010:WorkflowViewState.IdRef="LogMessage_9" Level="Info" Message="[&quot;MartBot: The Excel file &quot; + in_InputFilePath.Split(&quot;/&quot;c).Last + &quot; exists and contains DataRows&quot;]" />
-          <ui:FilterDataTable DataTable="[out_ExtractedDataTable]" DisplayName="Filter Data Table" FilterRowsMode="Remove" sap:VirtualizedContainerService.HintSize="338,161" sap2010:WorkflowViewState.IdRef="FilterDataTable_2" OutputDataTable="[out_ExtractedDataTable]" SelectColumnsMode="Keep">
-            <ui:FilterDataTable.Filters>
-              <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
-                <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
-                  <ui:FilterOperationArgument.Column>
-                    <InArgument x:TypeArguments="x:String">["Buyers Code"]</InArgument>
-                  </ui:FilterOperationArgument.Column>
-                  <ui:FilterOperationArgument.Operand>
-                    <InArgument x:TypeArguments="x:String">["0"]</InArgument>
-                  </ui:FilterOperationArgument.Operand>
-                </ui:FilterOperationArgument>
-                <ui:FilterOperationArgument Operand="{x:Null}" BooleanOperator="Or" Operator="EMPTY">
-                  <ui:FilterOperationArgument.Column>
-                    <InArgument x:TypeArguments="x:String">["Email"]</InArgument>
-                  </ui:FilterOperationArgument.Column>
-                </ui:FilterOperationArgument>
-              </scg:List>
-            </ui:FilterDataTable.Filters>
-            <ui:FilterDataTable.SelectColumns>
-              <scg:List x:TypeArguments="InArgument" Capacity="4">
-                <x:Null />
-              </scg:List>
-            </ui:FilterDataTable.SelectColumns>
-          </ui:FilterDataTable>
-        </Sequence>
-      </If.Then>
+      </If.Else>
     </If>
   </Sequence>
 </Activity>

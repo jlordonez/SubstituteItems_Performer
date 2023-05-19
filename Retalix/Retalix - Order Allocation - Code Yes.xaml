@@ -8,7 +8,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1006,5410</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>980,5410</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Order_Allocation___Code_Yes_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="66">
@@ -111,7 +111,7 @@
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="888,92" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;MartBot: Navigate to order allocation to search and verify the item.&quot;]" />
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="888,92" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;UiPathBot: Navigate to order allocation to search and verify the item.&quot;]" />
     <uit:TerminalSession ConnectionString="{x:Null}" ContinueOnError="{x:Null}" OutputConnection="{x:Null}" SSHPassword="{x:Null}" SSHUserName="{x:Null}" sap2010:Annotation.AnnotationText="&quot;{'AttachExisting':false,'ConnectionProtocol':0,'ConnectionType':1,'EhllBasicMode':false,'EhllDll':null,'EhllEnhanced':true,'EhllFunction':'hllapi','EhllSession':'A','EnableSSL':false,'Host':'10.101.6.131','InProcessMode':false,'InternalEncoding':'IBM037','Mode':1,'Port':7004,'Profile':null,'ProviderType':9,'ShowTerminal':true,'TerminalModel':0,'TerminalType':0}&quot;" CloseConnection="False" DelayMS="1000" DisplayName="Terminal Session" ExistingConnection="[in_TerminalConnection]" sap:VirtualizedContainerService.HintSize="888,5071" sap2010:WorkflowViewState.IdRef="TerminalSession_1" TimeoutMS="50000">
       <uit:TerminalSession.Body>
         <ActivityAction x:TypeArguments="uit:TerminalConnection">
@@ -236,21 +236,11 @@
                   </sap:WorkflowViewStateService.ViewState>
                   <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Retalix\Retalix - Confirm enought open count.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="652,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="Retalix\Retalix - Confirm enought open count.xaml">
                     <ui:InvokeWorkflowFile.Arguments>
-                      <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">
-                        <VisualBasicValue x:TypeArguments="ui:QueueItem" ExpressionText="in_TransactionItem" />
-                      </InArgument>
-                      <InArgument x:TypeArguments="x:Int32" x:Key="in_Ordered">
-                        <VisualBasicValue x:TypeArguments="x:Int32" ExpressionText="Ordered" />
-                      </InArgument>
-                      <InArgument x:TypeArguments="uit:TerminalConnection" x:Key="in_TerminalConnection">
-                        <VisualBasicValue x:TypeArguments="uit:TerminalConnection" ExpressionText="in_TerminalConnection" />
-                      </InArgument>
-                      <OutArgument x:TypeArguments="x:Boolean" x:Key="out_SubItemCheck">
-                        <VisualBasicReference x:TypeArguments="x:Boolean" ExpressionText="SubItemCheck" />
-                      </OutArgument>
-                      <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_dt_SubstituteItems_FinalReport">
-                        <VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="io_dt_SubstituteItems_FinalReport" />
-                      </InOutArgument>
+                      <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">[in_TransactionItem]</InArgument>
+                      <InArgument x:TypeArguments="x:Int32" x:Key="in_Ordered">[Ordered]</InArgument>
+                      <InArgument x:TypeArguments="uit:TerminalConnection" x:Key="in_TerminalConnection">[in_TerminalConnection]</InArgument>
+                      <OutArgument x:TypeArguments="x:Boolean" x:Key="out_SubItemCheck">[SubItemCheck]</OutArgument>
+                      <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_dt_SubstituteItems_FinalReport">[io_dt_SubstituteItems_FinalReport]</InOutArgument>
                     </ui:InvokeWorkflowFile.Arguments>
                   </ui:InvokeWorkflowFile>
                   <If Condition="[( SubItemCheck = True )]" sap:VirtualizedContainerService.HintSize="652,2150" sap2010:WorkflowViewState.IdRef="If_12">
