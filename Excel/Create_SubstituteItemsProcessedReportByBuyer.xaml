@@ -5,11 +5,12 @@
     <x:Property Name="in_dt_SubstituteItems_FinalReportByRegion" Type="InArgument(sd:DataTable)" />
     <x:Property Name="in_Buyer" Type="InArgument(x:String)" />
     <x:Property Name="in_dic_ScheduleRun" Type="InArgument(scg:Dictionary(x:String, s:String[]))" />
+    <x:Property Name="in_dt_SendNotifications" Type="InArgument(sd:DataTable)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>803,2391</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>803,1901</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Create_SubstituteItemsProcessedReportByBuyer_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="31">
@@ -99,7 +100,7 @@
       <AssemblyReference>Microsoft.VisualBasic.Core</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Create_SubstituteItemsProcessedReportByBuyer" sap:VirtualizedContainerService.HintSize="602,2326" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Create_SubstituteItemsProcessedReportByBuyer" sap:VirtualizedContainerService.HintSize="602,1836" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="str_FilePath" />
     </Sequence.Variables>
@@ -119,18 +120,24 @@
 in_dic_ScheduleRun("Time")(0).ToString + ".xlsx"]</InArgument>
       </Assign.Value>
     </Assign>
-    <Sequence DisplayName="Validate if 'Buyer' Folder Exists" sap:VirtualizedContainerService.HintSize="540,854" sap2010:WorkflowViewState.IdRef="Sequence_4">
+    <Sequence DisplayName="Validate if 'Buyer' Folder Exists" sap:VirtualizedContainerService.HintSize="540,81" sap2010:WorkflowViewState.IdRef="Sequence_4">
       <Sequence.Variables>
         <Variable x:TypeArguments="x:Boolean" Name="bool_ValidateFolderExists" />
       </Sequence.Variables>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <ui:FolderExistsX DisplayName="Folder Exists - Data\Output\Buyers" Exists="[bool_ValidateFolderExists]" sap:VirtualizedContainerService.HintSize="478,133" sap2010:WorkflowViewState.IdRef="FolderExistsX_1" Path="[in_Config(&quot;PathFolderSubstituteReport&quot;).ToString + &quot;Output\Buyers&quot;]" />
       <If Condition="[bool_ValidateFolderExists]" DisplayName="If - Validate Folder Exists" sap:VirtualizedContainerService.HintSize="478,570" sap2010:WorkflowViewState.IdRef="If_2">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
         <If.Then>
           <Sequence sap:VirtualizedContainerService.HintSize="400,203" sap2010:WorkflowViewState.IdRef="Sequence_2">
             <sap:WorkflowViewStateService.ViewState>
@@ -160,6 +167,7 @@ in_dic_ScheduleRun("Time")(0).ToString + ".xlsx"]</InArgument>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <ui:FileExistsX DisplayName="File Exists" Exists="[bool_ValidateFileExists]" sap:VirtualizedContainerService.HintSize="478,133" sap2010:WorkflowViewState.IdRef="FileExistsX_1" Path="[str_FilePath]" />
@@ -187,5 +195,31 @@ in_dic_ScheduleRun("Time")(0).ToString + ".xlsx"]</InArgument>
       </If>
       <ui:WriteRange AddHeaders="True" DataTable="[in_dt_SubstituteItems_FinalReportByRegion]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="478,116" sap2010:WorkflowViewState.IdRef="WriteRange_2" SheetName="[in_Config(&quot;Sheet_SubstituteItemsName&quot;).ToString]" StartingCell="A5" WorkbookPath="[str_FilePath]" />
     </Sequence>
+    <Delay DisplayName="Delay - 500ms" Duration="[TimeSpan.FromMilliseconds(500)]" sap:VirtualizedContainerService.HintSize="540,90" sap2010:WorkflowViewState.IdRef="Delay_1" />
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Email\Misc_SendNotification.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="540,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Email\Misc_SendNotification.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="s:String[]" x:Key="BodyValues" />
+        <InArgument x:TypeArguments="s:String[]" x:Key="SubjectValues">
+          <VisualBasicValue x:TypeArguments="s:String[]" ExpressionText="{}{in_Buyer, in_dt_SubstituteItems_FinalReportByRegion.Rows.Count.ToString}" />
+        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="NotificationID">
+          <Literal x:TypeArguments="x:String">SendFinalReportByBuyer</Literal>
+        </InArgument>
+        <InArgument x:TypeArguments="s:String[]" x:Key="AttachmentFolders" />
+        <InArgument x:TypeArguments="s:String[]" x:Key="Attachments">
+          <VisualBasicValue x:TypeArguments="s:String[]" ExpressionText="{}{str_FilePath}" />
+        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="ToAddress" />
+        <InArgument x:TypeArguments="x:String" x:Key="CCAddress" />
+        <InArgument x:TypeArguments="x:String" x:Key="OutlookAccount" />
+        <InArgument x:TypeArguments="x:String" x:Key="OutlookOnBehalfOf" />
+        <InArgument x:TypeArguments="sd:DataTable" x:Key="NotificationsDt">
+          <VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="in_dt_SendNotifications" />
+        </InArgument>
+        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">
+          <VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="in_Config" />
+        </InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
   </Sequence>
 </Activity>

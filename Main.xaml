@@ -9,6 +9,7 @@
     <x:Property Name="io_dt_SubstituteItems_FinalReport" Type="InOutArgument(sd:DataTable)" />
     <x:Property Name="in_dt_NotificationsByBuyers" Type="InArgument(sd:DataTable)" />
     <x:Property Name="out_dic_ScheduleRun" Type="OutArgument(scg:Dictionary(x:String, s:String[]))" />
+    <x:Property Name="in_dt_SendNotifications" Type="InArgument(sd:DataTable)" />
   </x:Members>
   <this:Main.in_TimeOfDay>
     <InArgument x:TypeArguments="x:String" />
@@ -25,10 +26,13 @@
   <this:Main.in_dt_NotificationsByBuyers>
     <InArgument x:TypeArguments="sd:DataTable" />
   </this:Main.in_dt_NotificationsByBuyers>
+  <this:Main.in_dt_SendNotifications>
+    <InArgument x:TypeArguments="sd:DataTable" />
+  </this:Main.in_dt_SendNotifications>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1006,1185</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>803,1185</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Main2_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="38">
@@ -622,11 +626,24 @@
                               </If>
                               <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke InitiAllApplications workflow" sap:VirtualizedContainerService.HintSize="478,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="Framework\InitAllApplications.xaml">
                                 <ui:InvokeWorkflowFile.Arguments>
-                                  <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[Config]</InArgument>
-                                  <OutArgument x:TypeArguments="s:Exception" x:Key="out_SystemException">[SystemException]</OutArgument>
-                                  <OutArgument x:TypeArguments="uit:TerminalConnection" x:Key="out_TerminalConnection">[TerminalConnection]</OutArgument>
-                                  <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dt_SubstituteItems_FinalReport">[io_dt_SubstituteItems_FinalReport]</OutArgument>
-                                  <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dt_NotificationsByBuyers">[in_dt_NotificationsByBuyers]</OutArgument>
+                                  <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">
+                                    <VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="Config" />
+                                  </InArgument>
+                                  <OutArgument x:TypeArguments="s:Exception" x:Key="out_SystemException">
+                                    <VisualBasicReference x:TypeArguments="s:Exception" ExpressionText="SystemException" />
+                                  </OutArgument>
+                                  <OutArgument x:TypeArguments="uit:TerminalConnection" x:Key="out_TerminalConnection">
+                                    <VisualBasicReference x:TypeArguments="uit:TerminalConnection" ExpressionText="TerminalConnection" />
+                                  </OutArgument>
+                                  <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dt_SubstituteItems_FinalReport">
+                                    <VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="io_dt_SubstituteItems_FinalReport" />
+                                  </OutArgument>
+                                  <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dt_NotificationsByBuyers">
+                                    <VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="in_dt_NotificationsByBuyers" />
+                                  </OutArgument>
+                                  <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dt_SendNotifications">
+                                    <VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="in_dt_SendNotifications" />
+                                  </OutArgument>
                                 </ui:InvokeWorkflowFile.Arguments>
                               </ui:InvokeWorkflowFile>
                             </Sequence>
@@ -699,7 +716,7 @@
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
                           <Transition.To>
-                            <State x:Name="__ReferenceID1" sap2010:Annotation.AnnotationText="End process and close all applications used." DisplayName="End Process" sap:VirtualizedContainerService.HintSize="483,654" sap2010:WorkflowViewState.IdRef="State_1" IsFinal="True">
+                            <State x:Name="__ReferenceID1" sap2010:Annotation.AnnotationText="End process and close all applications used." DisplayName="End Process" sap:VirtualizedContainerService.HintSize="483,614" sap2010:WorkflowViewState.IdRef="State_1" IsFinal="True">
                               <State.Entry>
                                 <Sequence sap:VirtualizedContainerService.HintSize="437,469" sap2010:WorkflowViewState.IdRef="Sequence_32">
                                   <sap:WorkflowViewStateService.ViewState>
@@ -790,6 +807,9 @@
                                       <InArgument x:TypeArguments="scg:Dictionary(x:String, s:String[])" x:Key="in_dic_ScheduleRun">
                                         <VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, s:String[])" ExpressionText="out_dic_ScheduleRun" />
                                       </InArgument>
+                                      <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_SendNotifications">
+                                        <VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="in_dt_SendNotifications" />
+                                      </InArgument>
                                     </ui:InvokeWorkflowFile.Arguments>
                                   </ui:InvokeWorkflowFile>
                                   <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Excel\Create_SubstituteItemsProcessedReport.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="375,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_31" UnSafe="False" WorkflowFileName="Excel\Create_SubstituteItemsProcessedReport.xaml">
@@ -802,6 +822,9 @@
                                       </InArgument>
                                       <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">
                                         <VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="Config" />
+                                      </InArgument>
+                                      <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_SendNotifications">
+                                        <VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="in_dt_SendNotifications" />
                                       </InArgument>
                                     </ui:InvokeWorkflowFile.Arguments>
                                   </ui:InvokeWorkflowFile>

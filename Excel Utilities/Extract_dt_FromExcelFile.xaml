@@ -9,7 +9,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>980,1289</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>803,2677</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Read_Substitute_Items_Report_Previous_Day_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="72">
@@ -119,14 +119,14 @@
       <AssemblyReference>System.IO.FileSystem.DriveInfo</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Extract DataTable From Excel File" sap:VirtualizedContainerService.HintSize="636,1224" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Extract DataTable From Excel File" sap:VirtualizedContainerService.HintSize="680,2612" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="574,92" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;UiPathBot: Extracting DataTable From: &quot; + vbLf +&quot;Excel File: &quot; + vbLf +in_InputFilePath.Split(&quot;/&quot;c).Last + vbLf + &quot;Sheet name: &quot; + in_Sheet]" />
-    <If Condition="[Not file.Exists(in_InputFilePath)]" DisplayName="Validate if Input File exists" sap:VirtualizedContainerService.HintSize="574,981" sap2010:WorkflowViewState.IdRef="If_5">
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="618,92" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;UiPathBot: Extracting DataTable From: &quot; + vbLf +&quot;Excel File: &quot; + vbLf +in_InputFilePath.Split(&quot;/&quot;c).Last + vbLf + &quot;Sheet name: &quot; + in_Sheet]" />
+    <If Condition="[Not file.Exists(in_InputFilePath)]" DisplayName="Validate if Input File exists" sap:VirtualizedContainerService.HintSize="618,2369" sap2010:WorkflowViewState.IdRef="If_5">
       <If.Then>
         <Sequence sap:VirtualizedContainerService.HintSize="400,304" sap2010:WorkflowViewState.IdRef="Sequence_15">
           <sap:WorkflowViewStateService.ViewState>
@@ -146,18 +146,18 @@
         </Sequence>
       </If.Then>
       <If.Else>
-        <Sequence sap:VirtualizedContainerService.HintSize="496,501" sap2010:WorkflowViewState.IdRef="Sequence_17">
+        <Sequence sap:VirtualizedContainerService.HintSize="540,1889" sap2010:WorkflowViewState.IdRef="Sequence_17">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="434,206" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+          <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="478,338" sap2010:WorkflowViewState.IdRef="TryCatch_1">
             <TryCatch.Try>
               <ui:ReadRange AddHeaders="True" DataTable="[out_ExtractedDataTable]" DisplayName="Read Range Workbook" sap:VirtualizedContainerService.HintSize="334,88" sap2010:WorkflowViewState.IdRef="ReadRange_1" Range="[in_Range]" SheetName="[in_Sheet]" WorkbookPath="[in_InputFilePath]" />
             </TryCatch.Try>
             <TryCatch.Catches>
-              <Catch x:TypeArguments="si:IOException" sap:VirtualizedContainerService.HintSize="400,21" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+              <Catch x:TypeArguments="si:IOException" sap:VirtualizedContainerService.HintSize="404,21" sap2010:WorkflowViewState.IdRef="Catch`1_1">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -239,7 +239,7 @@
                   </Sequence>
                 </ActivityAction>
               </Catch>
-              <Catch x:TypeArguments="s:ArgumentException" sap:VirtualizedContainerService.HintSize="400,21" sap2010:WorkflowViewState.IdRef="Catch`1_2">
+              <Catch x:TypeArguments="s:ArgumentException" sap:VirtualizedContainerService.HintSize="404,21" sap2010:WorkflowViewState.IdRef="Catch`1_2">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -270,10 +270,10 @@
               </Catch>
             </TryCatch.Catches>
           </TryCatch>
-          <If Condition="[out_ExtractedDataTable.Rows.Count &gt; 0 AndAlso in_Sheet.ToString.Trim.Equals(in_Config(&quot;Sheet_SubstituteItemsName&quot;).ToString)]" DisplayName="Validate if DataTable Contains DataRows - Sheet Substitute Items" sap:VirtualizedContainerService.HintSize="434,52" sap2010:WorkflowViewState.IdRef="If_2">
+          <If Condition="[out_ExtractedDataTable.Rows.Count &gt; 0 AndAlso in_Sheet.ToString.Trim.Equals(in_Config(&quot;Sheet_SubstituteItemsName&quot;).ToString)]" DisplayName="Validate if DataTable Contains DataRows - Sheet Substitute Items" sap:VirtualizedContainerService.HintSize="478,680" sap2010:WorkflowViewState.IdRef="If_2">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 <x:Boolean x:Key="IsPinned">False</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
@@ -312,10 +312,10 @@
               </Sequence>
             </If.Then>
           </If>
-          <If Condition="[out_ExtractedDataTable.Rows.Count &gt; 0 AndAlso in_Sheet.ToString.Trim.Equals(in_Config(&quot;Sheet_BuyersName&quot;).ToString)]" DisplayName="Validate if DataTable Contains DataRows - Sheet Buyers" sap:VirtualizedContainerService.HintSize="434,52" sap2010:WorkflowViewState.IdRef="If_4">
+          <If Condition="[out_ExtractedDataTable.Rows.Count &gt; 0 AndAlso in_Sheet.ToString.Trim.Equals(in_Config(&quot;Sheet_BuyersName&quot;).ToString)]" DisplayName="Validate if DataTable Contains DataRows - Sheet Buyers" sap:VirtualizedContainerService.HintSize="478,680" sap2010:WorkflowViewState.IdRef="If_4">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 <x:Boolean x:Key="IsPinned">False</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
@@ -340,7 +340,7 @@
                       </ui:FilterOperationArgument>
                       <ui:FilterOperationArgument Operand="{x:Null}" BooleanOperator="Or" Operator="EMPTY">
                         <ui:FilterOperationArgument.Column>
-                          <InArgument x:TypeArguments="x:String">["Email"]</InArgument>
+                          <InArgument x:TypeArguments="x:String">["EmailToBeSend"]</InArgument>
                         </ui:FilterOperationArgument.Column>
                       </ui:FilterOperationArgument>
                     </scg:List>

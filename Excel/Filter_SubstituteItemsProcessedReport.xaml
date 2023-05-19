@@ -4,6 +4,7 @@
     <x:Property Name="in_dt_SubstituteItems_FinalReport" Type="InArgument(sd:DataTable)" />
     <x:Property Name="in_dt_NotificationsByBuyers" Type="InArgument(sd:DataTable)" />
     <x:Property Name="in_dic_ScheduleRun" Type="InArgument(scg:Dictionary(x:String, s:String[]))" />
+    <x:Property Name="in_dt_SendNotifications" Type="InArgument(sd:DataTable)" />
   </x:Members>
   <this:Filter_SubstituteItemsProcessedReport.in_dic_ScheduleRun>
     <InArgument x:TypeArguments="scg:Dictionary(x:String, s:String[])" />
@@ -11,7 +12,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>807,1772</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>807,1732</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Filter_SubstituteItemsProcessedReport_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="31">
@@ -166,6 +167,9 @@ Select d).CopyToDataTable]</InArgument>
                             </InArgument>
                             <InArgument x:TypeArguments="scg:Dictionary(x:String, s:String[])" x:Key="in_dic_ScheduleRun">
                               <VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, s:String[])" ExpressionText="in_dic_ScheduleRun" />
+                            </InArgument>
+                            <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_SendNotifications">
+                              <VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="in_dt_SendNotifications" />
                             </InArgument>
                           </ui:InvokeWorkflowFile.Arguments>
                         </ui:InvokeWorkflowFile>
