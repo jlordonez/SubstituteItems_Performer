@@ -1,16 +1,19 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Create_SubstituteItemsProcessedReportByBuyer" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Create_SubstituteItemsProcessedReportByBuyer" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
-    <x:Property Name="in_dt_NotificationsByBuyers" Type="InArgument(sd:DataTable)" />
     <x:Property Name="in_dt_SubstituteItems_FinalReportByRegion" Type="InArgument(sd:DataTable)" />
-    <x:Property Name="in_Buyer" Type="InArgument(x:String)" />
     <x:Property Name="in_dic_ScheduleRun" Type="InArgument(scg:Dictionary(x:String, s:String[]))" />
     <x:Property Name="in_dt_SendNotifications" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="in_str_EmailToBeSend" Type="InArgument(x:String)" />
+    <x:Property Name="in_str_Buyer" Type="InArgument(x:String)" />
   </x:Members>
+  <this:Create_SubstituteItemsProcessedReportByBuyer.in_str_EmailToBeSend>
+    <InArgument x:TypeArguments="x:String" />
+  </this:Create_SubstituteItemsProcessedReportByBuyer.in_str_EmailToBeSend>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>803,1901</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1024,2714</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Create_SubstituteItemsProcessedReportByBuyer_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="31">
@@ -100,7 +103,7 @@
       <AssemblyReference>Microsoft.VisualBasic.Core</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Create_SubstituteItemsProcessedReportByBuyer" sap:VirtualizedContainerService.HintSize="602,1836" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Create_SubstituteItemsProcessedReportByBuyer" sap:VirtualizedContainerService.HintSize="602,2609" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="str_FilePath" />
     </Sequence.Variables>
@@ -116,17 +119,17 @@
       </Assign.To>
       <Assign.Value>
         <InArgument x:TypeArguments="x:String" xml:space="preserve">[in_Config("PathFolderSubstituteReport").ToString + "Output\Buyers\" + 
-"FinalReport_SubstituteItems_Buyer(" + in_Buyer + ")_" + Today.ToString("yyyy-MMM-dd_") + 
+"FinalReport_SubstituteItems_Buyer(" + in_str_Buyer + ")_" + Today.ToString("yyyy-MMM-dd_") + 
 in_dic_ScheduleRun("Time")(0).ToString + ".xlsx"]</InArgument>
       </Assign.Value>
     </Assign>
-    <Sequence DisplayName="Validate if 'Buyer' Folder Exists" sap:VirtualizedContainerService.HintSize="540,81" sap2010:WorkflowViewState.IdRef="Sequence_4">
+    <Sequence DisplayName="Validate if 'Buyer' Folder Exists" sap:VirtualizedContainerService.HintSize="540,854" sap2010:WorkflowViewState.IdRef="Sequence_4">
       <Sequence.Variables>
         <Variable x:TypeArguments="x:Boolean" Name="bool_ValidateFolderExists" />
       </Sequence.Variables>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
@@ -200,7 +203,7 @@ in_dic_ScheduleRun("Time")(0).ToString + ".xlsx"]</InArgument>
       <ui:InvokeWorkflowFile.Arguments>
         <InArgument x:TypeArguments="s:String[]" x:Key="BodyValues" />
         <InArgument x:TypeArguments="s:String[]" x:Key="SubjectValues">
-          <VisualBasicValue x:TypeArguments="s:String[]" ExpressionText="{}{in_Buyer, in_dt_SubstituteItems_FinalReportByRegion.Rows.Count.ToString}" />
+          <VisualBasicValue x:TypeArguments="s:String[]" ExpressionText="{}{in_str_Buyer, in_dt_SubstituteItems_FinalReportByRegion.Rows.Count.ToString}" />
         </InArgument>
         <InArgument x:TypeArguments="x:String" x:Key="NotificationID">
           <Literal x:TypeArguments="x:String">SendFinalReportByBuyer</Literal>
@@ -209,7 +212,9 @@ in_dic_ScheduleRun("Time")(0).ToString + ".xlsx"]</InArgument>
         <InArgument x:TypeArguments="s:String[]" x:Key="Attachments">
           <VisualBasicValue x:TypeArguments="s:String[]" ExpressionText="{}{str_FilePath}" />
         </InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="ToAddress" />
+        <InArgument x:TypeArguments="x:String" x:Key="ToAddress">
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_str_EmailToBeSend" />
+        </InArgument>
         <InArgument x:TypeArguments="x:String" x:Key="CCAddress" />
         <InArgument x:TypeArguments="x:String" x:Key="OutlookAccount" />
         <InArgument x:TypeArguments="x:String" x:Key="OutlookOnBehalfOf" />

@@ -7,7 +7,7 @@
     "UiPath.Mail.Activities": "[1.18.2]",
     "UiPath.System.Activities": "[22.10.4]",
     "UiPath.Terminal.Activities": "[2.6.0]",
-    "UiPath.Testing.Activities": "[22.10.1]",
+    "UiPath.Testing.Activities": "[23.4.0]",
     "UiPath.UIAutomation.Activities": "[22.10.4]"
   },
   "webServices": [],
@@ -44,28 +44,28 @@
     },
     "fileInfoCollection": [
       {
-        "editingStatus": "InProgress",
+        "editingStatus": "Publishable",
         "testCaseId": "54dc938b-0a8c-4379-88cd-3a9419a6f957",
         "testCaseType": "TestCase",
         "executionTemplateType": "Local",
         "fileName": "Tests\\GetTransactionDataTestCase.xaml"
       },
       {
-        "editingStatus": "InProgress",
+        "editingStatus": "Publishable",
         "testCaseId": "ae248f10-f15d-49c3-95b9-8d2828c9d0ff",
         "testCaseType": "TestCase",
         "executionTemplateType": "Local",
         "fileName": "Tests\\InitAllApplicationsTestCase.xaml"
       },
       {
-        "editingStatus": "InProgress",
+        "editingStatus": "Publishable",
         "testCaseId": "0eebb8a7-0b97-4a83-8ff6-0c7797884ac5",
         "testCaseType": "TestCase",
         "executionTemplateType": "Local",
         "fileName": "Tests\\InitAllSettingsTestCase.xaml"
       },
       {
-        "editingStatus": "InProgress",
+        "editingStatus": "Publishable",
         "testCaseId": "ce846db5-954a-41f4-91f1-640370cb445c",
         "testCaseType": "TestCase",
         "executionTemplateType": "Local",
@@ -84,6 +84,12 @@
         "testCaseType": "TestCase",
         "executionTemplateType": "Local",
         "fileName": "Tests\\WorkflowTestCaseTemplate.xaml"
+      },
+      {
+        "editingStatus": "Publishable",
+        "testCaseId": "0e46fd43-bfd4-43ca-a948-fb79f864227c",
+        "testCaseType": "TestCase",
+        "fileName": "Tests\\Misc_SendNotificationTestCase.xaml"
       }
     ],
     "modernBehavior": true

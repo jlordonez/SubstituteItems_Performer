@@ -1,9 +1,11 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Retalix___LogIn" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:ss="clr-namespace:System.Security;assembly=System.Private.CoreLib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uit="http://schemas.uipath.com/workflow/activities/terminal" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Retalix___LogIn" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:sc="clr-namespace:System.ComponentModel;assembly=System.ComponentModel.TypeConverter" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ss="clr-namespace:System.Security;assembly=System.Private.CoreLib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uit="http://schemas.uipath.com/workflow/activities/terminal" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="out_SystemException" Type="OutArgument(s:Exception)" />
     <x:Property Name="out_TerminalConnection" Type="OutArgument(uit:TerminalConnection)" />
     <x:Property Name="in_Port" Type="InArgument(x:String)" />
     <x:Property Name="in_Host" Type="InArgument(x:String)" />
+    <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="in_dt_SendNotifications" Type="InArgument(sd:DataTable)" />
   </x:Members>
   <this:Retalix___LogIn.in_Port>
     <InArgument x:TypeArguments="x:String" />
@@ -14,10 +16,10 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>697,2027</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>774,2966</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Retalix___LogIn_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
-    <scg:List x:TypeArguments="x:String" Capacity="32">
+    <scg:List x:TypeArguments="x:String" Capacity="64">
       <x:String>System.Activities</x:String>
       <x:String>System.Activities.Statements</x:String>
       <x:String>System.Activities.Expressions</x:String>
@@ -50,10 +52,12 @@
       <x:String>UiPath.Terminal.Advanced.Activities</x:String>
       <x:String>System.Reflection</x:String>
       <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Xml.Serialization</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="37">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="74">
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>System.Private.CoreLib</AssemblyReference>
@@ -90,9 +94,19 @@
       <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
       <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
       <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>Microsoft.Win32.Primitives</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Connect on the terminal and LogIn " DisplayName="Retalix___LogIn" sap:VirtualizedContainerService.HintSize="636,1962" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Connect on the terminal and LogIn " DisplayName="Retalix___LogIn" sap:VirtualizedContainerService.HintSize="609,2901" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="UserRetalix" />
       <Variable x:TypeArguments="ss:SecureString" Name="PassRetalix" />
@@ -103,19 +117,19 @@
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log Message - Start Secuence" sap:VirtualizedContainerService.HintSize="574,92" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;MartBot: Initializacing terminal session connection&quot;]" />
-    <ui:GetRobotCredential AssetName="RetalixLogIn" CacheStrategy="None" DisplayName="Get Credential - Retalix" FolderPath="Development/Substitute" sap:VirtualizedContainerService.HintSize="574,168" sap2010:WorkflowViewState.IdRef="GetRobotCredential_1" Password="[PassRetalix]" Username="[UserRetalix]">
+    <ui:LogMessage DisplayName="Log Message - Start Secuence" sap:VirtualizedContainerService.HintSize="547,92" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;MartBot: Initializacing terminal session connection&quot;]" />
+    <ui:GetRobotCredential AssetName="RetalixLogIn" CacheStrategy="None" DisplayName="Get Credential - Retalix" FolderPath="Development/Substitute" sap:VirtualizedContainerService.HintSize="547,168" sap2010:WorkflowViewState.IdRef="GetRobotCredential_1" Password="[PassRetalix]" Username="[UserRetalix]">
       <ui:GetRobotCredential.TimeoutMS>
         <InArgument x:TypeArguments="x:Int32" />
       </ui:GetRobotCredential.TimeoutMS>
     </ui:GetRobotCredential>
-    <uit:TerminalSession ContinueOnError="{x:Null}" ExistingConnection="{x:Null}" SSHPassword="{x:Null}" SSHUserName="{x:Null}" CloseConnection="False" ConnectionString="[&quot;{'AttachExisting':false,'ConnectionProtocol':0,'ConnectionType':1,'EhllBasicMode':false,'EhllDll':null,'EhllEnhanced':true,'EhllFunction':'hllapi','EhllSession':'A','EnableSSL':false,'Host':'&quot;+ in_Host +&quot;','InProcessMode':false,'InternalEncoding':'IBM037','Mode':1,'Port':&quot;+ in_Port +&quot;,'Profile':null,'ProviderType':9,'ShowTerminal':true,'TerminalModel':0,'TerminalType':0}&quot;]" DelayMS="1000" DisplayName="Terminal Session - Log In" sap:VirtualizedContainerService.HintSize="574,1480" sap2010:WorkflowViewState.IdRef="TerminalSession_2" OutputConnection="[out_TerminalConnection]" TimeoutMS="50000">
+    <uit:TerminalSession ContinueOnError="{x:Null}" ExistingConnection="{x:Null}" SSHPassword="{x:Null}" SSHUserName="{x:Null}" CloseConnection="False" ConnectionString="[&quot;{'AttachExisting':false,'ConnectionProtocol':0,'ConnectionType':1,'EhllBasicMode':false,'EhllDll':null,'EhllEnhanced':true,'EhllFunction':'hllapi','EhllSession':'A','EnableSSL':false,'Host':'&quot;+ in_Host +&quot;','InProcessMode':false,'InternalEncoding':'IBM037','Mode':1,'Port':&quot;+ in_Port +&quot;,'Profile':null,'ProviderType':9,'ShowTerminal':true,'TerminalModel':0,'TerminalType':0}&quot;]" DelayMS="1000" DisplayName="Terminal Session - Log In" sap:VirtualizedContainerService.HintSize="547,2287" sap2010:WorkflowViewState.IdRef="TerminalSession_2" OutputConnection="[out_TerminalConnection]" TimeoutMS="50000">
       <uit:TerminalSession.Body>
         <ActivityAction x:TypeArguments="uit:TerminalConnection">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="uit:TerminalConnection" Name="terminalSession" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="540,1380" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="513,2187" sap2010:WorkflowViewState.IdRef="Sequence_2">
             <Sequence.Variables>
               <Variable x:TypeArguments="x:String" Name="MainMenu" />
             </Sequence.Variables>
@@ -124,59 +138,121 @@
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <uit:TerminalSendKeys DelayMS="300" DisplayName="&quot;Send Keys - User&quot;" sap:VirtualizedContainerService.HintSize="478,60" sap2010:WorkflowViewState.IdRef="TerminalSendKeys_1" Keys="[UserRetalix]" TimeoutMS="5000" WaitType="READY" />
-            <uit:TerminalSendControlKey DelayMS="1000" DisplayName="Send Control Key" sap:VirtualizedContainerService.HintSize="478,60" sap2010:WorkflowViewState.IdRef="TerminalSendControlKey_5" Key="Tab" TimeoutMS="5000" WaitType="READY" />
-            <uit:TerminalSendKeysSecure DelayMS="300" DisplayName="Send Keys Secure" sap:VirtualizedContainerService.HintSize="478,80" sap2010:WorkflowViewState.IdRef="TerminalSendKeysSecure_1" SecureText="[PassRetalix]" TimeoutMS="5000" WaitType="READY" />
-            <uit:TerminalSendControlKey DelayMS="1000" DisplayName="Send Control Key" sap:VirtualizedContainerService.HintSize="478,60" sap2010:WorkflowViewState.IdRef="TerminalSendControlKey_6" Key="Transmit" TimeoutMS="5000" WaitType="READY" />
-            <uit:TerminalGetText DelayMS="300" DisplayName="Get Text" sap:VirtualizedContainerService.HintSize="478,25" sap2010:WorkflowViewState.IdRef="TerminalGetText_1" Text="[MainMenu]" TimeoutMS="5000" WaitType="READY" />
-            <If Condition="[MainMenu.Contains(&quot; M A I N   M E N U&quot;)]" DisplayName="If - Check LogIn" sap:VirtualizedContainerService.HintSize="478,784" sap2010:WorkflowViewState.IdRef="If_1">
-              <If.Then>
-                <Sequence sap:VirtualizedContainerService.HintSize="400,304" sap2010:WorkflowViewState.IdRef="Sequence_5">
-                  <sap:WorkflowViewStateService.ViewState>
-                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                    </scg:Dictionary>
-                  </sap:WorkflowViewStateService.ViewState>
-                  <ui:LogMessage DisplayName="Log Message - Success" sap:VirtualizedContainerService.HintSize="338,92" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;MartBot: successfully connection&quot;]" />
-                  <Assign DisplayName="Assign - Exception" sap:VirtualizedContainerService.HintSize="338,61" sap2010:WorkflowViewState.IdRef="Assign_1">
-                    <Assign.To>
-                      <OutArgument x:TypeArguments="s:Exception">[out_SystemException]</OutArgument>
-                    </Assign.To>
-                    <Assign.Value>
-                      <InArgument x:TypeArguments="s:Exception">[Nothing]</InArgument>
-                    </Assign.Value>
-                  </Assign>
-                </Sequence>
-              </If.Then>
-              <If.Else>
-                <Sequence sap:VirtualizedContainerService.HintSize="400,304" sap2010:WorkflowViewState.IdRef="Sequence_6">
-                  <sap:WorkflowViewStateService.ViewState>
-                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                    </scg:Dictionary>
-                  </sap:WorkflowViewStateService.ViewState>
-                  <ui:LogMessage DisplayName="Log Message - Failed" sap:VirtualizedContainerService.HintSize="338,92" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Warn" Message="[&quot;MartBot: Unsuccessfully connection&quot;]">
-                    <sap:WorkflowViewStateService.ViewState>
-                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                      </scg:Dictionary>
-                    </sap:WorkflowViewStateService.ViewState>
-                  </ui:LogMessage>
-                  <Assign DisplayName="Assign - Exception" sap:VirtualizedContainerService.HintSize="338,61" sap2010:WorkflowViewState.IdRef="Assign_2">
-                    <Assign.To>
-                      <OutArgument x:TypeArguments="s:Exception">[out_SystemException]</OutArgument>
-                    </Assign.To>
-                    <Assign.Value>
-                      <InArgument x:TypeArguments="s:Exception">[New Exception("Failed to connect on the retalix check the user and password would be correct or the server is enable.")]</InArgument>
-                    </Assign.Value>
-                  </Assign>
-                </Sequence>
-              </If.Else>
-            </If>
+            <uit:TerminalSendKeys DelayMS="300" DisplayName="&quot;Send Keys - User&quot;" sap:VirtualizedContainerService.HintSize="451,60" sap2010:WorkflowViewState.IdRef="TerminalSendKeys_1" Keys="[UserRetalix]" TimeoutMS="5000" WaitType="READY" />
+            <uit:TerminalSendControlKey DelayMS="1000" DisplayName="Send Control Key" sap:VirtualizedContainerService.HintSize="451,60" sap2010:WorkflowViewState.IdRef="TerminalSendControlKey_5" Key="Tab" TimeoutMS="5000" WaitType="READY" />
+            <uit:TerminalSendKeysSecure DelayMS="300" DisplayName="Send Keys Secure" sap:VirtualizedContainerService.HintSize="451,80" sap2010:WorkflowViewState.IdRef="TerminalSendKeysSecure_1" SecureText="[PassRetalix]" TimeoutMS="5000" WaitType="READY" />
+            <uit:TerminalSendControlKey DelayMS="1000" DisplayName="Send Control Key" sap:VirtualizedContainerService.HintSize="451,60" sap2010:WorkflowViewState.IdRef="TerminalSendControlKey_6" Key="Transmit" TimeoutMS="5000" WaitType="READY" />
+            <uit:TerminalGetText DelayMS="300" DisplayName="Get Text" sap:VirtualizedContainerService.HintSize="451,25" sap2010:WorkflowViewState.IdRef="TerminalGetText_1" Text="[MainMenu]" TimeoutMS="5000" WaitType="READY" />
+            <ui:IfElseIf DisplayName="Else If - Check LogIn" sap:VirtualizedContainerService.HintSize="451,1591" sap2010:WorkflowViewState.IdRef="IfElseIf_1">
+              <ui:IfElseIf.ConditionBlocks>
+                <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
+                  <ui:IfElseIfBlock BlockType="If" Condition="[MainMenu.Contains(&quot; M A I N   M E N U&quot;)]">
+                    <ui:IfElseIfBlock.Then>
+                      <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="400,300" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <ui:LogMessage DisplayName="Log Message - Success" sap:VirtualizedContainerService.HintSize="338,88" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;UiPathBot: Successfully connection to Retalix&quot;]" />
+                        <Assign DisplayName="Assign - Exception" sap:VirtualizedContainerService.HintSize="338,61" sap2010:WorkflowViewState.IdRef="Assign_1">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="s:Exception">[out_SystemException]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="s:Exception">[Nothing]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                      </Sequence>
+                    </ui:IfElseIfBlock.Then>
+                  </ui:IfElseIfBlock>
+                  <ui:IfElseIfBlock BlockType="ElseIf" Condition="[MainMenu.Contains(&quot;PASSWORD INVALID&quot;) Or MainMenu.Contains(&quot;USER ID INVALID&quot;)]">
+                    <ui:IfElseIfBlock.Then>
+                      <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="400,482" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="338,88" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Info" Message="[&quot;UiPathBot: The Username or Password are incorrect when trying to login to Retalix&quot;]" />
+                        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Email\Misc_SendNotification.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="338,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Email\Misc_SendNotification.xaml">
+                          <ui:InvokeWorkflowFile.Arguments>
+                            <InArgument x:TypeArguments="s:String[]" x:Key="BodyValues">[{"Retalix", in_Config("logF_BusinessProcessName").ToString}]</InArgument>
+                            <InArgument x:TypeArguments="s:String[]" x:Key="SubjectValues">[{"System Exception - "}]</InArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="NotificationID">CredentialError</InArgument>
+                            <InArgument x:TypeArguments="s:String[]" x:Key="AttachmentFolders" />
+                            <InArgument x:TypeArguments="s:String[]" x:Key="Attachments" />
+                            <InArgument x:TypeArguments="x:String" x:Key="ToAddress" />
+                            <InArgument x:TypeArguments="x:String" x:Key="CCAddress" />
+                            <InArgument x:TypeArguments="x:String" x:Key="OutlookAccount" />
+                            <InArgument x:TypeArguments="x:String" x:Key="OutlookOnBehalfOf" />
+                            <InArgument x:TypeArguments="sd:DataTable" x:Key="NotificationsDt">[in_dt_SendNotifications]</InArgument>
+                            <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
+                          </ui:InvokeWorkflowFile.Arguments>
+                        </ui:InvokeWorkflowFile>
+                        <Throw DisplayName="Throw - SE" Exception="[New Exception(&quot;The Username or Password are Incorrect when trying to Login to Retalix&quot;)]" sap:VirtualizedContainerService.HintSize="338,90" sap2010:WorkflowViewState.IdRef="Throw_1" />
+                      </Sequence>
+                    </ui:IfElseIfBlock.Then>
+                  </ui:IfElseIfBlock>
+                  <ui:IfElseIfBlock BlockType="Else">
+                    <ui:IfElseIfBlock.Then>
+                      <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="400,453" sap2010:WorkflowViewState.IdRef="Sequence_9">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <ui:LogMessage DisplayName="Log Message - Failed" sap:VirtualizedContainerService.HintSize="338,88" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Warn" Message="[&quot;UiPathBot: Unsuccessfully connection to Retalix&quot;]">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </ui:LogMessage>
+                        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Email\Misc_SendNotification.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="338,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Email\Misc_SendNotification.xaml">
+                          <ui:InvokeWorkflowFile.Arguments>
+                            <InArgument x:TypeArguments="s:String[]" x:Key="BodyValues">
+                              <VisualBasicValue x:TypeArguments="s:String[]" ExpressionText="{}{&quot;Retalix&quot;, in_Config(&quot;logF_BusinessProcessName&quot;).ToString}" />
+                            </InArgument>
+                            <InArgument x:TypeArguments="s:String[]" x:Key="SubjectValues">
+                              <VisualBasicValue x:TypeArguments="s:String[]" ExpressionText="{}{&quot;System Exception - &quot;}" />
+                            </InArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="NotificationID">
+                              <Literal x:TypeArguments="x:String">LoginError</Literal>
+                            </InArgument>
+                            <InArgument x:TypeArguments="s:String[]" x:Key="AttachmentFolders" />
+                            <InArgument x:TypeArguments="s:String[]" x:Key="Attachments" />
+                            <InArgument x:TypeArguments="x:String" x:Key="ToAddress" />
+                            <InArgument x:TypeArguments="x:String" x:Key="CCAddress" />
+                            <InArgument x:TypeArguments="x:String" x:Key="OutlookAccount" />
+                            <InArgument x:TypeArguments="x:String" x:Key="OutlookOnBehalfOf" />
+                            <InArgument x:TypeArguments="sd:DataTable" x:Key="NotificationsDt">
+                              <VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="in_dt_SendNotifications" />
+                            </InArgument>
+                            <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">
+                              <VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="in_Config" />
+                            </InArgument>
+                          </ui:InvokeWorkflowFile.Arguments>
+                        </ui:InvokeWorkflowFile>
+                        <Assign DisplayName="Assign - Exception" sap:VirtualizedContainerService.HintSize="338,61" sap2010:WorkflowViewState.IdRef="Assign_2">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="s:Exception">[out_SystemException]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="s:Exception">[New Exception("The UiPathBot has encountered an error when trying to login to Retalix.")]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                      </Sequence>
+                    </ui:IfElseIfBlock.Then>
+                  </ui:IfElseIfBlock>
+                </sc:BindingList>
+              </ui:IfElseIf.ConditionBlocks>
+            </ui:IfElseIf>
           </Sequence>
         </ActivityAction>
       </uit:TerminalSession.Body>
     </uit:TerminalSession>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="547,92" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[&quot;&quot;]" />
   </Sequence>
 </Activity>

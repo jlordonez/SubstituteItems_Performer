@@ -8,7 +8,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>803,1951</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>774,1564</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Create_SubstituteItemsProcessedReport_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="56">
@@ -93,7 +93,7 @@
       <AssemblyReference>System.Collections</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Create_SubstituteItemsProcessedReport" sap:VirtualizedContainerService.HintSize="680,1886" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Create_SubstituteItemsProcessedReport" sap:VirtualizedContainerService.HintSize="540,1499" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:Boolean" Name="bool_ValidateFileExists" />
     </Sequence.Variables>
@@ -102,9 +102,9 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="618,92" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;UiPathBot: Start Creating Substitute Items Final Report with all the transactions procesesed&quot;]" />
-    <ui:FileExistsX DisplayName="File Exists" Exists="[bool_ValidateFileExists]" sap:VirtualizedContainerService.HintSize="618,133" sap2010:WorkflowViewState.IdRef="FileExistsX_1" Path="[in_ReportPath]" />
-    <If Condition="[bool_ValidateFileExists]" DisplayName="Validate if Final Report Excel File Exists for the specified Time Frame" sap:VirtualizedContainerService.HintSize="618,1470" sap2010:WorkflowViewState.IdRef="If_1">
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="478,92" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;UiPathBot: Start Creating Substitute Items Final Report with all the transactions procesesed&quot;]" />
+    <ui:FileExistsX DisplayName="File Exists" Exists="[bool_ValidateFileExists]" sap:VirtualizedContainerService.HintSize="478,133" sap2010:WorkflowViewState.IdRef="FileExistsX_1" Path="[in_ReportPath]" />
+    <If Condition="[bool_ValidateFileExists]" DisplayName="Validate if Final Report Excel File Exists for the specified Time Frame" sap:VirtualizedContainerService.HintSize="478,1083" sap2010:WorkflowViewState.IdRef="If_1">
       <If.Then>
         <Sequence sap:VirtualizedContainerService.HintSize="400,203" sap2010:WorkflowViewState.IdRef="Sequence_2">
           <sap:WorkflowViewStateService.ViewState>
@@ -116,51 +116,30 @@
         </Sequence>
       </If.Then>
       <If.Else>
-        <Sequence sap:VirtualizedContainerService.HintSize="540,1091" sap2010:WorkflowViewState.IdRef="Sequence_3">
+        <Sequence sap:VirtualizedContainerService.HintSize="400,704" sap2010:WorkflowViewState.IdRef="Sequence_3">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <If Condition="[in_dt_SubstituteItems_FinalReport.Rows.Count &gt; 0]" DisplayName="Validate if in_dt_SubstituteItems_FinalReport contains DataRows" sap:VirtualizedContainerService.HintSize="478,980" sap2010:WorkflowViewState.IdRef="If_2">
-            <If.Then>
-              <Sequence sap:VirtualizedContainerService.HintSize="400,704" sap2010:WorkflowViewState.IdRef="Sequence_4">
-                <sap:WorkflowViewStateService.ViewState>
-                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                  </scg:Dictionary>
-                </sap:WorkflowViewStateService.ViewState>
-                <ui:CopyFile ContinueOnError="{x:Null}" Destination="[in_ReportPath]" DisplayName="Copy File - Substitute Items Report Template" sap:VirtualizedContainerService.HintSize="338,154" sap2010:WorkflowViewState.IdRef="CopyFile_1" Overwrite="True" Path="Data\Temp\Substitute Items - Template.xlsx" />
-                <ui:WriteRange AddHeaders="True" DataTable="[in_dt_SubstituteItems_FinalReport]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="338,116" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="[in_Config(&quot;Sheet_SubstituteItemsName&quot;).ToString]" StartingCell="A5" WorkbookPath="[in_ReportPath]" />
-                <Delay DisplayName="Delay - 500ms" Duration="[TimeSpan.FromMilliseconds(500)]" sap:VirtualizedContainerService.HintSize="338,90" sap2010:WorkflowViewState.IdRef="Delay_1" />
-                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Email\Misc_SendNotification.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="338,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Email\Misc_SendNotification.xaml">
-                  <ui:InvokeWorkflowFile.Arguments>
-                    <InArgument x:TypeArguments="s:String[]" x:Key="BodyValues" />
-                    <InArgument x:TypeArguments="s:String[]" x:Key="SubjectValues">
-                      <VisualBasicValue x:TypeArguments="s:String[]" ExpressionText="{}{in_dt_SubstituteItems_FinalReport.Rows.Count.ToString}" />
-                    </InArgument>
-                    <InArgument x:TypeArguments="x:String" x:Key="NotificationID">
-                      <Literal x:TypeArguments="x:String">SendFinalReport</Literal>
-                    </InArgument>
-                    <InArgument x:TypeArguments="s:String[]" x:Key="AttachmentFolders" />
-                    <InArgument x:TypeArguments="s:String[]" x:Key="Attachments">
-                      <VisualBasicValue x:TypeArguments="s:String[]" ExpressionText="{}{in_ReportPath}" />
-                    </InArgument>
-                    <InArgument x:TypeArguments="x:String" x:Key="ToAddress" />
-                    <InArgument x:TypeArguments="x:String" x:Key="CCAddress" />
-                    <InArgument x:TypeArguments="x:String" x:Key="OutlookAccount" />
-                    <InArgument x:TypeArguments="x:String" x:Key="OutlookOnBehalfOf" />
-                    <InArgument x:TypeArguments="sd:DataTable" x:Key="NotificationsDt">
-                      <VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="in_dt_SendNotifications" />
-                    </InArgument>
-                    <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">
-                      <VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="in_Config" />
-                    </InArgument>
-                  </ui:InvokeWorkflowFile.Arguments>
-                </ui:InvokeWorkflowFile>
-              </Sequence>
-            </If.Then>
-          </If>
+          <ui:CopyFile ContinueOnError="{x:Null}" Destination="[in_ReportPath]" DisplayName="Copy File - Substitute Items Report Template" sap:VirtualizedContainerService.HintSize="338,154" sap2010:WorkflowViewState.IdRef="CopyFile_1" Overwrite="True" Path="Data\Temp\Substitute Items - Template.xlsx" />
+          <ui:WriteRange AddHeaders="True" DataTable="[in_dt_SubstituteItems_FinalReport]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="338,116" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="[in_Config(&quot;Sheet_SubstituteItemsName&quot;).ToString]" StartingCell="A5" WorkbookPath="[in_ReportPath]" />
+          <Delay DisplayName="Delay - 500ms" Duration="[TimeSpan.FromMilliseconds(500)]" sap:VirtualizedContainerService.HintSize="338,90" sap2010:WorkflowViewState.IdRef="Delay_1" />
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Email\Misc_SendNotification.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="338,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Email\Misc_SendNotification.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+              <InArgument x:TypeArguments="s:String[]" x:Key="BodyValues" />
+              <InArgument x:TypeArguments="s:String[]" x:Key="SubjectValues">[{in_dt_SubstituteItems_FinalReport.Rows.Count.ToString}]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="NotificationID">SendFinalReport</InArgument>
+              <InArgument x:TypeArguments="s:String[]" x:Key="AttachmentFolders" />
+              <InArgument x:TypeArguments="s:String[]" x:Key="Attachments">[{in_ReportPath}]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="ToAddress" />
+              <InArgument x:TypeArguments="x:String" x:Key="CCAddress" />
+              <InArgument x:TypeArguments="x:String" x:Key="OutlookAccount" />
+              <InArgument x:TypeArguments="x:String" x:Key="OutlookOnBehalfOf" />
+              <InArgument x:TypeArguments="sd:DataTable" x:Key="NotificationsDt">[in_dt_SendNotifications]</InArgument>
+              <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
+            </ui:InvokeWorkflowFile.Arguments>
+          </ui:InvokeWorkflowFile>
         </Sequence>
       </If.Else>
     </If>
